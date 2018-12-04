@@ -5,7 +5,7 @@ require_once File::build_path(array("model","Model.php"));
 class ModelUtilisateur extends Model {
 	
 	protected static $object="utilisateur";
-    private $id;
+    private $idUser;
     private $nom;
     private $prenom;
     private $email;
@@ -19,7 +19,7 @@ class ModelUtilisateur extends Model {
 
     public function __construct($id = null , $nom, $prenom, $email, $dateInscription, $adresse, $nomVille, $pays, $admin = 0)
     {
-        $this->id = $id;
+        $this->idUser = $id;
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->password = $password;
@@ -35,122 +35,69 @@ class ModelUtilisateur extends Model {
 
 
 
-    public function getId()
-    {
-        return $this->id;
+    public function get($nom_attribut){
+        if (property_exists($this, $nom_attribut))
+            return $this->$nom_attribut;
+        return false;
     }
 
-    public function setId($id)
-    {
-        $this->id = $id;
+    public function setId($id){
+        $this->idUser = $id;
     }
 
-
-    public function getNom()
-    {
-        return $this->nom;
-    }
-
-    public function setNom($nom)
-    {
+    public function setNom($nom){
         if (strlen($nom) < 30 && strlen($nom) > 0){
             $this->nom = $nom;
         }
     }
 
-    public function getPrenom()
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom($prenom)
-    {
+    public function setPrenom($prenom){
         if (strlen($prenom) < 30 && strlen($prenom) > 0) {
             $this->prenom = $prenom;
         }
     }
 
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    public function setEmail($email)
-    {
+    public function setEmail($email){
         if (strlen($email) < 50 && strlen($email) > 5) {
             $this->email = $email;
         }
     }
 
-    public function getDateInscription()
-    {
-        return $this->dateInscription;
-    }
-
-
-    public function getAdresse()
-    {
-        return $this->adresse;
-    }
-
-    public function setAdresse($adresse)
-    {
+    public function setAdresse($adresse){
         if (strlen($adresse) < 100 && strlen($adresse) > 2){
             $this->adresse = $adresse;
         }
     }
 
-    public function getNomVille()
-    {
-        return $this->nomVille;
-    }
-
-    public function setNomVille($nomVille)
-    {
+    public function setNomVille($nomVille){
         if (strlen($nomVille) < 30 && strlen($nomVille) > 2){
             $this->nomVille = $nomVille;
         }
     }
 
-    public function getPays()
-    {
-        return $this->pays;
-    }
-
-
-    public function setPays($pays)
-    {
+    public function setPays($pays){
         if (strlen($pays) < 30 && strlen($pays) > 2){
             $this->pays = $pays;
         }
     }
 
-
-    public function getAdmin()
-    {
-        return $this->rang;
-    }
-
-    public function setAdmin($num)
-    {
+    public function setAdmin($num){
         $this->admin = $num;
     }
 
-
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-
-    public function setPassword($password)
-    {
+    public function setPassword($password){
         $this->password = $password;
     }
 
+    public static function supprimer($idUser){
+        $req = Model::$pdo->prepare('DELETE FROM Utilisateurs WHERE id = :id');
+        $req->bindValue(':id', $idUser);
+        $req->execute();
+    }
 
-    public function isValid ()
-    {
+
+//INSCRIPTIONS ET SESSIONS
+    public function isValid (){
 
         $this->errors = [];
 
@@ -173,7 +120,7 @@ class ModelUtilisateur extends Model {
             return true;
         }
 
-        $this->errors['nom'] = "Le nom est trop court ou trop long";
+        $this->errors['nom'] = "Nom trop long ou trop court";
         return false;
     }
 
@@ -184,7 +131,7 @@ class ModelUtilisateur extends Model {
             return true;
         }
 
-        $this->errors['prenom'] = 'Le prenom n est pas valide';
+        $this->errors['prenom'] = 'Prénom invalide';
         return false;
     }
 
@@ -209,12 +156,12 @@ class ModelUtilisateur extends Model {
         if ($valid)
         {
 
-            $req = Model::$pdo->prepare('SELECT COUNT(*) AS compteur FROM Utilisateurs WHERE email = :email');
-            $req->bindValue(':email', $this->getEmail());
+            $req = Model::$pdo->prepare('SELECT COUNT(*) AS cpt FROM Utilisateurs WHERE email = :email');
+            $req->bindValue(':email', $this->get('email'));
             $req->execute();
             $info_user = $req->fetch();
 
-            if ($info_user['compteur'] >= 1)
+            if ($info_user['cpt'] >= 1)
             {
                 $valid = 0;
                 $errors['email'] = 'email est déjà utilisé';
@@ -280,6 +227,7 @@ class ModelUtilisateur extends Model {
         return password_hash($password, PASSWORD_BCRYPT);
     }
 
+    // CONNEXION
 
     /**
      * Authentification d'un utilisateur
@@ -332,19 +280,19 @@ class ModelUtilisateur extends Model {
     {
 
         $_SESSION['user'] = array(
-            'id' => $this->getId(),
-            'nom' => $this->getNom(),
-            'prenom' =>$this->getPrenom(),
-            'password' => $this->getPassword(),
-            'email' => $this->getEmail(),
-            'dateInscription' => $this->getDateInscription(),
-            'adresse' => $this->getAdresse(),
-            'nomVille' => $this->getNomVille(),
-            'pays' => $this->getPays(),
-            'rang' => $this->getRang()
+            'id' => $this->get('idUser'),
+            'nom' => $this->get('nom'),
+            'prenom' =>$this->get('prenom'),
+            'password' => $this->get('password'),
+            'email' => $this->get('email'),
+            'dateInscription' => $this->get('dateInscription'),
+            'adresse' => $this->get('adresse'),
+            'nomVille' => $this->get('nomVille'),
+            'pays' => $this->get('pays'),
+            'rang' => $this->get('admin')
         );
 
-        $_SESSION['flash'] = 'Bienvenu ' . $this->getNom() . ' ' . $this->prenom;
+        $_SESSION['flash'] = 'Bienvenu ' . $this->get('nom') . ' ' . $this->prenom;
 
     }
 
@@ -423,14 +371,6 @@ class ModelUtilisateur extends Model {
     }
 
 
-    public static function supprimer ($idUser)
-    {
-        $req = Model::$pdo->prepare('DELETE FROM Utilisateurs WHERE id = :id');
-        $req->bindValue(':id', $idUser);
-        $req->execute();
-    }
-
-
     public function save ()
     {
 
@@ -439,16 +379,16 @@ class ModelUtilisateur extends Model {
         $token = Str::random(300);
 
         $req = Model::$pdo->prepare('INSERT INTO Utilisateurs 
-                  (nom, prenom, email, password, dateInscription, adresse, nomVille, pays, confirm_token) 
-                  VALUES (:nom, :prenom, :email, :password, :dateInscription, :adresse, :nomVille, :pays, :confirm_token)');
-        $req->bindValue(':nom', $this->getNom());
-        $req->bindValue(':prenom', $this->getPrenom());
-        $req->bindValue(':email', $this->getEmail());
-        $req->bindValue(':password', $this->getPassword());
+                  (nom, prenom, email, password, dateInscription, adresse, nomVille, pays) 
+                  VALUES (:nom, :prenom, :email, :password, :dateInscription, :adresse, :nomVille, :pays)');
+        $req->bindValue(':nom', $this->get('nom'));
+        $req->bindValue(':prenom', $this->get('prenom'));
+        $req->bindValue(':email', $this->get('email'));
+        $req->bindValue(':password', $this->get('password'));
         $req->bindValue(':dateInscription', $date);
-        $req->bindValue(':adresse', $this->getAdresse());
-        $req->bindValue(':nomVille', $this->getNomVille());
-        $req->bindValue(':pays', $this->getPays());
+        $req->bindValue(':adresse', $this->get('adresse'));
+        $req->bindValue(':nomVille', $this->get('nomVille'));
+        $req->bindValue(':pays', $this->get('pays'));
         $req->bindValue(':confirm_token', $token);
         $req->execute();
 
@@ -465,3 +405,4 @@ class ModelUtilisateur extends Model {
     }
 
 }
+?>

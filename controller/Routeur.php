@@ -16,8 +16,7 @@ if(!isset($_GET['controller'])) //Si le controller n'a  pas été spécifié
 		$controller = $_GET['controller']; // On recupère le controller passée dans l'URL
 	}
 
-$controller_class = 'Controller' . ucfirst($controller); 
-//on crée la variable qui represente la classe dur laquelle on appellera l'action
+$controller_class = 'Controller' . ucfirst($controller); //on crée la variable qui represente la classe dur laquelle on appellera l'action
 
 //--------------action---------------
 	if(!isset($_GET['action'])) //Si l'action n'a  pas été spécifiée
@@ -37,7 +36,6 @@ $controller_class = 'Controller' . ucfirst($controller);
 		}
 
 	}
-$controller_class::$action(); 
-// Appel de la méthode statique $action de ControllerPersonne
+$controller_class::$action(); // Appel de la méthode statique $action de ControllerPersonne
 ?>
 
