@@ -21,11 +21,6 @@ class ModelPanier extends Model{
 
     public function getProduit(){
         return $this->idProduit;
-    }
-
-    
-    
-
-       
+    }      
 }
 ?>

@@ -1,22 +1,14 @@
-
 <?php
-	
-	//dans index $ROOT_FOLDER = "home/ann2/votre_login/~puechc/";
-	
-	//mettre dans le routeur.php require_once "../lib/File.php";
-
+//BON
     require_once File::build_path(array("model","ModelGeneric.php"));
     require_once File::build_path(array("model","Model.php"));
-    //faire comme ca pour tous les les require
 
-    class ModelProduit extends ModelGeneric{
-		
-		protected static $object="produit";
+    class ModelProduit extends Model{
 
         private $idProduit;
         private $idVendeur;
         private $nomProduit;
-        private $categorie;
+        private $nomCateg;
         private $description;
         private $prix;
         private $genre;
@@ -24,211 +16,122 @@
         private $taille;
         private $photo;
 
-        // un getter      
-        public function getIdProduit() {
-            return $this->idProduit;
+    public function __construct($idV = NULL, $n = NULL, $cate = NULL, $d = NULL, $pr = NULL, $g = NULL, $coul = NULL, $t = NULL, $ph = NULL) {
+        if (!is_null($idV) && !is_null($n) && !is_null($cate) && !is_null($d) && !is_null($pr) && !is_null($g) && !is_null($coul) && !is_null($t)) {
+            $this->idVendeur = $idV;
+            $this->nomProduit = $n;
+            $this->nomCateg = $cate;
+            $this->description = $d;
+            $this->prix = $pr;
+            $this->genre = $g;
+            $this->couleur = $coul;
+            $this->taille = $t;
+            $this->photo = $ph;
         }
+    }
 
-        // un getter      
-        public function getIdVendeur() {
-            return $this->idVendeur;
-        }
+    public function get($nom_attribut){
+        if (property_exists($this, $nom_attribut))
+            return $this->$nom_attribut;
+        return false;
+    }
 
-        // un getter      
-        public function getNomProduit() {
-            return $this->nomProduit;
+    public function setNomProduit($valeur) {
+        if (strlen($valeur) < 100) {
+            $this->nomProduit = $valeur;
+        } else {
+            echo "Le nom du produit doit être inferieure à 100 caractères";
         }
+    }
+ 
+    public function setCategorie($valeur) {
+        if (strlen($valeur) < 50) {
+            $this->categorie = $valeur;
+        } else {
+            echo "Le catégorie du produit doit être inferieure à 50 caractères";
+        }
+    }
 
-        // un setter 
-        public function setNomProduit($nomProduit2) {
-            if (strlen($nomProduit2) < 100) {
-                $this->nomProduit = $nomProduit2;
-            } else {
-                echo "Le nom du produit doit être inferieure à 100 caractères";
-            }
+    public function setDescription($valeur) {
+        if (strlen($valeur) < 1000) {
+            $this->description = $valeur;
+        } else {
+            echo "La description du produit doit être inferieure à 1000 caractères";
         }
-        
-        // un getter      
-        public function getCategorie() {
-            return $this->categorie;
-        }
+    }
 
-        // un setter 
-        public function setCategorie($categorie2) {
-            if (strlen($categorie2) < 50) {
-                $this->categorie = $categorie2;
-            } else {
-                echo "Le catégorie du produit doit être inferieure à 50 caractères";
-            }
+    public function setPrix($valeur) {
+        if (strlen($valeur) < 5) {
+            $this->prix = $valeur;
+        } else {
+            echo "Le prix du produit doit être inferieure à 5 caractères";
         }
-		
-		// un getter      
-        public function getDescription() {
-            return $this->description;
-        }
+    }
 
-        // un setter 
-        public function setDescription($description2) {
-            if (strlen($description2) < 1000) {
-                $this->description = $description2;
-            } else {
-                echo "La description du produit doit être inferieure à 1000 caractères";
-            }
-        }
-		
-		// un getter      
-        public function getPrix() {
-            return $this->prix;
-        }
+    public function setGenre($valeur) {
+        $this->genre = $valeur;   
+    }
 
-        // un setter 
-        public function setPrix($prix2) {
-            if (strlen($prix2) < 5) {
-                $this->prix = $prix2;
-            } else {
-                echo "Le prix du produit doit être inferieure à 5 caractères";
-            }
-        }
-        
-        // un getter      
-        public function getGenre() {
-            return $this->genre;
-        }
+    public function setCouleur($valeur) {
+        $this->couleur = $valeur;    
+    }
 
-        // un setter 
-        public function setGenre($genre2) {
-            $this->genre = $genre2;   
-        }
-        
-        // un getter      
-        public function getCouleur() {
-            return $this->couleur;
-        }
+    public function setTaille($valeur) {
+        $this->taille = $valeur;
+    }
 
-        // un setter 
-        public function setCouleur($couleur2) {
-            $this->couleur = $couleur2;    
-        }
-        
-		// un getter
-        public function getTaille() {
-            return $this->taille;
-        }
+    public function setPhoto($valeur) {
+        $this->photo = $valeur;
+    }
 
-        // un setter 
-        public function setTaille($taille2) {
-            $this->taille = $taille2;
-        }
-		
-		// un getter
-        public function getPhoto() {
-            return $this->photo;
-        }
+    static public function getAllProduit() {
+        $SQL_request = " SELECT * FROM Produit";
+        $rep = Model::$pdo->query($SQL_request);
+        $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelProduit');
+        $tab_p = $rep->fetchAll();
+        return $tab_p;
+    }
 
-        // un setter 
-        public function setPhoto($photo2) {
-            $this->photo = $photo2;
-        }
-
-        public function __construct($idV = NULL, $n = NULL,
-		$cate = NULL, $d = NULL, $pr = NULL, $g = NULL, $coul = NULL, $t = NULL,
-		$ph = NULL) {
-            if (!is_null($idV) && !is_null($n)
-				&& !is_null($cate) && !is_null($d) && !is_null($pr) && !is_null($g)
-				&& !is_null($coul) && !is_null($t)) {
-                // Si aucun de attributs sont nuls,
-                // c'est forcement qu'on les a fournis
-                // donc on retombe sur le constructeur à 3 arguments
-                //$this->idProduit = $idP;
-                $this->idVendeur = $idV;
-                $this->nomProduit = $n;
-				$this->categorie = $cate;
-                $this->description = $d;
-                $this->prix = $pr;
-				$this->genre = $g;
-                $this->couleur = $coul;
-                $this->taille = $t;
-				$this->photo = $ph;
-            }
-        }
-
-        // une methode d'affichage.
-        //public function afficher() {
-          //  echo"<br>";
-            //echo "Voiture $this->immatriculation de marque $this->marque (couleur $this->couleur)";
-        //}
-
-        static public function getAllProduit() {
-            $SQL_request = " SELECT * FROM Produits";
-            $rep = Model::$pdo->query($SQL_request);
-
-            $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelProduit');
-            $tab_p = $rep->fetchAll();
-
+    public static function getProduitByCategorie($cate) {
+        $sql = "SELECT * from Produits WHERE nomCateg=:nom_tag";
+        $req_prep = Model::$pdo->prepare($sql);
+        $values = array(
+            "nom_tag" => $cate,
+        );
+        $req_prep->execute($values);
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelProduit');
+        $tab_p = $req_prep->fetchAll();
+        if (empty($tab_p)){
             return $tab_p;
         }
-
-        public static function getProduitByCategorie($cate) {
-            $sql = "SELECT * from Produits WHERE categorie=:nom_tag";
-            // Préparation de la requête
-            $req_prep = Model::$pdo->prepare($sql);
-
-            $values = array(
-                "nom_tag" => $cate,
-                //nomdutag => valeur, ...
-            );
-            // On donne les valeurs et on exécute la requête	 
-            $req_prep->execute($values);
-
-            // On récupère les résultats comme précédemment
-            $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelProduit');
-            $tab_p = $req_prep->fetchAll();
-            // Attention, si il n'y a pas de résultats, on renvoie false
-            if (empty($tab_p)){
-                return $tab_p;
-            }
+        return $tab_p;
+    }
+        
+    public static function getProduitByNameAndGenre($name,$genre) {
+        $sql = "SELECT * from Produits WHERE nomProduit LIKE :name2 and genre=:genre2";
+        $req_prep = Model::$pdo->prepare($sql);
+        $values = array(
+            "name2" => '%'.$name.'%',
+            "genre2"=>$genre,
+        ); 
+        $req_prep->execute($values);
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelProduit');
+        $tab_p = $req_prep->fetchAll();
+        if (empty($tab_p)){
             return $tab_p;
         }
-        
-        public static function getProduitByNameAndGenre($name,$genre) {
-            $sql = "SELECT * from Produits WHERE nomProduit LIKE :name2 and genre=:genre2";
-            // Préparation de la requête
-            $req_prep = Model::$pdo->prepare($sql);
-
-            $values = array(
-                "name2" => '%'.$name.'%',
-                "genre2"=>$genre,
-                //nomdutag => valeur, ...
-            );
-            // On donne les valeurs et on exécute la requête	 
-            $req_prep->execute($values);
-
-            // On récupère les résultats comme précédemment
-            $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelProduit');
-            $tab_p = $req_prep->fetchAll();
-            // Attention, si il n'y a pas de résultats, on renvoie false
-            if (empty($tab_p)){
-                return $tab_p;
-            }
-            return $tab_p;
-        }        
+        return $tab_p;
+    }        
 		
 		public static function getProduitByIdProduit($idP) {
             $sql = "SELECT * from Produits WHERE idProduit=:nom_tag";
-            // Préparation de la requête
             $req_prep = Model::$pdo->prepare($sql);
-
             $values = array(
                 "nom_tag" => $idP,
-                //nomdutag => valeur, ...
-            );
-            // On donne les valeurs et on exécute la requête	 
+            ); 
             $req_prep->execute($values);
-
-            // On récupère les résultats comme précédemment
             $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelProduit');
             $tab_p = $req_prep->fetchAll();
-            // Attention, si il n'y a pas de résultats, on renvoie false
             if (empty($tab_p)){
                 return $tab_p;
             }
@@ -236,18 +139,12 @@
         }
         
         public static function deleteProduitByIdProduit($idP) {
-            $sql = "Delete from Produits WHERE idProduit=:nom_tag";
-            // Préparation de la requête
+            $sql = "Delete from Produit WHERE idProduit=:nom_tag";
             $req_prep = Model::$pdo->prepare($sql);
-
             $values = array(
                 "nom_tag" => $idP,
-                //nomdutag => valeur, ...
             );
-            // On donne les valeurs et on exécute la requête	 
-            
-
-            return $req_prep->execute($values); // 0 si n'a pas delete
+            return $req_prep->execute($values);
         }		
         
         public function save(){
