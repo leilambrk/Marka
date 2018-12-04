@@ -1,7 +1,8 @@
 <?php
+// BON
 require_once File::build_path(array('config','Conf.php'));
 
-class Model {
+class Model extends Model{
     public static $pdo;
     
     public static function Init() {
