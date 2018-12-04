@@ -25,7 +25,7 @@ require_once File::build_path(array('model','Model.php'));
 
     public static function getAllCommandes(){
         require_once 'Model.php';
-        $rep = Model::$pdo->query("SELECT * FROM Commandes");
+        $rep = Model::$pdo->query("SELECT * FROM Commande");
         $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelCommande');
         $tab_commandes = $rep->fetchAll();
         return $tab_commandes;
