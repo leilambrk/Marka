@@ -1,4 +1,5 @@
 <?php
+// BON
 require_once File::build_path(array('config','Conf.php'));
 
 class Model extends Model{
