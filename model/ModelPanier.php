@@ -24,14 +24,7 @@ class ModelPanier extends Model{
     }
 
     
-    public static function Panier(){
-        require_once 'Model.php';
-        $rep = Model::$pdo->query("SELECT * FROM Paniers");
-        $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelPanier');
-        $tab_paniers = $rep->fetchAll();
-        return $tab_paniers;
-    }
-
+    
 
        
 }
