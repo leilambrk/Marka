@@ -6,6 +6,14 @@
     private $dateCommande;
     private $panier;
     
+    public function __construct($u = NULL, $d = NULL, $p = NULL) {
+      if (!is_null($u) && !is_null($d) && !is_null($p)) {
+        $this->idUtilisateur = $u[0];
+        $this->dateCommande = $d;
+        $this->panier = $p;
+      }
+    }  
+
     public static function getAllCommandes(){
         require_once 'Model.php';
         $rep = Model::$pdo->query("SELECT * FROM Commandes");
@@ -21,14 +29,6 @@
             return $this->$nom_attribut;
         return false;
     }
-        
-    public function __construct($u = NULL, $d = NULL, $p = NULL) {
-      if (!is_null($u) && !is_null($d) && !is_null($p)) {
-        $this->idUtilisateur = $u[0];
-        $this->dateCommande = $d;
-        $this->panier = $p;
-      }
-    }  
 
     public function save(){
 
