@@ -1,6 +1,5 @@
 <?php
 //BON
-    require_once File::build_path(array("model","ModelGeneric.php"));
     require_once File::build_path(array("model","Model.php"));
 
     class ModelProduit extends Model{

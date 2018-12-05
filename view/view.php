@@ -1,34 +1,43 @@
 <!DOCTYPE html>
 <html>
-    <head>  
-        <link rel="icon" type="image/png" href="images/nature.png" />
-        <link rel="stylesheet" type="text/css" href="css/styles.css">
-        <script src="script/jquery.min.js"></script>
-        <script src="script/script.js"></script>
+    <head>
         <meta charset="UTF-8">
         <title><?php echo $pagetitle; ?></title>
-    
     </head>
-    
-        <body>
+    <body>
         <header>
-            <img class="banniere" src="images/ban-accueil.jpg" alt="Article 1" width="135" height="135"/>
-         <?php require File::build_path(array("view", "menu.php")); ?>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="?action=homepage&controller=accueil">Accueil</a>
+                    </li>
+                    <li>
+                        <a href="?action=display&controller=produit">Nos produits</a>
+                        <ul>
+                            <li><a href="?action=display1st&controller=produit">Hommes</a></li>
+                            <li><a href="?action=display2nd&controller=produit">Femmes</a></li>
+                            <li><a href="?action=display3rd&controller=produit">Enfants</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="?action=display&controller=panier">Panier</a>
+                    </li>
+                </ul>
+            </nav>
         </header>
-
-            <main onclick="closeNav()">
-
 <?php
-
- 
-$filepath = File::build_path(array("view", static::$object, "$view.php"));
-require $filepath;
-
+// Si $controleur='voiture' et $view='list',
+// alors $filepath="/chemin_du_site/view/voiture/list.php"
+    $filepath = File::build_path(array("view", static::$object, "$view.php"));
+    require $filepath;
 ?>
-    </main>
     </body>
-    <footer>
-       <?php require File::build_path(array("view","footer.php")); ?>
-    </footer>
+        <footer>
+            <div>
+                <p> Suivez nous sur les réseaux sociaux ! </p>
+                    <a href="https://www.facebook.com/" target="_blank"><img id="logoFB" src="images/facebook.png" alt="logo facebook"> </a>
+                    <a href="https://twitter.com/" target="_blank"><img id="logoTT" src="images/twitter.png" alt="logo twitter"> </a>
+                    <a href="https://plus.google.com/" target="_blank"><img id="logoGP" src="images/googleplus.png" alt="logo google plus"> </a>
+                </div>
+        </footer>
 </html>
-

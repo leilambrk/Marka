@@ -1,42 +1,43 @@
 <?php
 require_once File::build_path(array('controller','ControllerAccueil.php'));
-require_once File::build_path(array('controller','ControllerPanier.php'));
 require_once File::build_path(array('controller','ControllerUtilisateur.php'));
 require_once File::build_path(array('controller','ControllerCommande.php'));
 require_once File::build_path(array('controller','ControllerProduit.php'));
 
 
-//------------controller-------------
-if(!isset($_GET['controller'])) //Si le controller n'a  pas été spécifié
-	{
-		$controller = 'accueil'; //On définit un controller par defaut (Personne)
+/*------ Controllers ------*/
+	if(isset($_GET['controller'])){
+		$controller = $_GET['controller'];
+	}else{
+		$controller = "accueil";
 	}
+	$controller_class = "Controller" . ucfirst($controller); 
 
+
+
+/*------ Actions ------*/
+	if(class_exists($controller_class)){
+		if(isset($_GET['action'])){ //si l'action est précisée, alors
+			$action = $_GET['action']; //on exécute l'action
+		}else{
+			$action = "homepage"; //sinon, action par défaut
+		}
+
+		if(in_array($action, get_class_methods($controller_class))){
+			$controller_class::$action(); 
+		
+		}else{
+			$pagetitle='Erreur';
+	        $view='error';
+	        $controller = "accueil";
+			require_once (File::build_path(array("view", "view.php")));
+		}
+	}
 	else
 	{
-		$controller = $_GET['controller']; // On recupère le controller passée dans l'URL
+		$pagetitle='Erreur';
+	    $view='error';
+	    $controller = "accueil";
+		require_once (File::build_path(array("view", "view.php")));
 	}
-
-$controller_class = 'Controller' . ucfirst($controller); //on crée la variable qui represente la classe dur laquelle on appellera l'action
-
-//--------------action---------------
-	if(!isset($_GET['action'])) //Si l'action n'a  pas été spécifiée
-	{
-		$action = 'homepage'; //On définit une action par defaut (readAll)
-	}
-
-	else 
-	{
-		if (in_array($_GET['action'], get_class_methods($controller_class))) 
-		{
-			$action = $_GET['action']; // On recupère l'action passée dans l'URL
-		}
-		else 
-		{
-			$action = 'error';
-		}
-
-	}
-$controller_class::$action(); // Appel de la méthode statique $action de ControllerPersonne
 ?>
-
