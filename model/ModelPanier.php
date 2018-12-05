@@ -2,8 +2,8 @@
 
 class ModelPanier extends Model{
 
-  private $commande;
-  private $produit;
+  private $idCommande;
+  private $idProduit;
   private $quantite;
 
     public function __construct($comm = NULL, $prod = NULL, $quant = NULL) {
@@ -11,16 +11,14 @@ class ModelPanier extends Model{
 
         $this->idCommande = $comm;
         $this->idProduit = $prod;
-        $this->idQuantite = $quant;
+        $this->quantite = $quant;
       }
     }
 
-    public function getCommande() {
-        return $this->idCommande;  
-    }
-
-    public function getProduit(){
-        return $this->idProduit;
-    }      
+        public function get($nom_attribut){
+        if (property_exists($this, $nom_attribut))
+            return $this->$nom_attribut;
+        return false;
+    }     
 }
 ?>
