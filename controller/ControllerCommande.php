@@ -1,7 +1,6 @@
 <?php 
 
-class ControllerCommande
-{
+class ControllerCommande{
 
     protected static $object='commande';
 

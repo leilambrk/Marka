@@ -160,6 +160,17 @@ class ModelUtilisateur extends Model {
 
 //INSCRIPTIONS ET SESSIONS
     public function isValid (){
+        if (strlen($this->nom)>2 && strlen($this->prenom)>2 && strlen($this->email) > 5
+            && strlen($this->password)>7 && strlen($this->adresse)>2 && strlen($this->nomVille)>2 
+            &&strlen($this->pays)>2){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    /*public function isValid (){
 
         $this->errors = [];
 
@@ -173,7 +184,11 @@ class ModelUtilisateur extends Model {
         }
 
         return $this->errors;
-    }
+    }*/
+
+
+
+
 
     public function checkNom ()
     {

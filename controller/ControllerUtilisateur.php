@@ -41,14 +41,33 @@ class ControllerUtilisateur{
 
     public static function create()
     {
-    $controller ='personne';
+    $controller ='utilisateur';
     $view = 'create';
     $pagetitle = 'Inscription';
     require File::build_path(array('view','view.php')); 
         //redirige vers la vue create.php (formulaire)
     }
 
-    public static function created() 
+public static function created() 
+    {
+    $date = date('Y-m-d H:i:s');
+    $p = new ModelUtilisateur($id,$_POST['nom'],$_POST['prenom'],$_POST['email'],$_POST['password'],$date
+    ,$_POST['adresse'],$_POST['nomVille'],$_POST['pays'],$admin);
+    if ($p->isValid() && $_POST['password']==$_POST['password_valid']){ //on recupere les infos du formulaires
+        $p->save(); // on les sauve dans la base de donnees
+        $controller ='utilisateur';
+        $view = 'error';
+        $pagetitle = 'Liste des personnes';
+        require File::build_path(array('view','view.php'));
+        //redirige vers la vue created.php
+    }
+    else {
+        self::error();
+    }
+
+    }
+
+  /* public static function created() 
     {
     $p = new ModelPersonne($_POST['nomPersonne'],$_POST['prenomPersonne'],$_POST['mailPersonne']); //on recupere les infos du formulaires
     $p->save(); // on les sauve dans la base de donnees
@@ -58,7 +77,7 @@ class ControllerUtilisateur{
     require File::build_path(array('view','view.php'));
         //redirige vers la vue created.php
 
-    }
+    }*/
 
     public static function connect(){
 		$view = 'connect';
