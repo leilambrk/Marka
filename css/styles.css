@@ -1,10 +1,22 @@
+/* menu */
+
 /*nav {
 	border: 1px solid black;
 	text-align:center;
 	padding:1%;
 }*/
+footer {
+      width: 100%;
+      margin-left: 0px;
+      margin-right: 0px;
+    }
 
-/* menu */
+#logoFB , #logoTT , #logoGP {
+  padding-left: 1%;
+  height: 25px;
+  width: 25px;
+  text-decoration: none;
+}
 	#menu {
 		border: 2px solid;
 		border-color:#223A49;
