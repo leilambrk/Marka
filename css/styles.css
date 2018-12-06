@@ -190,4 +190,12 @@ footer {
 
 .ban {
 	margin-top: 20px;
+	height: 400px;
+	width: 1600px;
+	direction: flex;
+}
+
+h1,h2{
+	text-align: center;
+	margin-top: 30px;
 }

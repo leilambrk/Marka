@@ -1,4 +1,4 @@
-<h1>Vente de vêtements en ligne</h1>
+<h1>La mode à petits prix</h1>
 
 <img src="images/ban.jpg" class="ban"/>
 
