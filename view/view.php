@@ -18,6 +18,7 @@
                                 <li id="rej"><a href="?action=display3rd&controller=produit">Enfants</a></li>
                         </li></ul>
                         <li class="align"><a href="?action=display&controller=panier">Panier</a></li>
+                        <li class="align"><a href="?action=connect&controller=utilisateur">Se connecter</a></li>
                     </ul>
             </div>
             <nav>
@@ -31,6 +32,7 @@
                                 <li><a href="?action=display3rd&controller=produit">Enfants</a></li>
                         </ul></li>
                         <li><a href="?action=display&controller=panier">Panier</a></li>
+                        <li><a href="?action=connect&controller=utilisateur">Se connecter</a></li>
                     </ul>
                 </div>
             </nav>

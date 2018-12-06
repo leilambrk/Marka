@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'lib/File.php';
 //session_start();
 //require_once File::build_path(array('lib','Security.php'));
