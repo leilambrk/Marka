@@ -1,0 +1,174 @@
+/*nav {
+	border: 1px solid black;
+	text-align:center;
+	padding:1%;
+}*/
+
+/* menu */
+	#menu {
+		border: 2px solid;
+		border-color:#223A49;
+		background-color:white;
+		justify-content: center;
+		height: 35px;
+		border-radius: 8px;
+		width: 99%;
+		margin: auto;
+		margin-top: 35px;
+		display: flex;
+		flex-direction: row;
+	}
+
+	#menu, #menu ul{
+		padding:0;
+		margin:auto;
+		list-style:none;
+		text-align:center;
+	}
+
+	#menu li{
+		display:inline-block;
+		position:relative;
+		border-radius:10px 10px 0 solid;
+	}
+	#menu ul li{
+		display:inherit;
+		border-radius:10px 10px 0 solid ;
+	}
+	#menu ul li:hover{
+		border-radius:0;
+	}
+
+	#menu ul{
+		position:absolute;
+		max-height:0;
+		left: 0px;
+		right: 25px;
+		overflow:hidden;
+		-moz-transition: .8s all .3s;
+		-webkit-transition: .8s all .3s;
+		transition: .8s all .3s;
+		width:168.06px;
+		height:105px;
+	}
+	#menu li:hover ul{
+			max-height:15em;
+	}
+
+	/* background des liens sous menus */
+
+	#menu li li{
+		/*background:white;*/
+		border: 0px solid;
+		border-radius:5px;
+		border-color:#223A49;
+		/*margin:3px 3px;*/
+	}
+
+	/* background des liens menus et sous menus au survol */
+	#menu li:hover, #menu li li:hover{
+		background:#223A49;
+	}
+
+
+	/* les a href */
+	#menu a{
+		text-decoration:none;
+		display:block;
+		padding:8px 32px;
+		color:#223A49;
+		font-family: 'Glitch', sans-serif;
+	}
+	
+	#menu ul a{
+		padding:8px 0px;
+	}
+	
+	#menu li:hover li a{
+		color:#223A49;
+		text-transform:inherit;
+	}
+	#menu li:hover a, #menu li li:hover a{
+		color:white;
+	}
+
+
+
+	/* menu bruger */
+	.burger{
+		display:none;
+	}
+
+	@media all and (max-width: 650px) {
+		
+		.burger{
+			display:block;
+		}
+			
+		.burger{
+			display:flex;
+		}
+			
+		nav ul li {
+			display:inherit;
+		}
+		
+		nav{
+			display:none;
+		}
+		
+		#menu2{
+			position:absolute;
+			left:0px;
+			display:none;
+		}
+
+		.align{
+			text-align:center;
+			display: flex;
+			border-radius:8px;
+			border:1px solid;
+			border-color:#223A49;
+			background-color:white;
+		}
+			
+		li #rej {
+			text-align:center;
+			display: none;
+			
+		}
+			
+		li:hover #rej {
+			text-align:center;
+			display: block;
+		}
+				
+		.burger:hover #menu2{
+			display:block;
+		}
+			
+	}
+
+	img .burger:hover {
+		display: block;
+	}
+
+	.burger {
+		overflow: hidden;
+		background-color: #223A49;
+	}
+
+	.burger a {
+		float: left;
+		display: block;
+		color: #223A49;
+		text-align: center;
+		padding: 10px 15px;
+		text-decoration: none;
+		font-size: 17px;
+		background-color:white;
+	}
+
+	.burger li li li a{
+		display:none;
+	}

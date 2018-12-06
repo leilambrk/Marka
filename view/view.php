@@ -1,28 +1,25 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="css/styles.css"/>
         <meta charset="UTF-8">
         <title><?php echo $pagetitle; ?></title>
     </head>
     <body>
         <header>
             <nav>
-                <ul>
-                    <li>
-                        <a href="?action=homepage&controller=accueil">Accueil</a>
-                    </li>
-                    <li>
-                        <a href="?action=display&controller=produit">Nos produits</a>
+                <div>
+                    <ul id="menu" class="nav">
+                        <li><a href="?action=homepage&controller=accueil">Accueil</a></li>
+                        <li><a href="#">Nos produits</a>
                         <ul>
-                            <li><a href="?action=display1st&controller=produit">Hommes</a></li>
-                            <li><a href="?action=display2nd&controller=produit">Femmes</a></li>
-                            <li><a href="?action=display3rd&controller=produit">Enfants</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="?action=display&controller=panier">Panier</a>
-                    </li>
-                </ul>
+                                <li><a href="?action=display1st&controller=produit">Hommes</a></li>
+                                <li><a href="?action=display2nd&controller=produit">Femmes</a></li>
+                                <li><a href="?action=display3rd&controller=produit">Enfants</a></li>
+                        </ul></li>
+                        <li><a href="?action=display&controller=panier">Panier</a></li>
+                    </ul>
+                </div>
             </nav>
         </header>
 <?php
@@ -41,3 +38,37 @@
                 </div>
         </footer>
 </html>
+
+
+
+            <!--            <nav>
+                <ul>
+                    <li>
+                        <a href="?action=homepage&controller=accueil">Accueil</a>
+                    </li>
+                    <li>
+                        <a href="?action=display&controller=produit">Nos produits</a>
+                        <ul>
+                            <li><a href="?action=display1st&controller=produit">Hommes</a></li>
+                            <li><a href="?action=display2nd&controller=produit">Femmes</a></li>
+                            <li><a href="?action=display3rd&controller=produit">Enfants</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="?action=display&controller=panier">Panier</a>
+                    </li>
+                </ul>
+            </nav>
+
+
+
+
+                        <nav>
+                <a href="?action=homepage&controller=accueil">Accueil</a>
+                <a href="?action=display&controller=produit">Nos produits</a>
+                <a href="?action=display1st&controller=produit">Hommes</a>
+                <a href="?action=display2nd&controller=produit">Femmes</a>
+                <a href="?action=display3rd&controller=produit">Enfants</a>
+                <a href="?action=display&controller=panier">Panier</a>
+            </nav>
+            -->
