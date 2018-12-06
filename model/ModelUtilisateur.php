@@ -95,6 +95,68 @@ class ModelUtilisateur extends Model {
         $req->execute();
     }
 
+    public static function selectByEmail($email){
+        error_reporting(E_ALL & ~E_NOTICE);
+        $sql = "SELECT * FROM Utilisateurs U WHERE email=:email";
+
+        // Préparation de la requête
+        $req_prep = Model::$pdo->prepare($sql);
+
+
+        $values = array(
+            "email" => $email,
+        );
+        // On donne les valeurs et on exécute la requête
+        $req_prep->execute($values);
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
+
+        $tab = $req_prep->fetchAll();
+        return $tab[0];
+
+    }
+
+    public function checkPW($email, $mdpchiffre)
+    {
+
+        $sql = "SELECT * FROM Utilisateurs WHERE email=:email";
+
+        // Préparation de la requête
+        $req_prep = Model::$pdo->prepare($sql);
+
+        $data = array(
+            "email" => $email,);
+
+        $req_prep->execute($data);
+
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
+
+        $tab = $req_prep->fetchAll();
+
+
+        return ($tab[0]->email==$email) && ($tab[0]->password==$mdpchiffre);
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//------------------------------------------------------------------------
 
 //INSCRIPTIONS ET SESSIONS
     public function isValid (){
@@ -172,25 +234,7 @@ class ModelUtilisateur extends Model {
         return $valid;
     }
 
-    public function checkPassword ()
-    {
 
-        $valid = 1;
-
-        if (strlen($this->password) < 5)
-        {
-            $valid = 0;
-            $this->errors['password'] = 'password trop court';
-        }
-
-        if (strcmp($this->password, $this->confirm_password) !== 0)
-        {
-            $valid = 0;
-            $this->errors['password'] = 'Les mots de passe ne correspond pas';
-        }
-
-        return $valid;
-    }
 
     public function checkAdresse ()
     {
@@ -370,35 +414,35 @@ class ModelUtilisateur extends Model {
         return $users;
     }
 
-
-    public function save ()
-    {
-
-        $date = date('Y-m-d H:i:s');
-
-        $token = Str::random(300);
-
-        $req = Model::$pdo->prepare('INSERT INTO Utilisateurs 
-                  (nom, prenom, email, password, dateInscription, adresse, nomVille, pays) 
-                  VALUES (:nom, :prenom, :email, :password, :dateInscription, :adresse, :nomVille, :pays)');
-        $req->bindValue(':nom', $this->get('nom'));
-        $req->bindValue(':prenom', $this->get('prenom'));
-        $req->bindValue(':email', $this->get('email'));
-        $req->bindValue(':password', $this->get('password'));
-        $req->bindValue(':dateInscription', $date);
-        $req->bindValue(':adresse', $this->get('adresse'));
-        $req->bindValue(':nomVille', $this->get('nomVille'));
-        $req->bindValue(':pays', $this->get('pays'));
-        $req->bindValue(':confirm_token', $token);
-        $req->execute();
-
-        $idUser = Model::$pdo->lastInsertId();
-
-        $message = 'Votre compte a bien été enregistrer cliquer sur le lien suivant pour valider votre compte : http://localhost/vente-en-ligne/?url=confirmation&id=' . $idUser . '&token=' . $token;
-
-        $this->sendMail($message);
-    }
-
+//
+//    public function save ()
+//    {
+//
+//        $date = date('Y-m-d H:i:s');
+//
+//        $token = Str::random(300);
+//
+//        $req = Model::$pdo->prepare('INSERT INTO Utilisateurs 
+//                  (nom, prenom, email, password, dateInscription, adresse, nomVille, pays) 
+//                  VALUES (:nom, :prenom, :email, :password, :dateInscription, :adresse, :nomVille, :pays)');
+//        $req->bindValue(':nom', $this->get('nom'));
+//        $req->bindValue(':prenom', $this->get('prenom'));
+//        $req->bindValue(':email', $this->get('email'));
+//        $req->bindValue(':password', $this->get('password'));
+//        $req->bindValue(':dateInscription', $date);
+//        $req->bindValue(':adresse', $this->get('adresse'));
+//        $req->bindValue(':nomVille', $this->get('nomVille'));
+//        $req->bindValue(':pays', $this->get('pays'));
+//        $req->bindValue(':confirm_token', $token);
+//        $req->execute();
+//
+//        $idUser = Model::$pdo->lastInsertId();
+//
+//        $message = 'Votre compte a bien été enregistrer cliquer sur le lien suivant pour valider v//otre compte : //http://localhost/vente-en-ligne/?url=confirmation&id=' . $idUser . '&token=' . $token;//
+//
+//        $this->sendMail($message);
+//    }
+//
     private function sendMail ($message)
     {
         mail($this->email, 'Inscription - Vente en ligne', $message);

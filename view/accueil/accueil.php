@@ -1,4 +1,4 @@
-<h1>La mode à petits prix</h1>
+<h1>La mode qui convient à tous.</h1>
 
 <img src="images/ban.jpg" class="ban"/>
 
