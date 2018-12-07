@@ -17,20 +17,23 @@ class ModelUtilisateur extends Model {
     private $admin;
 
 
-    public function __construct($nom, $prenom, $email,$password, $dateInscription, $adresse, $nomVille, $pays)
-    {
-        $this->idUser = null;
-        $this->nom = $nom;
-        $this->prenom = $prenom;
-        $this->password = $password;
-        $this->email = $email;
-        $this->dateInscription = $dateInscription;
-        $this->adresse = $adresse;
-        $this->nomVille = $nomVille;
-        $this->pays = $pays;
-        $this->admin=0;
-    }
 
+		public function __construct($id = null ,$nom = null, $prenom = null, $email = null, $dateInscription = null, $password=null,$adresse = null, $nomVille = null, $pays = null, $admin = 0)
+		    {
+		        if (!is_null($nom) && !is_null($prenom) && !is_null($email) &&!is_null($dateInscription) && !is_null($password) && !is_null($adresse) && !is_null($nomVille) &&!is_null($pays)){
+		        $this->idUser = null;
+		        $this->nom = $nom;
+		        $this->prenom = $prenom;
+		        $this->password = $password;
+		        $this->email = $email;
+		        $this->dateInscription = $dateInscription;
+		        $this->adresse = $adresse;
+		        $this->nomVille = $nomVille;
+		        $this->pays = $pays;
+		        $this->admin=0;
+
+		        }
+		    }
 		public function save()
 		{
 				$sql = "INSERT INTO Utilisateur (nom, prenom, email, password, dateInscription, adresse, nomVille, pays) VALUES (:nom, :prenom, :email, :pw, :da, :addre, :nomVille, :pays)";
@@ -114,25 +117,25 @@ class ModelUtilisateur extends Model {
         $req->execute();
     }
 
-    public static function selectByEmail($email){
-        error_reporting(E_ALL & ~E_NOTICE);
-        $sql = "SELECT * FROM Utilisateur U WHERE email=:email";
+		public static function selectByEmail($email){
+		        error_reporting(E_ALL & ~E_NOTICE);
+		        $sql = "SELECT * FROM Utilisateur U WHERE email=:email";
 
-        // Préparation de la requête
-        $req_prep = Model::$pdo->prepare($sql);
+		        // Préparation de la requête
+		        $req_prep = Model::$pdo->prepare($sql);
 
 
-        $values = array(
-            "email" => $email,
-        );
-        // On donne les valeurs et on exécute la requête
-        $req_prep->execute($values);
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
+		        $values = array(
+		            "email" => $email,
+		        );
+		        // On donne les valeurs et on exécute la requête
+		        $req_prep->execute($values);
+		        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
 
-        $tab = $req_prep->fetchAll();
-        return $tab[0];
+		        $tab = $req_prep->fetchAll();
+		        return $tab[0];
 
-    }
+		    }
 
     public function checkPW($email, $mdpchiffre)
     {

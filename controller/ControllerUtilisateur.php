@@ -52,11 +52,14 @@ class ControllerUtilisateur{
 
 public static function created()
     {
-    if (empty($_SESSION['login'])){
+    //if (!empty($_SESSION['login'])){
     $date = date('Y-m-d H:i:s');
     $mdp=Security::chiffrer($_POST['password']);
-    $p = new ModelUtilisateur($_POST['nom'],$_POST['prenom'],$_POST['email'],$mdp,$date
-    ,$_POST['adresse'],$_POST['nomVille'],$_POST['pays']);
+    $id=null;
+    $admin=null;
+    $p = new ModelUtilisateur($id,$_POST['nom'],$_POST['prenom'],$_POST['email'],$date,$mdp,$_POST['adresse'],$_POST['nomVille'],$_POST['pays'],$admin);
+    var_dump($p);
+
     if ($_POST['password']==$_POST['password_valid']){ //on recupere les infos du formulaires
         $p->save(); // on les sauve dans la base de donnees
         $_SESSION['login']=$_POST['email'];
@@ -68,12 +71,12 @@ public static function created()
     else {
         self::error();
     }
-  }
-  else {
-    $view = 'voirmonprofil';
-    $pagetitle = 'Mon profil';
-    require File::build_path(array('view','view.php'));
-  }
+  // }
+  // else {
+  //   $view = 'voirmonprofil';
+  //   $pagetitle = 'Mon profil';
+  //   require File::build_path(array('view','view.php'));
+  // }
 
     }
 
@@ -84,27 +87,37 @@ public static function created()
 		require File::build_path(array('view','view.php'));
 	}
 
-    public static function connected()
-    {
-        if (isset($_POST['email'])&&isset($_POST['password']))
-        {
-            $login = $_POST['email'];
-            //$pw = Security::chiffrer($_POST['password']);
-            if (ModelUtilisateur::selectByEmail($login)->checkPW($login, $_POST['password']))
-            {
-                $_SESSION['login'] = $login;
-                $infos = ModelUtilisateur::selectByEmail($login);
-                $view = 'voirmonprofil';
-                $pagetitle = 'Mon Profil';
-                require File::build_path(array('view','view.php'));
-            } else {
-                self::error();
-            }
-            } else {
-                self::error();
-            }
+  public static function connected(){
+          if (isset($_POST['email'])&&isset($_POST['password']))
+          {
+              $login = $_POST['email'];
+              $mdp = Security::chiffrer($_POST['password']);
+              $user = ModelUtilisateur::selectByEmail($login);
+              if (!empty($user)){
+                  if ($user->get('password') == $mdp){
+                          $_SESSION['login'] = $login;
+                          $view = 'voirmonprofil';
+                          $pagetitle = 'Mon Profil';
+                          require File::build_path(array('view','view.php'));
+                  }
+                  else {
+                      $view = 'connect';
+                      $pagetitle = 'Erreur de connexion mdp';
+                      require File::build_path(array('view','view.php'));
+                  }
+              }
+              else {
+                  $view = 'connect';
+                  $pagetitle = 'Erreur de connexion mail';
+                  require File::build_path(array('view','view.php'));
+              }
+          }
+          else {
+              self::error();
+         }
+      }
 
-    }
+
     public static function profile()
     {
         if (isset($_SESSION['login'])) {
