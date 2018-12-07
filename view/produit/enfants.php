@@ -27,7 +27,7 @@
 
 </aside>
 
-
+<img src="images">
 
 
 
@@ -42,9 +42,9 @@
 
 
 <h2 class="h2"> Garçons </h2>
-<img src="images/jeanf.jpg" alt="Jean" class="vet" />
-<img src="images/chemise.jpg" alt="Pull" class="vet" />
-<img src="images/to.jpg" alt="T-shirt" class="vet" />
+<img src="images/veste.jpg" alt="Veste" class="vet" />
+<img src="images/chemise.jpg" alt="chemise" class="vet" />
+<img src="images/pullg.jpg" alt="Pull" class="vet" />
 
 
 
