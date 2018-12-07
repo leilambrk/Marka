@@ -16,7 +16,7 @@
         private $photo;
 
     public function __construct($idV = NULL, $n = NULL, $cate = NULL, $d = NULL, $pr = NULL, $g = NULL, $coul = NULL, $t = NULL, $ph = NULL) {
-        if (!is_null($idV) && !is_null($n) && !is_null($cate) && !is_null($d) && !is_null($pr) && !is_null($g) && !is_null($coul) && !is_null($t)) {
+        if (!is_null($idV) && !is_null($n) && !is_null($cate) && !is_null($d) && !is_null($pr) && !is_null($g) && !is_null($coul) && !is_null($t) && !is_null($ph)) {
             $this->idVendeur = $idV;
             $this->nomProduit = $n;
             $this->nomCateg = $cate;
@@ -92,7 +92,7 @@
     }
 
     public static function getProduitByCategorie($cate) {
-        $sql = "SELECT * from Produits WHERE nomCateg=:nom_tag";
+        $sql = "SELECT * from Produit WHERE nomCateg=:nom_tag";
         $req_prep = Model::$pdo->prepare($sql);
         $values = array(
             "nom_tag" => $cate,
@@ -138,7 +138,7 @@
         }
         
         public static function deleteProduitByIdProduit($idP) {
-            $sql = "Delete from Produit WHERE idProduit=:nom_tag";
+            $sql = "DELETE * FROM Produit WHERE idProduit=:nom_tag";
             $req_prep = Model::$pdo->prepare($sql);
             $values = array(
                 "nom_tag" => $idP,
@@ -147,7 +147,7 @@
         }		
         
         public function save(){
-			$sql = "INSERT INTO `Produits` 
+			$sql = "INSERT INTO `Produit` 
 			(`idProduit`, `idVendeur`, `nomProduit`, `categorie`,
 			`description`, `prix`, `genre`, `couleur`, `taille`, `photo`)
 			VALUES (\"" . "\"" . ","  . "\"" . $this->idVendeur . "\"" . ","  . "\"" . $this->nomProduit."\"" . ","  . "\"" . $this->categorie."\"" . ","  . "\"" . $this->description."\"" . ","  . "\"" . $this->prix."\"" . ","  . "\"" . $this->genre."\"" . ","  . "\"" . $this->couleur."\"" . ","  . "\"" . $this->taille."\"" . ","  . "\"" . $this->photo."\")";
