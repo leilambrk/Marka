@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 07 déc. 2018 à 18:54
+-- Généré le :  ven. 07 déc. 2018 à 19:43
 -- Version du serveur :  5.7.23
 -- Version de PHP :  7.2.10
 
@@ -75,20 +75,21 @@ CREATE TABLE IF NOT EXISTS `produit` (
   `nomCateg` varchar(50) NOT NULL,
   `description` varchar(1000) NOT NULL,
   `prix` int(5) NOT NULL,
-  `taille` int(5) NOT NULL,
+  `taille` varchar(5) NOT NULL,
   `photo` varchar(300) NOT NULL,
   PRIMARY KEY (`idProduit`),
   UNIQUE KEY `idProduit` (`idProduit`),
   KEY `categorie` (`nomCateg`),
   KEY `Produits_ibfk_2` (`vendeur`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `produit`
 --
 
 INSERT INTO `produit` (`idProduit`, `nomProduit`, `vendeur`, `nomCateg`, `description`, `prix`, `taille`, `photo`) VALUES
-(1, 'Jean', 'mabrkl@icloud.com', 'Hommes', 'Beau', 152, 32, 'Image');
+(2, 'Chemise bleu ciel', 'mabrkl@icloud.com', 'Hommes', 'Chemise de très bonne qualité', 69, 'M', 'http://image.noelshack.com/fichiers/2018/49/5/1544210183-chemise.jpg'),
+(3, 'Veste noir', 'mabrkl@icloud.com', 'Hommes', 'Veste très chique', 159, 'L', 'http://image.noelshack.com/fichiers/2018/49/5/1544210280-vestnoir.jpg');
 
 -- --------------------------------------------------------
 

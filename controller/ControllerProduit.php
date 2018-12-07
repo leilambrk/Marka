@@ -23,13 +23,17 @@ protected static $object='produit';
 
     }
 
+    public static function displayerH(){
+      $tab = ModelProduit::getProduitByCategorie('Hommes');
+      return $tab;
+    }
+
 
     public static function adder(){
         if ( is_numeric($_POST['prix']) && $_SESSION['admin'] == 1)
         {
           $produit = new ModelProduit($_SESSION['login'],$_POST['nom'],$_POST['categorie'],
           $_POST['description'],$_POST['prix'],$_POST['taille'],$_POST['photo']);
-          var_dump($produit);
           $produit->save();
           $controller ='produit';
           $view = 'add';
@@ -51,6 +55,8 @@ protected static $object='produit';
         $pagetitle = 'Collection Femme';
         require File::build_path(array('view','view.php'));
     }
+
+
     public static function display3rd()
     {
         $controller ='produit';

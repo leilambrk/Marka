@@ -42,7 +42,7 @@
     }
 
     public static function getProduitByCategorie($cate) {
-        $sql = "SELECT * from Produit WHERE nomCateg=:nom_tag";
+        $sql = "SELECT * from produit WHERE nomCateg=:nom_tag";
         $req_prep = Model::$pdo->prepare($sql);
         $values = array(
             "nom_tag" => $cate,
@@ -67,7 +67,6 @@
 
         public function save(){
           $sql = "INSERT INTO produit (nomProduit, taille, prix, nomCateg, photo, description, vendeur) VALUES (:nom, :t, :p, :cat, :photo, :des, :idV)";
-          var_dump($sql);
         // Préparation de la requête
           $req_prep = Model::$pdo->prepare($sql);
 

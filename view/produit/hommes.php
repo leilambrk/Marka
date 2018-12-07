@@ -1,25 +1,22 @@
-<h1>Tendances | Mode HOMMES</h1>
+//<form method="post" action="?action=diplayerH&controller=produit">
 
-<aside class="aside">
-<h3  id="pageHomme">Collection Hommes</h3>
+	<h1>Tendances | Mode HOMMES</h1>
 
-<ul class="list1">
-	<li><a href="">Jeans</a></li>
-	<li><a href="">Pulls</a></li>
-	<li><a href="">Vestes</a></li>
-	<li><a href="">Tenues de fêtes</a></li>
-	<li><a href="">T-shirt</a></li>
-	<li><a href="">Vêtements de sport</a></li>
-</ul>
+<?php
+require_once File::build_path(array('model','ModelProduit.php'));
+require_once File::build_path(array('controller','ControllerProduit.php'));
 
-
-</aside>
-
-
-<img src="images/jean.jpg" alt="Jean" class="vet" />
-<img src="images/pull.jpg" alt="Pull" class="vet" />
-<img src="images/tshirt.jpg" alt="T-shirt" class="vet" />
+		$tab = ControllerProduit::displayerH();
+		var_dump($tab);
+		foreach ($tab as $key => $value) {
+			echo '<h4> ' . $tab[$key]->get('nomProduit') . '</h4>';
+			echo '<img src="' . $tab[$key]->get('photo') . '"/><br>';
+			echo '<label> ' . $tab[$key]->get('description') . '</label>';
+			echo '<h5> ' . $tab[$key]->get('prix') . '€</h5>';
+			echo '<label> De taille ' . $tab[$key]->get('taille') . '</label>';
+			echo '<br><label> ---------------------------------------------------------------------------------------------------------------------------------------------</label>';
 
 
-
-
+		}
+		?>
+<img src=""/>
