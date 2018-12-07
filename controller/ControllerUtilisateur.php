@@ -52,6 +52,7 @@ class ControllerUtilisateur{
 
 public static function created()
     {
+    if (empty($_SESSION['login'])){
     $date = date('Y-m-d H:i:s');
     $mdp=Security::chiffrer($_POST['password']);
     $p = new ModelUtilisateur($_POST['nom'],$_POST['prenom'],$_POST['email'],$mdp,$date
@@ -60,13 +61,19 @@ public static function created()
         $p->save(); // on les sauve dans la base de donnees
         $_SESSION['login']=$_POST['email'];
         $view = 'voirmonprofil';
-        $pagetitle = 'Liste des personnes';
+        $pagetitle = 'Mon profil';
         require File::build_path(array('view','view.php'));
         //redirige vers la vue created.php
     }
     else {
         self::error();
     }
+  }
+  else {
+    $view = 'voirmonprofil';
+    $pagetitle = 'Mon profil';
+    require File::build_path(array('view','view.php'));
+  }
 
     }
 
@@ -87,7 +94,9 @@ public static function created()
             {
                 $_SESSION['login'] = $login;
                 $infos = ModelUtilisateur::selectByEmail($login);
-                ControllerProfil::profile();
+                $view = 'voirmonprofil';
+                $pagetitle = 'Mon Profil';
+                require File::build_path(array('view','view.php'));
             } else {
                 self::error();
             }
