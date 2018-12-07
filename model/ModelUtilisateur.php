@@ -3,7 +3,7 @@
 require_once File::build_path(array("model","Model.php"));
 
 class ModelUtilisateur extends Model {
-	
+
 	protected static $object="utilisateur";
     private $idUser;
     private $nom;
@@ -17,21 +17,18 @@ class ModelUtilisateur extends Model {
     private $admin;
 
 
-    public function __construct($id = null , $nom = null, $prenom = null, $email = null, $dateInscription = null, $adresse = null, $nomVille = null, $pays = null, $admin = 0)
+    public function __construct($nom, $prenom, $email,$password, $dateInscription, $adresse, $nomVille, $pays)
     {
-        if (!is_null($id) && !is_null($nom) && !is_null($prenom) && !is_null($email) && !is_null($dateInscription) && !is_null($adresse) && !is_null($nomVille) && !is_null($pays)) {
-            $this->idUser = $id;
-            $this->nom = $nom;
-            $this->prenom = $prenom;
-            $this->password = $password;
-            $this->email = $email;
-            $this->dateInscription = $dateInscription;
-            $this->adresse = $adresse;
-            $this->nomVille = $nomVille;
-            $this->pays = $pays;
-            $this->admin = $admin;    
-        }
-        
+        $this->idUser = null;
+        $this->nom = $nom;
+        $this->prenom = $prenom;
+        $this->password = $password;
+        $this->email = $email;
+        $this->dateInscription = $dateInscription;
+        $this->adresse = $adresse;
+        $this->nomVille = $nomVille;
+        $this->pays = $pays;
+        $this->admin=0;
     }
 
 		public function save()
@@ -118,12 +115,13 @@ class ModelUtilisateur extends Model {
     }
 
     public static function selectByEmail($email){
-        //var_dump($email);
-        //error_reporting(E_ALL & ~E_NOTICE);
-        //try{
-        $sql = "SELECT * FROM Utilisateur WHERE email=:email";
+        error_reporting(E_ALL & ~E_NOTICE);
+        $sql = "SELECT * FROM Utilisateur U WHERE email=:email";
+
         // Préparation de la requête
         $req_prep = Model::$pdo->prepare($sql);
+
+
         $values = array(
             "email" => $email,
         );
@@ -132,11 +130,7 @@ class ModelUtilisateur extends Model {
         $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
 
         $tab = $req_prep->fetchAll();
-        return $tab;  
-        //} catch(PDOException $e){
-        //var_dump($e);
-        //}
-        
+        return $tab[0];
 
     }
 
@@ -162,59 +156,12 @@ class ModelUtilisateur extends Model {
 
     }
 
-  public function save ()
-    {
-
-        $date = date('Y-m-d H:i:s');
-        $sql = "INSERT INTO Utilisateur 
-                  (nom, prenom, email, password, dateInscription, adresse, nomVille, pays) 
-                  VALUES (:nom, :prenom, :email, :password, :dateInscription, :adresse, :nomVille, :pays)";
-        $req_prep = Model::$pdo->prepare($sql);
-         
-
-        $values = array(
-            "nom" => $this->nom,
-            "prenom" => $this->prenom,
-            "email" => $this->email,
-            "password" => $this->password,
-            "dateInscription" => $date,
-            "adresse" => $this->adresse,
-            "nomVille" => $this->nomVille,
-            "pays" => $this->pays,
-        );
-//
-//
-//        $req->bindValue(':nom', $this->get('nom'));
-//        $req->bindValue(':prenom', $this->get('prenom'));
-//        $req->bindValue(':email', $this->get('email'));
-//        $req->bindValue(':password', $this->get('password'));
-//        $req->bindValue(':dateInscription', $date);
-//        $req->bindValue(':adresse', $this->get('adresse'));
-//        $req->bindValue(':nomVille', $this->get('nomVille'));
-//        $req->bindValue(':pays', $this->get('pays'));
-       $req_prep->execute($values);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //------------------------------------------------------------------------
 
 //INSCRIPTIONS ET SESSIONS
     public function isValid (){
         if (strlen($this->nom)>2 && strlen($this->prenom)>2 && strlen($this->email) > 5
-            && strlen($this->password)>7 && strlen($this->adresse)>2 && strlen($this->nomVille)>2 
+            && strlen($this->password)>7 && strlen($this->adresse)>2 && strlen($this->nomVille)>2
             &&strlen($this->pays)>2){
             return true;
         }
