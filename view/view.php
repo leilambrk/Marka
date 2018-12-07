@@ -18,6 +18,9 @@
                                 <li id="rej"><a href="?action=display3rd&controller=produit">Enfants</a></li>
                         </li></ul>
                         <li class="align"><a href="?action=display&controller=panier">Panier</a></li>
+                        <li>
+                            <a href="?action=create&controller=utilisateur">S'inscrire</a>
+                        </li>
                         <li class="align"><a href="?action=connect&controller=utilisateur">Se connecter</a></li>
                     </ul>
             </div>
@@ -33,6 +36,9 @@
                         </ul></li>
                         <li><a href="?action=display&controller=panier">Panier</a></li>
                         <?php  if (!isset($_SESSION['login'])) { ?>
+                                                    <li>
+                                                        <a href="?action=create&controller=utilisateur">S'inscrire</a>
+                                                    </li>
                                                     <li>
                                                         <a href="?action=connect&controller=utilisateur">Se connecter</a>
                                                     </li>
