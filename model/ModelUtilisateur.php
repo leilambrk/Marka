@@ -90,14 +90,14 @@ class ModelUtilisateur extends Model {
     }
 
     public static function supprimer($idUser){
-        $req = Model::$pdo->prepare('DELETE FROM Utilisateurs WHERE id = :id');
+        $req = Model::$pdo->prepare('DELETE FROM Utilisateur WHERE id = :id');
         $req->bindValue(':id', $idUser);
         $req->execute();
     }
 
     public static function selectByEmail($email){
         error_reporting(E_ALL & ~E_NOTICE);
-        $sql = "SELECT * FROM Utilisateurs U WHERE email=:email";
+        $sql = "SELECT * FROM Utilisateur U WHERE email=:email";
 
         // Préparation de la requête
         $req_prep = Model::$pdo->prepare($sql);
@@ -118,7 +118,7 @@ class ModelUtilisateur extends Model {
     public function checkPW($email, $mdpchiffre)
     {
 
-        $sql = "SELECT * FROM Utilisateurs WHERE email=:email";
+        $sql = "SELECT * FROM Utilisateur WHERE email=:email";
 
         // Préparation de la requête
         $req_prep = Model::$pdo->prepare($sql);
@@ -151,11 +151,28 @@ class ModelUtilisateur extends Model {
         }
     }
 
+//    public function save()
+//    {
+//        $sql = "INSERT INTO Utilisateur (idAdherent, adressepostaleAdherent, ville, PW_Adherent, idPersonne, estProducteur, estAdministrateur, dateinscription, dateproducteur) VALUES (:idAdherent, :adressepostaleAdherent, :ville, :PW_Adherent, :idPersonne, :estProducteur, :estAdministrateur, :dateinscription, :dateproducteur)";
+
+        // Préparation de la requête
+//        $req_prep = Model::$pdo->prepare($sql);
 //
-    private function sendMail ($message)
-    {
-        mail($this->email, 'Inscription - Vente en ligne', $message);
-    }
+//
+//        $values = array(
+//            "idAdherent" => $this->idAdherent,
+//            "idPersonne" => $this->idPersonne,
+//            "adressepostaleAdherent" => $this->adressepostaleAdherent,
+//            "ville" => $this->ville,
+//            "PW_Adherent" => $this->PW_Adherent,
+//            "estProducteur" => $this->estProducteur,
+//            "estAdministrateur" => $this->estAdministrateur,
+//            "dateinscription" => $this->dateinscription,
+//            "dateproducteur" => $this->dateproducteur,
+//        );
+//        // On donne les valeurs et on exécute la requête
+//        $req_prep->execute($values);
+//    }
 
 }
 ?>

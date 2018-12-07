@@ -1,6 +1,8 @@
 <?php
 //BON
 require_once File::build_path(array('model','ModelUtilisateur.php'));
+require_once File::build_path(array('lib','Security.php'));
+require_once File::build_path(array('lib','Session.php'));
 class ControllerUtilisateur{
 
 
@@ -85,32 +87,56 @@ public static function created()
 		require File::build_path(array('view','view.php'));
 	}
 
-	public static function connected(){
-		if (isset($_POST['email'])&&isset($_POST['password'])){
-			$login = $_POST['email'];
-			//$pw = Securite::chiffrer($_POST['password']);
-			if (ModelUtilisateur::selectByEmail($_POST['email'])){
-				echo 'On est la ';
-				//if (ModelUtilisateur::selectByEmail($login)->checkPW($login, $pw)){
-				//	$_SESSION['login'] = $login;
-				//	$a = ModelUtilisateur::selectByEmail($login);
-				//	ControllerProfil::profile();
-				//}
-				//else {
-				//	self::error();
-				//	echo 'Mdp incorrect';
-				//}
-			}
-			else {
-				self::error();
-				echo 'email incorrect';
-			}
-		}
-		else {
-			self::error();
-			echo 'erreur de type inconnue, veuillez rééssayer ultérieurement';
-		}
-	}
+    public static function connected()
+    {
+        if (isset($_POST['email'])&&isset($_POST['password']))
+        {
+            $login = $_POST['email'];
+            //$pw = Security::chiffrer($_POST['password']);
+            if (ModelUtilisateur::selectByEmail($login)->checkPW($login, $_POST['password']))
+            {   
+                $_SESSION['login'] = $login;
+                $infos = ModelUtilisateur::selectByEmail($login);
+                ControllerProfil::profile();
+            } else {
+                self::error();
+            }
+            } else {
+                self::error();
+            }   
+        } else {
+            self::error();
+        }
+
+    }
+
+
+//	public static function connected(){
+//		if (isset($_POST['email'])&&isset($_POST['password'])){
+//			$login = $_POST['email'];
+//			$pw = Security::chiffrer($_POST['password']);
+//			if (ModelUtilisateur::selectByEmail($_POST['email'])){
+//				echo 'On est la ';
+//				if (ModelUtilisateur::selectByEmail($login)->checkPW($login, $pw)){
+//					$_SESSION['login'] = $login;
+//					$a = ModelUtilisateur::selectByEmail($login);
+//					ControllerProfil::profile();
+//				}
+//				else {
+//					self::error();
+//					echo 'Mdp incorrect';
+//				}
+//			}
+//			else {
+//				self::error();
+//				echo 'email incorrect';
+//			}
+//		}
+//		else {
+//			self::error();
+//			echo 'erreur de type inconnue, veuillez rééssayer ultérieurement';
+//		}
+//	}
 
     public static function error()
     {

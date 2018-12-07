@@ -1,5 +1,5 @@
 <?php
-class Securite
+class Security
 {
 
 	private static $seed = 'IheoYufrb7H2eXsPMMMF';
