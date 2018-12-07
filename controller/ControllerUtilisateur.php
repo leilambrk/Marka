@@ -53,7 +53,8 @@ class ControllerUtilisateur{
 public static function created()
     {
     $date = date('Y-m-d H:i:s');
-    $p = new ModelUtilisateur($_POST['nom'],$_POST['prenom'],$_POST['email'],$_POST['password'],$date
+    $mdp=Security::chiffrer($_POST['password']);
+    $p = new ModelUtilisateur($_POST['nom'],$_POST['prenom'],$_POST['email'],$mdp,$date
     ,$_POST['adresse'],$_POST['nomVille'],$_POST['pays']);
     if ($_POST['password']==$_POST['password_valid']){ //on recupere les infos du formulaires
         $p->save(); // on les sauve dans la base de donnees
