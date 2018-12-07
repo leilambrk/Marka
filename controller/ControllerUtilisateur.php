@@ -58,13 +58,10 @@ public static function created()
     $id=null;
     $admin=null;
     $p = new ModelUtilisateur($id,$_POST['nom'],$_POST['prenom'],$_POST['email'],$date,$mdp,$_POST['adresse'],$_POST['nomVille'],$_POST['pays'],$admin);
-    var_dump($p);
-
     if ($_POST['password']==$_POST['password_valid']){ //on recupere les infos du formulaires
         $p->save(); // on les sauve dans la base de donnees
         $_SESSION['login']=$_POST['email'];
-        $view = 'voirmonprofil';
-        $pagetitle = 'Mon profil';
+        self::profile();
         require File::build_path(array('view','view.php'));
         //redirige vers la vue created.php
     }
@@ -96,9 +93,7 @@ public static function created()
               if (!empty($user)){
                   if ($user->get('password') == $mdp){
                           $_SESSION['login'] = $login;
-                          $view = 'voirmonprofil';
-                          $pagetitle = 'Mon Profil';
-                          require File::build_path(array('view','view.php'));
+                          self::profile();
                   }
                   else {
                       $view = 'connect';
@@ -130,34 +125,6 @@ public static function created()
     }
 
 
-// public static function connected(){
-	// if (isset($_POST['email'])&&isset($_POST['password'])){
-	// 	$login = $_POST['email'];
-	// 	$pw = Security::chiffrer($_POST['password']);
-	// 	if (ModelUtilisateur::selectByEmail($_POST['email'])){
-	// 		echo 'On est la ';
-	// 		if (ModelUtilisateur::selectByEmail($login)->checkPW($login, $pw)){
-	// 			$_SESSION['login'] = $login;
-	// 			$a = ModelUtilisateur::selectByEmail($login);
-	// 			ControllerProfil::profile();
-	// 		}
-	// 		else {
-	// 			self::error();
-	// 			echo 'Mdp incorrect';
-	// 		}
-	// 	}
-	// 	else {
-	// 		self::error();
-	// 		echo 'email incorrect';
-	// 	}
-	// }
-	// else {
-	// 	self::error();
-	// 	echo 'erreur de type inconnue, veuillez rééssayer ultérieurement';
-	// }
-
-// }
-
     public static function error()
     {
 	    $controller ='utilisateur';
@@ -165,6 +132,13 @@ public static function created()
 	    $pagetitle = 'Error 404';
 	    require File::build_path(array('view','view.php'));
     }
+
+      public static function deconnect()
+		{
+			session_unset();
+
+			ControllerAccueil::homepage();
+		}
 
 }
 ?>
