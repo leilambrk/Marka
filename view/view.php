@@ -53,6 +53,11 @@
                                                               </ul>
                                                             </li>
                                             <?php } ?>
+                          <?php  if (isset($_SESSION['admin'])) {
+                                    if ($_SESSION['admin']==1){?><li><a href="?action=add&controller=produit">Ajouter un article</a></li>
+                              <?php }}  ?>
+
+
                           </ul>
                 </div>
             </nav>

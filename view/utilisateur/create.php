@@ -1,3 +1,4 @@
+<?php  if (!isset($_SESSION['login'])) { ?>
 <form method="post" action="?action=created&controller=utilisateur">
     <!-- On recupere les infos avec la methode post et on redirige vers la sauvegarde dans la base de donnees -->
 
@@ -17,15 +18,15 @@
             <input type="email" placeholder="Ex : mabroukl@icloud.com" name="email" id="email" required/>
         </p>
         <p>
-            <label for="addpost">Adresse postale :</label> 
+            <label for="addpost">Adresse postale :</label>
             <input type="text" placeholder="Ex : 71 chemin des plantiers" name="adresse" id="adresse" required/>
         </p>
         <p>
-            <label for="ville">Ville :</label> 
+            <label for="ville">Ville :</label>
             <input type="text" placeholder="Ex : Montpellier" name="nomVille" id="nomVille" required/>
         </p>
         <p>
-            <label for="ville">Pays :</label> 
+            <label for="ville">Pays :</label>
             <input type="text" placeholder="Ex : France " name="pays" id="pays" required/>
         </p>
         <p>
@@ -41,3 +42,8 @@
         </p>
     </fieldset>
 </form>
+<?php }
+else {?>
+<li><a href="?action=profile&controller=utilisateur">Vous vous êtes déjà connecté, cliquez ici pour voir votre profil.</a></li>
+<?php
+}?>

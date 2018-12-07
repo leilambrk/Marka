@@ -1,3 +1,5 @@
+<?php  if (isset($_SESSION['login'])) { ?>
+
 	<h1> Votre profil: </h1>
 	<div>
 		<ul>
@@ -9,3 +11,8 @@
 
 		</ul>
 	</div>
+<?php }
+else {?>
+<li><a href="?action=create&controller=utilisateur">Vous vous êtes déjà connecté, cliquez ici pour voir votre profil.</a></li>
+<?php
+}?>
