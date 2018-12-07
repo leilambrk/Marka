@@ -1,4 +1,4 @@
-<h1>Tendances | Collection femme</h1>
+<h1>Tendances | Collection femmes</h1>
 
 
 <article>
