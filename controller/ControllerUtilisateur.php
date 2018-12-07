@@ -61,6 +61,7 @@ public static function created()
     if ($_POST['password']==$_POST['password_valid']){ //on recupere les infos du formulaires
         $p->save(); // on les sauve dans la base de donnees
         $_SESSION['login']=$_POST['email'];
+        $_SESSION['admin']=$p->get(admin);
         self::profile();
         require File::build_path(array('view','view.php'));
         //redirige vers la vue created.php
@@ -93,6 +94,8 @@ public static function created()
               if (!empty($user)){
                   if ($user->get('password') == $mdp){
                           $_SESSION['login'] = $login;
+                          $_SESSION['admin'] = $user->get(admin);
+                          var_dump($_SESSION['admin']);
                           self::profile();
                   }
                   else {

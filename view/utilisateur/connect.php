@@ -21,8 +21,7 @@
     <a href="?action=create&controller=utilisateur">S'inscrire</a>
 </form>
 <?php }
-else {
-
-}?>
+else {?>
 <li><a href="?action=profile&controller=utilisateur">Vous vous êtes déjà connecté, cliquez ici pour voir votre profil.</a></li>
-<?php}?>
+<?php
+}?>
