@@ -6,12 +6,21 @@
 	padding:1%;
 }*/
 footer {
-      width: 100%;
-      margin-left: 0px;
-      margin-right: 0px;
-      margin-bottom: 50px;
-      margin-top: 50px;
-    }
+	    width: 100%;
+	    margin-left: 0px;
+	    margin-right: 0px;
+	    margin-bottom: 50px;
+	    margin-top: 50px;
+		background:black;
+		position:absolute;
+		width:100%;
+		padding-top:50px;
+		height:50px;
+
+}
+
+ 
+   
 
 #logoFB , #logoTT , #logoGP {
   padding-left: 1%;
@@ -65,7 +74,7 @@ footer {
 		transition: .8s all .3s;
 		width:168.06px;
 		height:105px;
-		background-color: white;
+		background-color: #003366;
 
 	}
 
