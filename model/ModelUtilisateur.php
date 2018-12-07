@@ -23,15 +23,34 @@ class ModelUtilisateur extends Model {
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->password = $password;
-        $this->confirm_password = $confirm_password;
         $this->email = $email;
-        $this->confirm_email = $confirm_email;
         $this->dateInscription = $dateInscription;
         $this->adresse = $adresse;
         $this->nomVille = $nomVille;
         $this->pays = $pays;
         $this->admin=0;
     }
+
+		public function save()
+		{
+				$sql = "INSERT INTO Utilisateur (nom, prenom, email, password, dateInscription, adresse, nomVille, pays) VALUES (:nom, :prenom, :email, :pw, :da, :addre, :nomVille, :pays)";
+			// Préparation de la requête
+				$req_prep = Model::$pdo->prepare($sql);
+
+
+				$values = array(
+						"nom" => $this->nom,
+						"prenom" => $this->prenom,
+						"email" => $this->email,
+						"pw" => $this->password,
+						"da" => $this->dateInscription,
+						"addre" => $this->adresse,
+						"nomVille" => $this->nomVille,
+						"pays" => $this->pays,
+				);
+				// On donne les valeurs et on exécute la requête
+				$req_prep->execute($values);
+		}
 
 
 
@@ -150,29 +169,6 @@ class ModelUtilisateur extends Model {
             return false;
         }
     }
-
-//    public function save()
-//    {
-//        $sql = "INSERT INTO Utilisateur (idAdherent, adressepostaleAdherent, ville, PW_Adherent, idPersonne, estProducteur, estAdministrateur, dateinscription, dateproducteur) VALUES (:idAdherent, :adressepostaleAdherent, :ville, :PW_Adherent, :idPersonne, :estProducteur, :estAdministrateur, :dateinscription, :dateproducteur)";
-
-        // Préparation de la requête
-//        $req_prep = Model::$pdo->prepare($sql);
-//
-//
-//        $values = array(
-//            "idAdherent" => $this->idAdherent,
-//            "idPersonne" => $this->idPersonne,
-//            "adressepostaleAdherent" => $this->adressepostaleAdherent,
-//            "ville" => $this->ville,
-//            "PW_Adherent" => $this->PW_Adherent,
-//            "estProducteur" => $this->estProducteur,
-//            "estAdministrateur" => $this->estAdministrateur,
-//            "dateinscription" => $this->dateinscription,
-//            "dateproducteur" => $this->dateproducteur,
-//        );
-//        // On donne les valeurs et on exécute la requête
-//        $req_prep->execute($values);
-//    }
 
 }
 ?>

@@ -57,8 +57,8 @@ public static function created()
     ,$_POST['adresse'],$_POST['nomVille'],$_POST['pays']);
     if ($_POST['password']==$_POST['password_valid']){ //on recupere les infos du formulaires
         $p->save(); // on les sauve dans la base de donnees
-        $controller ='utilisateur';
-        $view = 'error';
+        $_SESSION['login']=$_POST['email'];
+        $view = 'voirmonprofil';
         $pagetitle = 'Liste des personnes';
         require File::build_path(array('view','view.php'));
         //redirige vers la vue created.php
@@ -69,17 +69,6 @@ public static function created()
 
     }
 
-  /* public static function created()
-    {
-    $p = new ModelPersonne($_POST['nomPersonne'],$_POST['prenomPersonne'],$_POST['mailPersonne']); //on recupere les infos du formulaires
-    $p->save(); // on les sauve dans la base de donnees
-    $controller ='personne';
-    $view = 'created';
-    $pagetitle = 'Liste des personnes';
-    require File::build_path(array('view','view.php'));
-        //redirige vers la vue created.php
-
-    }*/
 
     public static function connect(){
 		$view = 'connect';
@@ -94,7 +83,7 @@ public static function created()
             $login = $_POST['email'];
             //$pw = Security::chiffrer($_POST['password']);
             if (ModelUtilisateur::selectByEmail($login)->checkPW($login, $_POST['password']))
-            {   
+            {
                 $_SESSION['login'] = $login;
                 $infos = ModelUtilisateur::selectByEmail($login);
                 ControllerProfil::profile();
@@ -103,40 +92,48 @@ public static function created()
             }
             } else {
                 self::error();
-            }   
-        } else {
-            self::error();
-        }
+            }
 
+    }
+    public static function profile()
+    {
+        if (isset($_SESSION['login'])) {
+            $infos = ModelUtilisateur::selectByEmail($_SESSION['login']);
+        }
+        $controller ='utilisateur';
+        $view = 'voirmonprofil';
+        $pagetitle = 'Mon Profil';
+        require File::build_path(array('view','view.php'));
     }
 
 
-//	public static function connected(){
-//		if (isset($_POST['email'])&&isset($_POST['password'])){
-//			$login = $_POST['email'];
-//			$pw = Security::chiffrer($_POST['password']);
-//			if (ModelUtilisateur::selectByEmail($_POST['email'])){
-//				echo 'On est la ';
-//				if (ModelUtilisateur::selectByEmail($login)->checkPW($login, $pw)){
-//					$_SESSION['login'] = $login;
-//					$a = ModelUtilisateur::selectByEmail($login);
-//					ControllerProfil::profile();
-//				}
-//				else {
-//					self::error();
-//					echo 'Mdp incorrect';
-//				}
-//			}
-//			else {
-//				self::error();
-//				echo 'email incorrect';
-//			}
-//		}
-//		else {
-//			self::error();
-//			echo 'erreur de type inconnue, veuillez rééssayer ultérieurement';
-//		}
-//	}
+// public static function connected(){
+	// if (isset($_POST['email'])&&isset($_POST['password'])){
+	// 	$login = $_POST['email'];
+	// 	$pw = Security::chiffrer($_POST['password']);
+	// 	if (ModelUtilisateur::selectByEmail($_POST['email'])){
+	// 		echo 'On est la ';
+	// 		if (ModelUtilisateur::selectByEmail($login)->checkPW($login, $pw)){
+	// 			$_SESSION['login'] = $login;
+	// 			$a = ModelUtilisateur::selectByEmail($login);
+	// 			ControllerProfil::profile();
+	// 		}
+	// 		else {
+	// 			self::error();
+	// 			echo 'Mdp incorrect';
+	// 		}
+	// 	}
+	// 	else {
+	// 		self::error();
+	// 		echo 'email incorrect';
+	// 	}
+	// }
+	// else {
+	// 	self::error();
+	// 	echo 'erreur de type inconnue, veuillez rééssayer ultérieurement';
+	// }
+
+// }
 
     public static function error()
     {
