@@ -194,6 +194,10 @@ footer {
 
 /* css site */
 
+html { 
+	background-color: #f0f3f4;
+	}
+
 .ban {
 	margin-top: 20px;
 	height: 400px;
@@ -215,19 +219,6 @@ h1,h2{
     margin-right: 30px ;
  	border: 2px #aaa solid; 
   	text-align: center;
-
-}
-
-.bouton {
-	border-radius:11px 0 11px 0;
-	background: #606060;
-	border:none;
-	color:#fff;
-	font:bold 12px Verdana;
-	padding:8px 3px 8px 3px;
-	margin-top: 20px;
-	margin-left: 150px;
-
 }
 
 .bouton:hover{
@@ -250,16 +241,25 @@ a:visited{
 }
 
 #pageHomme{
-	margin-top: 100px;
-}
-
-.vetHomme{
-	width: 250px;
-	height: 400px;
-	display: inline;
-
+	margin-top: 70px;
+	text-align: left;
 }
 
 .aside{
 	position: fixed;
+}
+
+
+.vet{
+	width: 400px;
+	height: 500px;
+	margin-top: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	margin-bottom: 100px;
+}
+
+.h2{
+	text-align: center;
 }

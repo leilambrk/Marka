@@ -48,53 +48,33 @@ class ControllerUtilisateur{
         //redirige vers la vue create.php (formulaire)
     }
 
-//    public static function created() 
-//    {
-//        $date = date('Y-m-d H:i:s');
-//        if ($_POST['password']==$_POST['password_valid']){ //on recupere les infos du formulaires
-//            ModelUtilisateur::save(array(
-//            "nom" => $id,$_POST['nom'],
-//            "prenom" => $_POST['prenom'],
-//            "email" => $_POST['email'],
-//            "password" => $_POST['password'],
-//            "dateInscription" => $date,
-//            "adresse" => $_POST['adresse'],
-//            "nomVille" => $_POST['nomVille'],
-//            "pays" => $_POST['pays'])); // on les sauvegarde dans la base de donnees
-//            
-//            $controller ='profil';
-//            $view = 'voirmonprofil';
-//            $pagetitle = 'Mon Compte';
-//            require File::build_path(array('view','view.php'));
-//        }
-//
-//    }
-//
-   public static function created() 
+
+public static function created()
     {
-    ModelUtilisateur::save(array(
-            "nom" => $id,$_POST['nom'],
-            "prenom" => $_POST['prenom'],
-            "email" => $_POST['email'],
-            "password" => $_POST['password'],
-            "dateInscription" => $date,
-            "adresse" => $_POST['adresse'],
-            "nomVille" => $_POST['nomVille'],
-            "pays" => $_POST['pays'])); // on les sauvegarde dans la base de donnees on les sauve dans la base de donnees
-    
-    $controller ='profil';
-    $view = 'voirmonprofil';
-    $pagetitle = 'Mon Profil';
-    require File::build_path(array('view','view.php'));
+    $date = date('Y-m-d H:i:s');
+    $p = new ModelUtilisateur($_POST['nom'],$_POST['prenom'],$_POST['email'],$_POST['password'],$date
+    ,$_POST['adresse'],$_POST['nomVille'],$_POST['pays']);
+    if ($_POST['password']==$_POST['password_valid']){ //on recupere les infos du formulaires
+        $p->save(); // on les sauve dans la base de donnees
+        $_SESSION['login']=$_POST['email'];
+        $view = 'voirmonprofil';
+        $pagetitle = 'Liste des personnes';
+        require File::build_path(array('view','view.php'));
         //redirige vers la vue created.php
+    }
+    else {
+        self::error();
+    }
 
     }
+
 
     public static function connect(){
 		$view = 'connect';
 		$pagetitle = 'Se connecter';
 		require File::build_path(array('view','view.php'));
 	}
+
 
 	public static function connected(){
        $login = $_POST['email'];
@@ -125,6 +105,7 @@ class ControllerUtilisateur{
 	//		echo 'erreur de type inconnue, veuillez rééssayer ultérieurement';
 	//	}
 	}
+
 
     public static function error()
     {

@@ -34,6 +34,27 @@ class ModelUtilisateur extends Model {
         
     }
 
+		public function save()
+		{
+				$sql = "INSERT INTO Utilisateur (nom, prenom, email, password, dateInscription, adresse, nomVille, pays) VALUES (:nom, :prenom, :email, :pw, :da, :addre, :nomVille, :pays)";
+			// Préparation de la requête
+				$req_prep = Model::$pdo->prepare($sql);
+
+
+				$values = array(
+						"nom" => $this->nom,
+						"prenom" => $this->prenom,
+						"email" => $this->email,
+						"pw" => $this->password,
+						"da" => $this->dateInscription,
+						"addre" => $this->adresse,
+						"nomVille" => $this->nomVille,
+						"pays" => $this->pays,
+				);
+				// On donne les valeurs et on exécute la requête
+				$req_prep->execute($values);
+		}
+
 
 
     public function get($nom_attribut){

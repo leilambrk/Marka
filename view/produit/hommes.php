@@ -15,10 +15,11 @@
 
 </aside>
 
-<article>
 
-<img src="images/jean1.jpg" />
+<img src="images/jean.jpg" alt="Jean" class="vet" />
+<img src="images/pull.jpg" alt="Pull" class="vet" />
+<img src="images/tshirt.jpg" alt="T-shirt" class="vet" />
 
 
 
-</article>
+

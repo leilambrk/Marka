@@ -23,65 +23,33 @@ class Model{
     }
 }
 
-//    public static function save($data)
-//    {
-//        try
-//        {
-//            $table_name = static::$object;
-//            $primary_key = static::$primary;
-//
-//            $sql = "INSERT INTO " . $table_name . " (";
-//            foreach ($data as $key => $value)
-//            {
-//                $sql .= $key . ', ';
-//            }
-//
-//            $sql = rtrim($sql, ', ') . ") VALUES (";
-//            foreach ($data as $key => $value)
-//            {
-//                $sql .= ":" . $key . ', ';
-//            }
-//            $sql = rtrim($sql, ', ') . ")";
-//            $req_prep = Model::$pdo->prepare($sql);
-//            $req_prep->execute($data);
-//        } catch(PDOException $e) {
-//            if (Conf::getDebug()) 
-//            {
-//                echo $e->getMessage(); // affiche un message d'erreur
-//            } 
-//            else
-//            {
-//                echo 'Une erreur est survenue <a href=""> retour a la page d\'accueil </a>';
-//            }
-//            die();
-//        }
-//    }
 
-public function save() {
-        $table_name = static::$object;
-        $class_name = 'Model' . ucfirst($table_name);
-        $champs = "";
-        foreach ($this as $cle => $valeur){
-            $champs = $champs .':'.$cle.',';
-        }
-        try{
-            $sql = "INSERT INTO wp_$table_name VALUES (".rtrim($champs, ',').")";
-            // Préparation de la requête
-            $req_prep = Model::$pdo->prepare($sql);
+// public function save() {
+//         $table_name = static::$object;
+//         $class_name = 'Model' . ucfirst($table_name);
+//         $champs = "";
+//         foreach ($this as $cle => $valeur){
+//             $champs = $champs .':'.$cle.',';
+//         }
+//         try{
+//             $sql = "INSERT INTO $table_name VALUES (".rtrim($champs, ',').")";
+//             // Préparation de la requête
+//             $req_prep = Model::$pdo->prepare($sql);
+//
+//             foreach ($this as $cle => $valeur){
+//                 $values[$cle] = $valeur;
+//         }
+//         // On donne les valeurs et on exécute la requête
+//         $req_prep->execute($values);
+//         } catch(PDOException $e) {
+//             if (Conf::getDebug())
+//                 echo $e->getMessage(); // affiche un message d'erreur
+//             else
+//                 echo 'Une erreur est survenue <a href=""> retour a la page d\'accueil </a>';
+//             die();
+//         }
+//     }
 
-            foreach ($this as $cle => $valeur){
-                $values[$cle] = $valeur;
-        }
-        // On donne les valeurs et on exécute la requête   
-        $req_prep->execute($values);
-        } catch(PDOException $e) {
-            if (Conf::getDebug())
-                echo $e->getMessage(); // affiche un message d'erreur
-            else
-                echo 'Une erreur est survenue <a href=""> retour a la page d\'accueil </a>';
-            die();
-        }
-    }
 
 static public function selectAll() {
 
