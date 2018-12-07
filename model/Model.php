@@ -22,6 +22,35 @@ class Model{
   }
     }
 }
+        public static function update($data)
+        {
+            try
+            {
+                $table_name = ucfirst(static::$object);
+                $primary_key = ucfirst(static::$primary);
+
+                $sql = "UPDATE '" . $table_name . "' SET ";
+                foreach ($data as $key => $value)
+                {
+                    $sql .= $sql . "'" . $key . " = :" . $key . ', ';
+                }
+                $sql = rtrim($sql, ', ') . " WHERE " . $primary_key . " = :" . $primary_key;
+                $req_prep = Model::$pdo->prepare($sql);
+                $req_prep->execute($data);
+                echo 'ok';
+            } catch(PDOException $e) {
+                if (Conf::getDebug()) 
+                {
+                    echo $e->getMessage(); // affiche un message d'erreur
+                } 
+                else
+                {
+                    echo 'Une erreur est survenue <a href=""> retour a la page d\'accueil </a>';
+                }
+                die();
+            }
+            echo 'pas ok';
+        }
 
 // public function save() {
 //         $table_name = static::$object;

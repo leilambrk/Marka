@@ -1,4 +1,28 @@
-<h1>Tendances | Mode ENFANTS</h1>
+<h1>Tendances | Collection enfants</h1>
+
+
+<article>
+
+<?php
+
+//var_dump($tab);
+
+if (!$tab){
+	echo 'Rupture totale ! Revenez vite pour plus d\'article enfants.';
+}else{
+	foreach ($tab as $prod){
+		echo '<div><img class="vet" src= "'. $prod->get('photo') . '" alt="' . $prod->get('idProduit'). '"/><h2>'. $prod->get('nomProduit') . '</h2><h5>' . $prod->get('prix') . '€ </h5>' . $prod->get('taille') . '<p>' . $prod->get('description') . '</p></div>';
+	}
+}
+
+?>
+
+</article>
+
+
+
+
+<!--<h1>Tendances | Mode ENFANTS</h1>
 
 <aside class="aside">
 <h3 id="pageHomme">Collection Filles</h3>
@@ -44,7 +68,7 @@
 <h2 class="h2"> Garçons </h2>
 <img src="images/veste.jpg" alt="Veste" class="vet" />
 <img src="images/chemise.jpg" alt="chemise" class="vet" />
-<img src="images/pullg.jpg" alt="Pull" class="vet" />
+<img src="images/pullg.jpg" alt="Pull" class="vet" />-->
 
 
 

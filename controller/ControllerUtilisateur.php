@@ -7,6 +7,7 @@ class ControllerUtilisateur{
 
 
     protected static $object='utilisateur';
+    protected static $primary='email';
 
     public static function readAll()
     {
@@ -150,6 +151,11 @@ public static function created()
       $view = 'updatePW';
       $pagetitle = 'Modifier le mot de passe';
       require File::build_path(array('view','view.php'));
+    }
+
+    public static function updatesArdL(){
+      ModelUtilisateur::update(array("adresse"=>$_POST['newadrL'], "nomVille"=>$_POST['newVille']));
+      self::profile();
     }
 
 }

@@ -28,6 +28,15 @@ protected static $object='produit';
       return $tab;
     }
 
+    public static function displayerF(){
+      $tab = ModelProduit::getProduitByCategorie('Femmes');
+      return $tab;
+    }
+
+    public static function displayerE(){
+      $tab = ModelProduit::getProduitByCategorie('Enfants');
+      return $tab;
+    }
 
     public static function adder(){
         if ( is_numeric($_POST['prix']) && $_SESSION['admin'] == 1)
@@ -50,6 +59,7 @@ protected static $object='produit';
 
     public static function display2nd()
     {
+        $tab = self::displayerF();
         $controller ='produit';
         $view = 'femmes';
         $pagetitle = 'Collection Femme';
@@ -59,6 +69,7 @@ protected static $object='produit';
 
     public static function display3rd()
     {
+        $tab = self::displayerE();
         $controller ='produit';
         $view = 'enfants';
         $pagetitle = 'Collection Enfant';

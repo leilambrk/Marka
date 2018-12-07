@@ -15,11 +15,8 @@
 			<li>E-mail: <?php echo $infos->get('email'); ?> -
 				<a href="?action=updateAdrM&controller=utilisateur">Modifier votre adresse mail.</a>
 			</li>
-			<li>Password : ******** - <a href="?action=updatePW&controller=utilisateur">Modifier votre mot de passe.</a></li>
-
-
-
-
+			<li>Password : ******** - <a href="?action=updatePW&controller=utilisateur">Modifier votre mot de passe.</a>
+			</li>
 		</ul>
 	</div>
 <?php }
