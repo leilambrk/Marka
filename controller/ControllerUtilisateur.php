@@ -134,5 +134,23 @@ public static function created()
 			ControllerAccueil::homepage();
 		}
 
+    public static function updateAdrL(){
+      $view = 'updateAdrL';
+      $pagetitle = 'Modifier l\'adresse de livraisaon';
+      require File::build_path(array('view','view.php'));
+    }
+
+    public static function updateAdrM(){
+      $view = 'updateAdrM';
+      $pagetitle = 'Modifier l\'adresse mail';
+      require File::build_path(array('view','view.php'));
+    }
+
+    public static function updatePW(){
+      $view = 'updatePW';
+      $pagetitle = 'Modifier le mot de passe';
+      require File::build_path(array('view','view.php'));
+    }
+
 }
 ?>
