@@ -190,7 +190,7 @@ public static function created()
           $primary='email';
           $table_name='utilisateur';
           $primary_value=$_SESSION['login'];
-          Model::update($primary, $primary_value, $table_name, array("email"=>$a));
+          Model::update($primary, $primary_value, $table_name, array("password"=>$bchiffre));
           self::profile();
         }
         else{
@@ -206,6 +206,5 @@ public static function created()
          require File::build_path(array('view','view.php'));
       }
     }
-
 }
 ?>
