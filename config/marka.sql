@@ -67,7 +67,7 @@ CREATE TABLE `produit` (
 --
 
 INSERT INTO `produit` (`idProduit`, `nomProduit`, `vendeur`, `nomCateg`, `description`, `prix`, `taille`, `photo`) VALUES
-(1, 'Jean', 'mabrkl@icloud.com', 'Hommes', 'Beau', 152, 32, 'Image'),
+(1, 'Jean', 'mabrkl@icloud.com', 'Hommes', 'Beau', 152, 32, 'https://cdn.laredoute.com/products/641by641/f/8/b/f8bb8fecca43d0fcc8d77a2794ebba4e.jpg'),
 (2, 'Veste en velours', 'mabrkl@icloud.com', 'Femmes', ' Veste en velours côtelé avec col imitation peau de mouton - Rouge baie', 60, 36, 'https://images.asos-media.com/products/asos-design-veste-en-velours-cotele-avec-col-imitation-peau-de-mouton-rouge-baie/9519519-1-berry?$XXL$&wid=513&fit=constrain'),
 (3, 'Pantalon imprimé', 'mabrkl@icloud.com', 'Femmes', 'Commencez l\'année en beauté et optez pour des vibes très rétro avec ce pantalon.', 35, 38, 'https://cdn-img.prettylittlething.com/8/4/3/2/84320499cfb3f01725726eed692ec7020fbe543d_cma2384_1.jpg?imwidth=1024'),
 (4, 'Jupe rayée', 'mabrkl@icloud.com', 'Femmes', 'Jupe rayée en jean noir et blanche.', 30, 38, 'https://cdn-img.prettylittlething.com/d/0/f/e/d0fe029704949607410c9019a28e677354155568_clx5305_1.jpg?imwidth=1024'),
