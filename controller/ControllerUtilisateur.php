@@ -159,7 +159,17 @@ public static function created()
       $primary='email';
       $table_name='utilisateur';
       $primary_value=$_SESSION['login'];
-      Model::update($primary, $primary_value, $table_name, array("adresse"=>$a, "nomVille"=>$b));
+      ModelUtilisateur::update($primary, $primary_value, $table_name, array("adresse"=>$a, "nomVille"=>$b));
+      self::profile();
+    }
+
+    public static function updatedAdrM(){
+      $a=$_POST['newadrM'];
+      $primary='email';
+      $table_name='utilisateur';
+      $primary_value=$_SESSION['login'];
+      Model::update($primary, $primary_value, $table_name, array("email"=>$a));
+      $_SESSION['login']=$a;
       self::profile();
     }
 
