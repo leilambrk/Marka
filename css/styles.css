@@ -211,6 +211,7 @@ html {
 	margin-top: 20px;
 	height: 400px;
 	width: 1600px;
+	border-style: inset;
 }
 
 h1,h2{
