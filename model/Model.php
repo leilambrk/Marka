@@ -5,39 +5,17 @@ require_once File::build_path(array('config','Conf.php'));
 class Model{
     public static $pdo;
 
-    public static function Init() {
-        $hostname = Conf::getHostname();
-        $database_name = Conf::getDatabase();
-        $login = Conf::getLogin();
-        $password = Conf::getPassword();
-    try {
-      self::$pdo = new PDO("mysql:host=$hostname;dbname=$database_name",$login,$password,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-      self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch(PDOException $e) {
-        if (Conf::getDebug()) {
-  echo $e->getMessage(); // affiche un message d'erreur
-  die();
-}else {
-    echo 'Une erreur est survenue <a href=""> retour a la page d\'accueil </a>';
-  }
-    }
-}
-        public static function update($data)
+        public static function Init()
         {
+            $hostname = Conf::getHostname();
+            $database_name = Conf::getDatabase();
+            $login = Conf::getLogin();
+            $password = Conf::getPassword();
+
             try
             {
-                $table_name = ucfirst(static::$object);
-                $primary_key = ucfirst(static::$primary);
-
-                $sql = "UPDATE '" . $table_name . "' SET ";
-                foreach ($data as $key => $value)
-                {
-                    $sql .= $sql . "'" . $key . " = :" . $key . ', ';
-                }
-                $sql = rtrim($sql, ', ') . " WHERE " . $primary_key . " = :" . $primary_key;
-                $req_prep = Model::$pdo->prepare($sql);
-                $req_prep->execute($data);
-                echo 'ok';
+                self::$pdo = new PDO("mysql:host=$hostname;dbname=$database_name",$login,$password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+                self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch(PDOException $e) {
                 if (Conf::getDebug()) 
                 {
@@ -49,7 +27,35 @@ class Model{
                 }
                 die();
             }
-            echo 'pas ok';
+        }
+
+
+        public static function update($primary_key, $primary_value, $table_name, $data)
+        {
+            try
+            {
+                //var_dump($data);
+                $sql = "UPDATE " . $table_name . " SET ";
+                foreach ($data as $valeur => $key)
+                {
+                    $sql = $sql . $valeur . " = '" . $key . "', ";
+
+                }
+                $sql = rtrim($sql, ', ') . " WHERE " . $primary_key . " = '" . $primary_value ."'";
+                //var_dump($sql);
+                $req_prep = Model::$pdo->prepare($sql);
+                $req_prep->execute($data);
+            } catch(PDOException $e) {
+                if (Conf::getDebug()) 
+                {
+                    echo $e->getMessage(); // affiche un message d'erreur
+                } 
+                else
+                {
+                    echo 'Une erreur est survenue <a href=""> retour a la page d\'accueil </a>';
+                }
+                die();
+            }
         }
 
 // public function save() {

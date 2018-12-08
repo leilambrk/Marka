@@ -4,8 +4,11 @@
 	<fieldset>
     <legend>Modifier votre adresse mail</legend>
     <p>
-      <label for="new_adrM">Nouvelle adresse :</label> 
-      <input type="text" placeholder="Ex : 3 boulevard des tuileries " name="newadrM" id="newadrM" required/>
+      <label for="new_adrM">Nouvelle adresse mail:</label> 
+      <input type="text" placeholder="Ex : romane84@yahoo.com " name="newadrM" id="newadrM" required/>
+    </p>
+    <p>
+      <input type="submit" value="Modifier" />
     </p>
   </fieldset>
 </form>

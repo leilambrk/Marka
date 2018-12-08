@@ -1,13 +1,13 @@
 <?php
 //BON
 require_once File::build_path(array('model','ModelUtilisateur.php'));
+require_once File::build_path(array('model','Model.php'));
 require_once File::build_path(array('lib','Security.php'));
 require_once File::build_path(array('lib','Session.php'));
 class ControllerUtilisateur{
 
 
     protected static $object='utilisateur';
-    protected static $primary='email';
 
     public static function readAll()
     {
@@ -157,9 +157,58 @@ public static function created()
       require File::build_path(array('view','view.php'));
     }
 
-    public static function updatesArdL(){
-      ModelUtilisateur::update(array("adresse"=>$_POST['newadrL'], "nomVille"=>$_POST['newVille']));
+    public static function updatedAdrL(){
+      $a=$_POST['newadrL'];
+      $b=$_POST['newVille'];
+      $primary='email';
+      $table_name='utilisateur';
+      $primary_value=$_SESSION['login'];
+      ModelUtilisateur::update($primary, $primary_value, $table_name, array("adresse"=>$a, "nomVille"=>$b));
       self::profile();
+    }
+
+    public static function updatedAdrM(){
+      $a=$_POST['newadrM'];
+      $primary='email';
+      $table_name='utilisateur';
+      $primary_value=$_SESSION['login'];
+      Model::update($primary, $primary_value, $table_name, array("email"=>$a));
+      $_SESSION['login']=$a;
+      self::profile();
+    }
+
+    public static function updatedPW(){
+      $a=$_POST['oldpw'];
+      $achiffre=Security::chiffrer($a);
+      $b=$_POST['newpw'];
+      $bchiffre=Security::chiffrer($b);
+      $c=$_POST['newpw_c'];
+      $mail=$_SESSION['login'];
+      $mdp = ModelUtilisateur::selectByEmail($mail);
+      $mdpv = $mdp->get('password');
+      //var_dump(ModelUtilisateur::getPwByMail($_SESSION['login']));
+      //var_dump($mdpv);
+      
+      if ($achiffre== $mdpv){
+        if($b==$c){
+          $primary='email';
+          $table_name='utilisateur';
+          $primary_value=$_SESSION['login'];
+          Model::update($primary, $primary_value, $table_name, array("email"=>$a));
+          self::profile();
+        }
+        else{
+          echo 'les deux nouveaux mots ne correspondent pas !';
+          $view = 'updatePW';
+          $pagetitle = 'Erreur correspondance';
+          require File::build_path(array('view','view.php'));
+        }
+      } else {
+        echo 'L\'ancien mot de passe est faux';
+        $view = 'updatePW';
+        $pagetitle = 'Erreur dans l\'ancien mot de passe';
+         require File::build_path(array('view','view.php'));
+      }
     }
 
 }

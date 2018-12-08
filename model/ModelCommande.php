@@ -3,6 +3,8 @@
 require_once File::build_path(array('model','Model.php'));
   class ModelCommande extends Model {
      
+    protected static $object='utilisateur';
+
     private $idUser;
     private $idProduit;
     private $dateAchat;
