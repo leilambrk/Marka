@@ -2,22 +2,22 @@
 // BON
 require_once File::build_path(array('model','Model.php'));
   class ModelCommande extends Model {
-     
+
     protected static $object='utilisateur';
 
-    private $idUser;
+    private $email;
     private $idProduit;
     private $dateAchat;
 
-    
+
     public function __construct($u = NULL, $p = NULL, $d = NULL) {
       if (!is_null($u) && !is_null($d) && !is_null($p)){
-        $this->idUser = $u;
+        $this->email = $u;
         $this->idProduit = $p;
         $this->dateAchat = $d;
 
       }
-    }  
+    }
 
     public function get($nom_attribut){
         if (property_exists($this, $nom_attribut))
