@@ -78,8 +78,6 @@ protected static $object='produit';
       else {
           self::error();
       }
-
-
     }
 
     public static function deleteProduit(){
