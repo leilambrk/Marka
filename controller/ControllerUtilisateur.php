@@ -173,5 +173,39 @@ public static function created()
       self::profile();
     }
 
+    public static function updatedPW(){
+      $a=$_POST['oldpw'];
+      $achiffre=Security::chiffrer($a);
+      $b=$_POST['newpw'];
+      $bchiffre=Security::chiffrer($b);
+      $c=$_POST['newpw_c'];
+      $mail=$_SESSION['login'];
+      $mdp = ModelUtilisateur::selectByEmail($mail);
+      $mdpv = $mdp->get('password');
+      //var_dump(ModelUtilisateur::getPwByMail($_SESSION['login']));
+      //var_dump($mdpv);
+      
+      if ($achiffre== $mdpv){
+        if($b==$c){
+          $primary='email';
+          $table_name='utilisateur';
+          $primary_value=$_SESSION['login'];
+          Model::update($primary, $primary_value, $table_name, array("email"=>$a));
+          self::profile();
+        }
+        else{
+          echo 'les deux nouveaux mots ne correspondent pas !';
+          $view = 'updatePW';
+          $pagetitle = 'Erreur correspondance';
+          require File::build_path(array('view','view.php'));
+        }
+      } else {
+        echo 'L\'ancien mot de passe est faux';
+        $view = 'updatePW';
+        $pagetitle = 'Erreur dans l\'ancien mot de passe';
+         require File::build_path(array('view','view.php'));
+      }
+    }
+
 }
 ?>

@@ -111,31 +111,50 @@ class ModelUtilisateur extends Model {
         $this->password = $password;
     }
 
+    // public static function getPwByMail($email){
+    // //error_reporting(E_ALL & ~E_NOTICE);
+    //    $sql = "SELECT password FROM Utilisateur WHERE email=:email";
+
+    //             // Préparation de la requête
+    //     $req_prep = Model::$pdo->prepare($sql);
+
+
+    //     $values = array(
+    //         "email" => $email,
+    //     );
+    //         // On donne les valeurs et on exécute la requête
+    //     $req_prep->execute($values);
+    //     $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
+
+    //     $tab = $req_prep
+    //     return $tab;
+    // }
+
     public static function supprimer($idUser){
         $req = Model::$pdo->prepare('DELETE FROM Utilisateur WHERE id = :id');
         $req->bindValue(':id', $idUser);
         $req->execute();
     }
-
-		public static function selectByEmail($email){
-		        error_reporting(E_ALL & ~E_NOTICE);
-		        $sql = "SELECT * FROM Utilisateur U WHERE email=:email";
+	
+    public static function selectByEmail($email){
+	   error_reporting(E_ALL & ~E_NOTICE);
+	   $sql = "SELECT * FROM Utilisateur U WHERE email=:email";
 
 		        // Préparation de la requête
-		        $req_prep = Model::$pdo->prepare($sql);
+        $req_prep = Model::$pdo->prepare($sql);
 
 
-		        $values = array(
-		            "email" => $email,
-		        );
-		        // On donne les valeurs et on exécute la requête
-		        $req_prep->execute($values);
-		        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
+	    $values = array(
+            "email" => $email,
+        );
+	        // On donne les valeurs et on exécute la requête
+	    $req_prep->execute($values);
+	    $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
 
-		        $tab = $req_prep->fetchAll();
-		        return $tab[0];
+        $tab = $req_prep->fetchAll();
+        return $tab[0];
 
-		    }
+	}
 
     public function checkPW($email, $mdpchiffre)
     {
