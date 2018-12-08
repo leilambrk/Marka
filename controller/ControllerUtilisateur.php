@@ -1,13 +1,13 @@
 <?php
 //BON
 require_once File::build_path(array('model','ModelUtilisateur.php'));
+require_once File::build_path(array('model','Model.php'));
 require_once File::build_path(array('lib','Security.php'));
 require_once File::build_path(array('lib','Session.php'));
 class ControllerUtilisateur{
 
 
     protected static $object='utilisateur';
-    protected static $primary='email';
 
     public static function readAll()
     {
@@ -153,8 +153,13 @@ public static function created()
       require File::build_path(array('view','view.php'));
     }
 
-    public static function updatesArdL(){
-      ModelUtilisateur::update(array("adresse"=>$_POST['newadrL'], "nomVille"=>$_POST['newVille']));
+    public static function updatedAdrL(){
+      $a=$_POST['newadrL'];
+      $b=$_POST['newVille'];
+      $primary='email';
+      $table_name='utilisateur';
+      $primary_value=$_SESSION['login'];
+      Model::update($primary, $primary_value, $table_name, array("adresse"=>$a, "nomVille"=>$b));
       self::profile();
     }
 
