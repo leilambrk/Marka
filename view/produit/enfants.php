@@ -11,7 +11,13 @@ if (!$tab){
 	echo 'Rupture totale ! Revenez vite pour plus d\'article enfants.';
 }else{
 	foreach ($tab as $prod){
-		echo '<div><img class="vet" src= "'. $prod->get('photo') . '" alt="' . $prod->get('idProduit'). '"/><h2>'. $prod->get('nomProduit') . '</h2><h5>' . $prod->get('prix') . '€ </h5>' . $prod->get('taille') . 'ans <p>' . $prod->get('description') . '</p></div>';
+		$idp=$prod->get('idProduit');
+		echo '<div><img class="vet" src= "'. $prod->get('photo') . '" alt="' . $prod->get('idProduit'). '"/><h2>'. $prod->get('nomProduit') . '</h2><h5>' . $prod->get('prix') . '€ </h5>' . $prod->get('taille') . '<p>' . $prod->get('description') . '</p></div>';
+		echo '<a href=?action=ajouterPanier&controller=panier&idProduit=' . $idp . '> Ajouter au panier </a>';
+		if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
+			echo '<a name=' . $prod->get('idProduit') . '>Modifier</a>  |  ';
+			echo '<a href=?action=deleteProduit&controller=produit&idProduit=' . $idp . '> Supprimer</a>  ';
+		}
 	}
 }
 
@@ -44,7 +50,7 @@ if (!$tab){
 	<li><a href="">Pull</a></li>
 	<li><a href="">Vestes</a></li>
 	<li><a href="">Tenues de fêtes</a></li>
-	
+
 
 
 
@@ -69,7 +75,3 @@ if (!$tab){
 <img src="images/veste.jpg" alt="Veste" class="vet" />
 <img src="images/chemise.jpg" alt="chemise" class="vet" />
 <img src="images/pullg.jpg" alt="Pull" class="vet" />-->
-
-
-
-

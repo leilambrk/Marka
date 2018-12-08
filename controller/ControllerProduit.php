@@ -82,6 +82,7 @@ protected static $object='produit';
     }
 
     public static function deleteProduit(){
+
       //var_dump($_GET['idProduit']);
       ModelProduit::deleteProduitByIdProduit($_GET['idProduit']);
       $view = 'hommes';
@@ -89,6 +90,12 @@ protected static $object='produit';
       $tab = ModelProduit::getProduitByCategorie('Hommes');
       require File::build_path(array('view','view.php'));
     }
+
+      //  //var_dump($_GET['idProduit']);
+      //  ModelProduit::deleteProduitByIdProduit($_GET['idProduit']);
+      //  $tab = ModelProduit::getProduitByCategorie('Hommes');
+      //  ControllerAccueil::homepage();
+
 
     public static function updateProduit(){
       $controller='produit';

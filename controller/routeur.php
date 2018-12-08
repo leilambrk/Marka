@@ -3,6 +3,8 @@ require_once File::build_path(array('controller','ControllerAccueil.php'));
 require_once File::build_path(array('controller','ControllerUtilisateur.php'));
 require_once File::build_path(array('controller','ControllerCommande.php'));
 require_once File::build_path(array('controller','ControllerProduit.php'));
+require_once File::build_path(array('controller','ControllerPanier.php'));
+
 
 
 /*------ Controllers ------*/
@@ -11,7 +13,7 @@ require_once File::build_path(array('controller','ControllerProduit.php'));
 	}else{
 		$controller = "accueil";
 	}
-	$controller_class = "Controller" . ucfirst($controller); 
+	$controller_class = "Controller" . ucfirst($controller);
 
 
 
@@ -24,8 +26,8 @@ require_once File::build_path(array('controller','ControllerProduit.php'));
 		}
 
 		if(in_array($action, get_class_methods($controller_class))){
-			$controller_class::$action(); 
-		
+			$controller_class::$action();
+
 		}else{
 			$pagetitle='Erreur';
 	        $view='error';
