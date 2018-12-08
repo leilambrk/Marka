@@ -78,19 +78,18 @@ protected static $object='produit';
       else {
           self::error();
       }
-
-
     }
 
     public static function deleteProduit(){
-      //var_dump($_GET['idProduit']);
-      ModelProduit::deleteProduitByIdProduit($_GET['idProduit']);
-      $view = 'hommes';
-      $pagetitle = 'Article supprimé';
-      $tab = ModelProduit::getProduitByCategorie('Hommes');
-      require File::build_path(array('view','view.php'));
+        //var_dump($_GET['idProduit']);
+        ModelProduit::deleteProduitByIdProduit($_GET['idProduit']);
+        $view = 'hommes';
+        $pagetitle = 'Article supprimé';
+        $tab = ModelProduit::getProduitByCategorie('Hommes');
+        require File::build_path(array('view','view.php'));
 
-    }
+      }
+
 
 
 }
