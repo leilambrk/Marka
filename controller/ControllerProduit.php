@@ -1,5 +1,6 @@
 <?php
 //BON
+require_once File::build_path(array('controller','ControllerUtilisateur.php'));
 require_once File::build_path(array('model','ModelProduit.php'));
 class ControllerProduit{
 
@@ -81,14 +82,33 @@ protected static $object='produit';
     }
 
     public static function deleteProduit(){
-        //var_dump($_GET['idProduit']);
-        ModelProduit::deleteProduitByIdProduit($_GET['idProduit']);
-        $view = 'hommes';
-        $pagetitle = 'Article supprimé';
-        $tab = ModelProduit::getProduitByCategorie('Hommes');
-        require File::build_path(array('view','view.php'));
+      //var_dump($_GET['idProduit']);
+      ModelProduit::deleteProduitByIdProduit($_GET['idProduit']);
+      $view = 'hommes';
+      $pagetitle = 'Article supprimé';
+      $tab = ModelProduit::getProduitByCategorie('Hommes');
+      require File::build_path(array('view','view.php'));
+    }
 
-      }
+    public static function updateProduit(){
+      $controller='produit';
+      $view = 'updateProduit';
+      $pagetitle = 'Modifier l\'article'; 
+      require File::build_path(array('view','view.php'));
+    }
+
+    public static function updated(){
+      $a=$_POST['newprice'];
+      $b=$_POST['newsize'];
+      $c=$_POST['newdesc'];
+      $primary='idProduit';
+      $table_name='produit';
+      $primary_value=$_GET['idProduit'];
+      //var_dump($_GET['idProduit']);
+      Model::update($primary, $primary_value, $table_name, array("prix"=>$a, "taille"=>$b, "description"=>$c));
+      //ModelUtilisateur::update($primary, $primary_value, $table_name, array("adresse"=>$a, "nomVille"=>$b));
+      ControllerUtilisateur::profile();
+    }
 
 
 

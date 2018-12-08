@@ -56,6 +56,18 @@
         return $tab_p;
     }
 
+     public static function getProduitByIdProduit($idP) {
+            $sql = " SELECT * FROM Produit WHERE idProduit=:nom_tag";
+            $req_prep = Model::$pdo->prepare($sql);
+            $values = array(
+                "nom_tag" => $idP,
+            );
+            $req_prep->execute($values);
+            $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelProduit');
+            $tab = $req_prep->fetchAll();
+            return $tab[0];
+        }
+
 
         public static function deleteProduitByIdProduit($idP) {
             $sql = " DELETE FROM Produit WHERE idProduit=:nom_tag";
