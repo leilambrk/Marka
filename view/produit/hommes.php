@@ -2,22 +2,28 @@
 
 
 <article>
-
 <?php
-
-//var_dump($tab);
 
 if (!$tab){
 	echo 'Rupture totale ! Revenez vite pour plus d\'article hommes.';
 }else{
 	foreach ($tab as $prod){
-		echo '<div><img class="vet" src= "'. $prod->get('photo') . '" alt="' . $prod->get('idProduit'). '"/><h2>'. $prod->get('nomProduit') . '</h2><h5>' . $prod->get('prix') . '€ </h5>' . $prod->get('taille') . '<p>' . $prod->get('description') . '</p></div>';
+		echo '<div><img class="vet" src= "'. $prod->get('photo') . '" alt="' . $prod->get('idProduit'). '"/><h2>'. $prod->get('nomProduit') . '</h2><h5>' . $prod->get('prix') . '€ </h5> Taille' . $prod->get('taille') . '<p>' . $prod->get('description') . '</p></div>';
+		if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
+			echo '<a name=' . $prod->get('idProduit') . '>Modifier</a>  |  ';
+			$idp=$prod->get('idProduit');
+			echo '<a onclick= "'.  $_SESSION['produit'] = $idp .'" href=?action=deleteProduit&controller=produit> Supprimer</a>';
+		}
 	}
 }
 
-?>
 
+?>
 </article>
+
+
+
+
 
 
 

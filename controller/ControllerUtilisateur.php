@@ -58,7 +58,7 @@ public static function created()
     $id=null;
     $admin=null;
     $p = new ModelUtilisateur($id,$_POST['nom'],$_POST['prenom'],$_POST['email'],$date,$mdp,$_POST['adresse'],$_POST['nomVille'],$_POST['pays'],$admin);
-    if ($_POST['password']==$_POST['password_valid']){ //on recupere les infos du formulaires
+    if ($_POST['password']==$_POST['password_valid'] && !$p->isUse()){ //on recupere les infos du formulaires
         $p->save(); // on les sauve dans la base de donnees
         $_SESSION['login']=$_POST['email'];
         $_SESSION['admin']=$p->get('admin');
@@ -117,6 +117,10 @@ public static function created()
         $view = 'voirmonprofil';
         $pagetitle = 'Mon Profil';
         require File::build_path(array('view','view.php'));
+    }
+
+    public static function uesrExist($email){
+
     }
 
 

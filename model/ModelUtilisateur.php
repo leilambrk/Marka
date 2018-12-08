@@ -136,6 +136,22 @@ class ModelUtilisateur extends Model {
 		        return $tab[0];
 
 		    }
+		public function isUse(){
+			$sql = "SELECT * FROM utilisateur WHERE email=:nom_tag";
+			$req_prep = Model::$pdo->prepare($sql);
+			$values = array(
+					"nom_tag" => $this->email,
+			);
+			$req_prep->execute($values);
+			$req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
+			$tab = $req_prep->fetchAll();
+			if (empty($tab)){
+				return false;
+			}
+			return true;
+
+		}
+
 
     public function checkPW($email, $mdpchiffre)
     {

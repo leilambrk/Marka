@@ -82,6 +82,17 @@ protected static $object='produit';
 
     }
 
+    public static function deleteProduit(){
+      var_dump($_SESSION['produit']);
+      unset($_SESSION['produit']);
+      //ModelProduit::deleteProduitByIdProduit($_GET['article']);
+      $view = 'hommes';
+      $pagetitle = 'Article supprimé';
+      $tab = ModelProduit::getProduitByCategorie('Hommes');
+      require File::build_path(array('view','view.php'));
+
+    }
+
 
 }
 ?>
