@@ -11,7 +11,7 @@ footer {
 	    margin-right: 0px;
 	    margin-bottom: 50px;
 	    margin-top: 50px;
-		background:black;
+		background-color:grey;
 		position:absolute;
 		width:100%;
 		padding-top:50px;
@@ -19,8 +19,9 @@ footer {
 
 }
 
- 
-   
+.footdiv{
+	text-align: center;
+}
 
 #logoFB , #logoTT , #logoGP {
   padding-left: 1%;
@@ -53,11 +54,11 @@ footer {
 	#menu li{
 		display:inline-block;
 		position:relative;
-		border-radius:10px 10px 0 solid;
+		border-radius:10px 10px 0 ;
 	}
 	#menu ul li{
 		display:inherit;
-		border-radius:10px 10px 0 solid ;
+		border-radius:10px 10px 0 ;
 	}
 	#menu ul li:hover{
 		border-radius:0;
@@ -211,7 +212,6 @@ html {
 	margin-top: 20px;
 	height: 400px;
 	width: 1600px;
-	direction: flex;
 }
 
 h1,h2{
