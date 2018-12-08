@@ -83,9 +83,8 @@ protected static $object='produit';
     }
 
     public static function deleteProduit(){
-      var_dump($_SESSION['produit']);
-      unset($_SESSION['produit']);
-      //ModelProduit::deleteProduitByIdProduit($_GET['article']);
+      //var_dump($_GET['idProduit']);
+      ModelProduit::deleteProduitByIdProduit($_GET['idProduit']);
       $view = 'hommes';
       $pagetitle = 'Article supprimé';
       $tab = ModelProduit::getProduitByCategorie('Hommes');

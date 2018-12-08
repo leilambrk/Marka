@@ -11,7 +11,7 @@ if (!$tab){
 	echo 'Rupture totale ! Revenez vite pour plus d\'article enfants.';
 }else{
 	foreach ($tab as $prod){
-		echo '<div><img class="vet" src= "'. $prod->get('photo') . '" alt="' . $prod->get('idProduit'). '"/><h2>'. $prod->get('nomProduit') . '</h2><h5>' . $prod->get('prix') . '€ </h5>' . $prod->get('taille') . '<p>' . $prod->get('description') . '</p></div>';
+		echo '<div><img class="vet" src= "'. $prod->get('photo') . '" alt="' . $prod->get('idProduit'). '"/><h2>'. $prod->get('nomProduit') . '</h2><h5>' . $prod->get('prix') . '€ </h5>' . $prod->get('taille') . 'ans <p>' . $prod->get('description') . '</p></div>';
 	}
 }
 
