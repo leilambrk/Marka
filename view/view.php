@@ -5,6 +5,13 @@
         <meta charset="UTF-8">
         <title><?php echo $pagetitle; ?></title>
     </head>
+
+    <header>
+
+        <h1 class="marka"> MARKA </h1>
+
+    </header>
+
     <body>
         <header>
             <div class="burger">
@@ -70,8 +77,8 @@
 ?>
     </body>
         <footer>
-            <div class="footdiv">
-                <p> Suivez nous sur les réseaux sociaux ! </p>
+            <div >
+                <p class="footdiv"> Suivez nous sur les réseaux sociaux ! </p>
                     <a href="https://www.facebook.com/" target="_blank"><img id="logoFB" src="images/facebook.png" alt="logo facebook"> </a>
                     <a href="https://twitter.com/" target="_blank"><img id="logoTT" src="images/twitter.png" alt="logo twitter"> </a>
                     <a href="https://plus.google.com/" target="_blank"><img id="logoGP" src="images/googleplus.png" alt="logo google plus"> </a>

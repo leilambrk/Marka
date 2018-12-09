@@ -5,22 +5,35 @@
 	text-align:center;
 	padding:1%;
 }*/
+
+.marka{
+	font-family: cursive;
+	text-shadow: 0 0 0.2em grey;
+	margin-top: 20px;
+}
+
+
+
+}
+
+
 footer {
-	    width: 100%;
-	    margin-left: 0px;
-	    margin-right: 0px;
-	    margin-bottom: 50px;
-	    margin-top: 50px;
-		background-color:grey;
-		position:absolute;
-		padding-top:50px;
-		height:50px;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: grey;
+  color: black;
+  text-align: center;
 
 }
 
 .footdiv{
 	text-align: center;
+	margin-bottom: 50px:
+	  margin-top: 10px; 
 }
+
 
 #logoFB , #logoTT , #logoGP {
   padding-left: 1%;
@@ -29,12 +42,12 @@ footer {
   text-decoration: none;
 }
 	#menu {
-		border: 2px solid;
-		border-color:#223A49;
-		background-color:white;
+		border: 4px solid;
+		border-color:black;
+		background-color:grey;
 		justify-content: center;
 		height: 35px;
-		border-radius: 8px;
+		border-radius: 5px;
 		width: 99%;
 		margin: auto;
 		margin-top: 35px;
@@ -48,6 +61,7 @@ footer {
 		margin:auto;
 		list-style:none;
 		text-align:center;
+		border-radius: 10px 10px 0;
 	}
 
 	#menu li{
@@ -60,7 +74,7 @@ footer {
 		border-radius:10px 10px 0 ;
 	}
 	#menu ul li:hover{
-		border-radius:0;
+		border-radius:10px;
 	}
 
 	#menu ul{
@@ -74,27 +88,30 @@ footer {
 		transition: .8s all .3s;
 		width:168.06px;
 		height:105px;
-		background-color: #003366;
+		background: linear-gradient(grey, black);
+
 
 	}
 
 	#menu li:hover ul{
 			max-height:15em;
+			border-radius: 5px 5px 0;
+
 	}
 
 	/* background des liens sous menus */
 
 	#menu li li{
 		/*background:white;*/
-		border: 0px solid;
-		border-radius:5px;
+		border: 5px 5px solid;
+		border-radius:10px;
 		border-color:#223A49;
 		/*margin:3px 3px;*/
 	}
 
 	/* background des liens menus et sous menus au survol */
 	#menu li:hover, #menu li li:hover{
-		background:#223A49;
+		background:black;
 	}
 
 
@@ -112,7 +129,7 @@ footer {
 	}
 	
 	#menu li:hover li a{
-		color:#223A49;
+		color:white;
 		text-transform:inherit;
 	}
 	#menu li:hover a, #menu li li:hover a{
@@ -204,35 +221,40 @@ footer {
 /* css site */
 
 html { 
-	background-color: #f0f3f4;
+	background-color: white;
 	}
 
 .ban {
 	margin-top: 20px;
-	height: 400px;
-	width: 1600px;
-	border-style: inset;
+	height:400px;
+	width: 90%;
+	border: 10px solid;
+ 	border-image: linear-gradient(black, grey) 5;
+  	padding: 20px;
+  	margin-right: 2%;
+  	margin-left: 2%;
+
+
 }
 
 h1,h2{
 	text-align: center;
 	margin-top: 70px;
+	margin-bottom: 20px;
 }
 
 .cat{
 	margin-top: 50px;
-	height: 550px;
-	width: 450px;
+	height: 500px;
+	width: 400px;
 	display: inline;
-    margin-left: 30px;
-    margin-right: 30px ;
+    margin-left: 4%;
+    margin-right: 1% ;
  	border: 2px #aaa solid; 
   	text-align: center;
+  	margin-bottom: 20px;
 }
 
-.bouton:hover{
-	background-color: #AFAFAF;
-}
 
 a{
 	color:#000;
@@ -272,3 +294,82 @@ a:visited{
 .h2{
 	text-align: center;
 }
+
+/* diapo */
+
+.contener_slideshow
+{
+  width:700px;
+  height:500px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 50px;
+}
+
+.slid_1, .slid_2, .slid_3
+{
+  position: absolute;
+  width:700px;
+  height:600px;
+}
+.slid_1{left: 0;}
+.slid_2{left: 610px;}
+.slid_3{left: 1220px;}
+
+
+.contener_slide
+{
+  width: 1220px;
+  height: 211px;
+  left:0px;
+  position: absolute;
+  -webkit-animation-duration: 10s;
+  -webkit-animation-iteration-count:infinite;
+  -webkit-animation-name: anim_slide;
+  -moz-animation-duration: 10s;
+  -moz-animation-iteration-count:infinite;
+  -moz-animation-name: anim_slide;
+  -ms-animation-duration: 10s;
+  -ms-animation-iteration-count:infinite;
+  -ms-animation-name: anim_slide;
+  animation-duration: 10s;
+  animation-iteration-count:infinite;
+  animation-name: anim_slide;
+}
+@-webkit-keyframes anim_slide 
+{
+  0% {left:0px;}
+  22% {left:0px;}
+  33% {left:-610px;}
+  45% {left:-610px;}
+  66% {left:-1220px;}
+  90% {left:-1220px;}
+}
+@-moz-keyframes anim_slide 
+{
+  0% {left:0px;}
+  22% {left:0px;}
+  33% {left:-610px;}
+  45% {left:-610px;}
+  66% {left:-1220px;}
+  90% {left:-1220px;}
+}
+@-ms-keyframes anim_slide 
+{
+  0% {left:0px;}
+  22% {left:0px;}
+  33% {left:-610px;}
+  45% {left:-610px;}
+  66% {left:-1220px;}
+  90% {left:-1220px;}
+}
+@keyframes anim_slide 
+{
+  0% {left:0px;}
+  22% {left:0px;}
+  33% {left:-610px;}
+  45% {left:-610px;}
+  66% {left:-1220px;}
+  90% {left:-1220px;}
+
+
