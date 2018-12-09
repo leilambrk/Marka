@@ -84,11 +84,16 @@ protected static $object='produit';
     public static function deleteProduit(){
 
       //var_dump($_GET['idProduit']);
-      ModelProduit::deleteProduitByIdProduit($_GET['idProduit']);
-      $view = 'hommes';
-      $pagetitle = 'Article supprimé';
-      $tab = ModelProduit::getProduitByCategorie('Hommes');
-      require File::build_path(array('view','view.php'));
+      if ($_SESSION['login'] == 1) {
+        self::error();
+      }
+      else {
+        ModelProduit::deleteProduitByIdProduit($_GET['idProduit']);
+        $view = 'hommes';
+        $pagetitle = 'Article supprimé';
+        $tab = ModelProduit::getProduitByCategorie('Hommes');
+        require File::build_path(array('view','view.php'));
+      }
     }
 
       //  //var_dump($_GET['idProduit']);
@@ -100,7 +105,7 @@ protected static $object='produit';
     public static function updateProduit(){
       $controller='produit';
       $view = 'updateProduit';
-      $pagetitle = 'Modifier l\'article'; 
+      $pagetitle = 'Modifier l\'article';
       require File::build_path(array('view','view.php'));
     }
 

@@ -14,27 +14,24 @@ class ControllerPanier{
 
   public static function ajouterPanier(){
     if (!isset($_COOKIE["panier"])){
-      $produit = serialize($_GET['idProduit']);
-      setcookie("panier", $produit , time()+3600);
-      ControllerAccueil::homepage();
-    }
-    if (is_array(unserialize($_COOKIE["panier"]))) {
-      $tab = unserialize($_COOKIE["panier"]);
-      array_push($tab,$_GET['idProduit']);
+      $tab = array(
+      $_GET['idProduit']
+      );
       $produit=serialize($tab);
       setcookie("panier", $produit , time()+3600);
       ControllerAccueil::homepage();
     }
     else {
       $tab = array(
-        unserialize($_COOKIE["panier"]),
         $_GET['idProduit']
       );
+      array_push($tab,unserialize($_COOKIE["panier"]));
       $produit=serialize($tab);
       setcookie("panier", $produit , time()+3600);
       ControllerAccueil::homepage();
     }
   }
+
 
   public static function ReadAllPanier(){
     if (isset($_COOKIE["panier"])){

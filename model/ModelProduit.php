@@ -95,8 +95,6 @@
           );
           // On donne les valeurs et on exécute la requête
           $req_prep->execute($values);
-
-        //  http://webinfo.iutmontp.univ-montp2.fr/~puechc/PHP/projet/
     }
   }
 ?>
