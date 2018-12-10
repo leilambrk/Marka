@@ -22,10 +22,8 @@ class ControllerPanier{
       ControllerAccueil::homepage();
     }
     else {
-      $tab = array(
-        $_GET['idProduit']
-      );
-      array_push($tab,unserialize($_COOKIE["panier"]));
+      $tab = unserialize($_COOKIE["panier"]);
+      array_push($tab,$_GET['idProduit']);
       $produit=serialize($tab);
       setcookie("panier", $produit , time()+3600);
       ControllerAccueil::homepage();

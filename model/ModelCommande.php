@@ -1,6 +1,8 @@
 <?php
 // BON
 require_once File::build_path(array('model','Model.php'));
+require_once File::build_path(array('model','ModelProduit.php'));
+
   class ModelCommande extends Model {
 
     protected static $object='utilisateur';
@@ -26,11 +28,16 @@ require_once File::build_path(array('model','Model.php'));
     }
 
     public static function getAllCommandes(){
-        require_once 'Model.php';
-        $rep = Model::$pdo->query("SELECT * FROM Commande");
-        $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelCommande');
-        $tab_commandes = $rep->fetchAll();
-        return $tab_commandes;
+          $sql = "SELECT * FROM commande c
+            JOIN achat a on c.idCommande = a.idCommande
+            WHERE client=:e ";
+          $req_prep = Model::$pdo->prepare($sql);
+          $values = array(
+              "e" => $_SESSION['login'],
+          );
+        $req_prep->execute($values);
+        $tab = $req_prep->fetchAll();
+        return $tab;
     }
 
     public static function getNbOfCommande(){
@@ -42,10 +49,47 @@ require_once File::build_path(array('model','Model.php'));
     public static function savePanier($tab){
       $produit = array();
       foreach ($tab as $id){
-      array_push($produit,getProduitByIdProduit($id));
+      array_push($produit,ModelProduit::getProduitByIdProduit($id));
       }
-      
-    }
+        $sql = "INSERT INTO commande (date, client) VALUES (:d, :cli)";
+        $req_prep = Model::$pdo->prepare($sql);
+        $values = array(
+            "d" => date('Y-m-d H:i:s'),
+            "cli" => $_SESSION['login'],
+        );
+        // On donne les valeurs et on exécute la requête
+        $req_prep->execute($values);
+
+        foreach ($produit as $tab) {
+          $sql = "INSERT INTO achat (idCommande, nomProduit, description, prix, photo, taille) VALUES (:idC, :n, :d, :prix, :p, :t)";
+          $req_prep = Model::$pdo->prepare($sql);
+          var_dump(self::getNbOfCommande()-1);
+          $values = array(
+              ":idC" => self::getNbOfCommande()-1,
+              ":n" => $tab->get('nomProduit'),
+              ":d" => $tab->get('description'),
+              ":prix" => $tab->get('prix'),
+              ":p" => $tab->get('photo'),
+              ":t" => $tab->get('taille'),
+          );
+          // On donne les valeurs et on exécute la requête
+          $req_prep->execute($values);
+        }
+
+      }
+
+      public static function clearHistorique(){
+        $sql = "DELETE FROM achat WHERE achat.idCommande IN (
+          Select commande.idCommande from commande
+          WHERE client=:c)";
+        $req_prep = Model::$pdo->prepare($sql);
+        $values = array(
+            "c" => $_SESSION['login'],
+        );
+        // On donne les valeurs et on exécute la requête
+        $req_prep->execute($values);
+      }
+
 
 }
 ?>

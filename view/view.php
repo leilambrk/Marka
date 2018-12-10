@@ -18,11 +18,19 @@
                                 <li id="rej"><a href="?action=display3rd&controller=produit">Enfants</a></li>
                         </li></ul>
                         <li class="align"><a href="?action=afficherPanier&controller=panier">Panier</a></li>
-                        <li>
-                            <a href="?action=create&controller=utilisateur">S'inscrire</a>
+                        <?php if (isset($_SESSION['login'])){
+                          echo'
+                        <li class="align"><a href="?action=historique&controller=commande">Mes commandes</a></li>
+                        <li class="align"><a href="?action=profile&controller=utilisateur">Mon profil</a></li>
+
+                        <li>';}
+                        else { echo '
+
+                          <li class="align">  <a href="?action=create&controller=utilisateur">S\'inscrire</a></li>
                         </li>
                         <li class="align"><a href="?action=connect&controller=utilisateur">Se connecter</a></li>
-                    </ul>
+                    </ul>';}
+                    ?>
             </div>
             <nav>
                 <div>
@@ -45,6 +53,7 @@
                                                <?php }
                                                     else
                                                         { ?>
+                                                          <li><a href="?action=historique&controller=commande">Mes commandes</a></li>
                                                           <li>
                                                               <a href="?action=profile&controller=utilisateur">Mon profil</a>
                                                               <ul>
