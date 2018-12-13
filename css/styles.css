@@ -21,11 +21,11 @@
 }
 	#menu {
 		border: 4px solid;
-		border-color:black;
+		/*border-color:black;*/
 		background-color:grey;
 		justify-content: center;
-		height: 35px;
-		border-radius: 5px;
+		height:40px;
+		border-radius: 3px;
 		width: 99%;
 		margin: auto;
 		margin-top: 35px;
@@ -39,7 +39,7 @@
 		margin:auto;
 		list-style:none;
 		text-align:center;
-		border-radius: 10px 10px 0;
+		border-radius: 5px 5px 0;
 	}
 
 	#menu li{
@@ -49,17 +49,17 @@
 	}
 	#menu ul li{
 		display:inherit;
-		border-radius:10px 10px 0 ;
+		border-radius:5px 5px 0 ;
 	}
 	#menu ul li:hover{
-		border-radius:10px;
+		border-radius:5px;
 	}
 
 	#menu ul{
 		position:absolute;
 		max-height:0;
 		left: 0px;
-		right: 25px;
+		right: 0px;
 		overflow:hidden;
 		-moz-transition: .8s all .3s;
 		-webkit-transition: .8s all .3s;
@@ -101,11 +101,11 @@
 		color:#223A49;
 		font-family: 'Glitch', sans-serif;
 	}
-
+	
 	#menu ul a{
 		padding:8px 0px;
 	}
-
+	
 	#menu li:hover li a{
 		color:white;
 		text-transform:inherit;
@@ -122,23 +122,23 @@
 	}
 
 	@media all and (max-width: 650px) {
-
+		
 		.burger{
 			display:block;
 		}
-
+			
 		.burger{
 			display:flex;
 		}
-
+			
 		nav ul li {
 			display:inherit;
 		}
-
+		
 		nav{
 			display:none;
 		}
-
+		
 		#menu2{
 			position:absolute;
 			left:0px;
@@ -153,22 +153,22 @@
 			border-color:#223A49;
 			background-color:white;
 		}
-
+			
 		li #rej {
 			text-align:center;
 			display: none;
-
+			
 		}
-
+			
 		li:hover #rej {
 			text-align:center;
 			display: block;
 		}
-
+				
 		.burger:hover #menu2{
 			display:block;
 		}
-
+			
 	}
 
 	img .burger:hover {
@@ -198,7 +198,7 @@
 
 /* css site */
 
-html {
+html { 
 	background-color: white;
 	}
 
@@ -228,7 +228,7 @@ h1,h2{
 	display: inline;
     margin-left: 4%;
     margin-right: 1% ;
- 	border: 2px #aaa solid;
+ 	border: 2px #aaa solid; 
   	text-align: center;
   	margin-bottom: 20px;
 }
@@ -269,7 +269,6 @@ a:visited{
 	margin-bottom: 20px;
 	border-color: grey;
 	border-radius: 10px;
-
 }
 
 .h2{
@@ -318,7 +317,7 @@ a:visited{
   animation-iteration-count:infinite;
   animation-name: anim_slide;
 }
-@-webkit-keyframes anim_slide
+@-webkit-keyframes anim_slide 
 {
   0% {left:0px;}
   22% {left:0px;}
@@ -327,7 +326,7 @@ a:visited{
   66% {left:-1220px;}
   90% {left:-1220px;}
 }
-@-moz-keyframes anim_slide
+@-moz-keyframes anim_slide 
 {
   0% {left:0px;}
   22% {left:0px;}
@@ -336,7 +335,7 @@ a:visited{
   66% {left:-1220px;}
   90% {left:-1220px;}
 }
-@-ms-keyframes anim_slide
+@-ms-keyframes anim_slide 
 {
   0% {left:0px;}
   22% {left:0px;}
@@ -346,7 +345,7 @@ a:visited{
   90% {left:-1220px;}
 }
 
-@keyframes anim_slide
+@keyframes anim_slide 
 {
   0% {left:0px;}
   22% {left:0px;}
@@ -408,10 +407,7 @@ footer {
 }*/
 
 .item {
-  /*position: relative;*/
-  
-  /*border: 1px solid #333;*/
-  /*margin: 2%;*/
+ 
   overflow: hidden;
   width: 540px;
   text-align: center;
@@ -430,3 +426,4 @@ footer {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
+
