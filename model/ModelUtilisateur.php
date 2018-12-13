@@ -5,6 +5,7 @@ require_once File::build_path(array("model","Model.php"));
 class ModelUtilisateur extends Model {
 
 	protected static $object="utilisateur";
+    protected static $primary="email";
     private $idUser;
     private $nom;
     private $prenom;
@@ -15,12 +16,12 @@ class ModelUtilisateur extends Model {
     private $nomVille;
     private $pays;
     private $admin;
+    private $nonce;
 
 
-
-		public function __construct($id = null ,$nom = null, $prenom = null, $email = null, $dateInscription = null, $password=null,$adresse = null, $nomVille = null, $pays = null, $admin = 0)
+		public function __construct($nom = null, $prenom = null, $email = null, $dateInscription = null, $password=null,$adresse = null, $nomVille = null, $pays = null, $admin = 0)
 		    {
-		        if (!is_null($nom) && !is_null($prenom) && !is_null($email) &&!is_null($dateInscription) && !is_null($password) && !is_null($adresse) && !is_null($nomVille) &&!is_null($pays)){
+		        if (!is_null($nom) && !is_null($prenom) && !is_null($email) &&!is_null($dateInscription) && !is_null($password) && !is_null($adresse) && !is_null($nomVille) &&!is_null($pays)) {
 		        $this->idUser = null;
 		        $this->nom = $nom;
 		        $this->prenom = $prenom;
@@ -31,12 +32,11 @@ class ModelUtilisateur extends Model {
 		        $this->nomVille = $nomVille;
 		        $this->pays = $pays;
 		        $this->admin=0;
-
 		        }
 		    }
 		public function save()
 		{
-				$sql = "INSERT INTO Utilisateur (nom, prenom, email, password, dateInscription, adresse, nomVille, pays) VALUES (:nom, :prenom, :email, :pw, :da, :addre, :nomVille, :pays)";
+				$sql = "INSERT INTO utilisateur (nom, prenom, email, password, dateInscription, adresse, nomVille, pays, nonce) VALUES (:nom, :prenom, :email, :pw, :da, :addre, :nomVille, :pays, :nonce)";
 			// Préparation de la requête
 				$req_prep = Model::$pdo->prepare($sql);
 
@@ -50,6 +50,7 @@ class ModelUtilisateur extends Model {
 						"addre" => $this->adresse,
 						"nomVille" => $this->nomVille,
 						"pays" => $this->pays,
+                        "nonce" => $this->nonce,
 				);
 				// On donne les valeurs et on exécute la requête
 				$req_prep->execute($values);
@@ -111,6 +112,21 @@ class ModelUtilisateur extends Model {
         $this->password = $password;
     }
 
+    public function getNonce(){
+        return $this->nonce;
+    }
+
+    public function getEmail(){
+        return $this->email;
+    }
+
+    public function getIdUser(){
+        return $this->idUser;
+    }
+
+    public function setNonce($nonce){
+        $this->nonce=$nonce;
+    }
     // public static function getPwByMail($email){
     // //error_reporting(E_ALL & ~E_NOTICE);
     //    $sql = "SELECT password FROM Utilisateur WHERE email=:email";
@@ -138,7 +154,7 @@ class ModelUtilisateur extends Model {
 
     public static function selectByEmail($email){
 	   error_reporting(E_ALL & ~E_NOTICE);
-	   $sql = "SELECT * FROM Utilisateur U WHERE email=:email";
+	   $sql = "SELECT * FROM utilisateur U WHERE email=:email";
 
 		        // Préparation de la requête
         $req_prep = Model::$pdo->prepare($sql);
@@ -175,7 +191,7 @@ class ModelUtilisateur extends Model {
     public function checkPW($email, $mdpchiffre)
     {
 
-        $sql = "SELECT * FROM Utilisateur WHERE email=:email";
+        $sql = "SELECT * FROM utilisateur WHERE email=:email";
 
         // Préparation de la requête
         $req_prep = Model::$pdo->prepare($sql);
@@ -193,6 +209,8 @@ class ModelUtilisateur extends Model {
         return ($tab[0]->email==$email) && ($tab[0]->password==$mdpchiffre);
 
     }
+
+
 
 //------------------------------------------------------------------------
 

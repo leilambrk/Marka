@@ -30,6 +30,7 @@ class Model{
         }
 
 
+        
         public static function update($primary_key, $primary_value, $table_name, $data)
         {
             try
@@ -39,7 +40,6 @@ class Model{
                 foreach ($data as $valeur => $key)
                 {
                     $sql = $sql . $valeur . " = '" . $key . "', ";
-
                 }
                 $sql = rtrim($sql, ', ') . " WHERE " . $primary_key . " = '" . $primary_value ."'";
                 //var_dump($sql);
@@ -57,6 +57,7 @@ class Model{
                 die();
             }
         }
+
 
 // public function save() {
 //         $table_name = static::$object;
@@ -84,7 +85,7 @@ class Model{
 //         }
 //     }
 
-static public function selectAll() {
+    public static function selectAll() {
 
         $table_name = static::$object;
         $class_name = 'Model' . ucfirst($table_name);
@@ -102,13 +103,13 @@ static public function selectAll() {
         return $tab;
     }
 
-    static public function select($primary_value)
+    public static function select($primary_value)
     {
         $table_name = static::$object;
         $class_name = 'Model' . ucfirst($table_name);
         $primary_key = static::$primary;
 
-        $sql = "SELECT * from " . ucfirst($table_name) .  " WHERE " . $primary_key . " = '" . $primary_value. "'";
+        $sql = "SELECT * from " . $table_name .  " WHERE " . $primary_key . " = '" . $primary_value. "'";
         //var_dump($sql);
         $req_prep = Model::$pdo->prepare($sql);
 
@@ -125,7 +126,7 @@ static public function selectAll() {
             return $tab[0];
     }
 
-     static public function delete($primary_value) {
+     public static function delete($primary_value) {
 
         $table_name = static::$object;
         $class_name = 'Model' . ucfirst($table_name);
@@ -137,7 +138,7 @@ static public function selectAll() {
         $req_prep->execute();
     }
 
-    static public function countAll()
+    public static function countAll()
     {
         $table_name = static::$object;
         $class_name = 'Model' . ucfirst($table_name);

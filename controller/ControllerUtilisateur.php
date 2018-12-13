@@ -49,6 +49,8 @@ class ControllerUtilisateur{
     $pagetitle = 'Inscription';
     require File::build_path(array('view','view.php'));
         //redirige vers la vue create.php (formulaire)
+
+
     }
 
 public static function created()
@@ -57,13 +59,29 @@ public static function created()
     $mdp=Security::chiffrer($_POST['password']);
     $id=null;
     $admin=null;
-    $p = new ModelUtilisateur($id,$_POST['nom'],$_POST['prenom'],$_POST['email'],$date,$mdp,$_POST['adresse'],$_POST['nomVille'],$_POST['pays'],$admin);
+    $p = new ModelUtilisateur($_POST['nom'],$_POST['prenom'],$_POST['email'],$date,$mdp,$_POST['adresse'],$_POST['nomVille'],$_POST['pays'],$admin);
+    $nonce =Security::generateRandomHex();
+    $p->setNonce($nonce);
+    $destinataire = $p->getEmail();
     if ($_POST['password']==$_POST['password_valid'] && !$p->isUse()){ //on recupere les infos du formulaires
+        
         $p->save(); // on les sauve dans la base de donnees
-        $_SESSION['login']=$_POST['email'];
-        $_SESSION['admin']=$p->get('admin');
-        self::profile();
+        //$_SESSION['login']=$_POST['email'];
+        //$_SESSION['admin']=$p->get('admin');
+        
+          $sujet = "Activer votre compte" ;
+          $entete = "From: inscription@marka.com" ;
+ 
+        $mail = '<p>Bienvenue sur VotreSite,
+ 
+      Pour activer votre compte, veuillez cliquer sur le lien ci dessous
+      
+ 
+      http://webinfo.iutmontp.univ-montp2.fr/~senhajis/Marka/index.php?controller=utilisateur&action=validate&email=' . $p->getEmail() . '&nonce=' . $nonce . '</p>';
+
+      mail($destinataire, $sujet, $mail, $entete);
         //redirige vers la vue monprofil
+      self::connect();
     }
     else {
         self::error();
@@ -73,41 +91,64 @@ public static function created()
 
 
     public static function connect(){
-		$view = 'connect';
-		$pagetitle = 'Se connecter';
-		require File::build_path(array('view','view.php'));
+    
+  			$view = 'connect';
+  			$pagetitle = 'Se connecter';
+  			require File::build_path(array('view','view.php'));
+  		
+	}
+
+
+
+
+
+	public static function validate(){
+		$user=ModelUtilisateur::select($_GET['email']);
+		if($user != false && $user->getNonce() == $_GET['nonce']){
+			ModelUtilisateur::update('idUser', $user->get('idUser'), 'utilisateur', array("nonce" => NULL));
+			self::connect();
+		}
+		else {
+			self::error();
+		}
+
 	}
 
   public static function connected(){
-          if (isset($_POST['email'])&&isset($_POST['password']))
-          {
-              $login = $_POST['email'];
-              $mdp = Security::chiffrer($_POST['password']);
-              $user = ModelUtilisateur::selectByEmail($login);
-              if (!empty($user)){
-                  if ($user->get('password') == $mdp){
-                          $_SESSION['login'] = $login;
-                          $_SESSION['admin'] = $user->get('admin');
-                          self::profile();
-                  }
-                  else {
-                      $view = 'connect';
-                      $pagetitle = 'Erreur de connexion mdp';
-                      require File::build_path(array('view','view.php'));
-                  }
-              }
-              else {
-                  $view = 'connect';
-                  $pagetitle = 'Erreur de connexion mail';
-                  require File::build_path(array('view','view.php'));
-              }
+    if (isset($_POST['email'])&&isset($_POST['password'])){ // Si mail et password exst
+      $login = $_POST['email'];
+      $mdp = Security::chiffrer($_POST['password']);
+      $user = ModelUtilisateur::selectByEmail($login);
+      if (!empty($user)){ // Si l'utilisateur existe
+        if(is_null($user->get('nonce')) || $user->get('nonce') == ""){ // Si nonce est null
+          if ($user->get('password') == $mdp){ // Si le mot de pass correspond
+            $_SESSION['login'] = $login;
+            $_SESSION['admin'] = $user->get('admin');
+            self::profile(); // Affichage profile
           }
-          else {
-              self::error();
-         }
+        }
+        else{
+          $view = 'connect';
+          $pagetitle = 'Merci de comfirmer votre adresse mail';
+          require File::build_path(array('view','view.php'));
+        }
+      }            
+      else { // Si utilisateur exst pas
+        $view = 'connect';
+        $pagetitle = 'Erreur de connexion mdp';
+        require File::build_path(array('view','view.php'));
       }
+    }  
+    else { // Si il n'y a pas de mail et de mot de passe
+      $view = 'connect';
+      $pagetitle = 'Erreur de connexion mail';
+      require File::build_path(array('view','view.php'));
+      }
+    }
 
 
+
+  
     public static function profile()
     {
         if (isset($_SESSION['login'])) {
