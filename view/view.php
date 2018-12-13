@@ -7,8 +7,8 @@
     </head>
     <body>
         <header>
-
-            <h1 class="marka"> MARKA </h1>
+            <img src="images/marka.jpg" alt="ban" width="100%">
+            <!--<h1 class="marka"> MARKA </h1>-->
             <div class="burger">
                 <img src="images/burger.png" alt="burger" width="50px" height="50px">
                     <ul id="menu2" class="men">

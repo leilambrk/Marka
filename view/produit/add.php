@@ -1,4 +1,4 @@
-<?php  if (isset($_SESSION['login']) && $_SESSION['admin']=1) { ?>
+
   <form method="post" action="?action=adder&controller=produit">
     <!-- On recupere les infos avec la methode post et on redirige vers la sauvegarde dans la base de donnees -->
 
@@ -41,10 +41,3 @@
         </p>
     </fieldset>
 </form>
-<?php }
-else {?>
-<li><a>Vous ne disposez pas des droits pour accéder à cette page.</a></li>
-<li><a href="?action=homepage&controller=accueil">Revenir au menu principal.</a></li>
-
-<?php
-}?>

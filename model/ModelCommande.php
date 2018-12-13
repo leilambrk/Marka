@@ -27,10 +27,27 @@ require_once File::build_path(array('model','ModelProduit.php'));
         return false;
     }
 
+    // public static function getAllCommandes(){
+    //       $sql = "SELECT * FROM commande c
+    //         JOIN achat a on c.idCommande = a.idCommande
+    //         WHERE client=:e ";
+    //       $req_prep = Model::$pdo->prepare($sql);
+    //       $values = array(
+    //           "e" => $_SESSION['login'],
+    //       );
+    //     $req_prep->execute($values);
+    //     $tab = $req_prep->fetchAll();
+    //     //$tab1 = array_count_values($tab);
+    //     var_dump($tab);
+    //     return $tab;
+    // }
+
     public static function getAllCommandes(){
-          $sql = "SELECT * FROM commande c
-            JOIN achat a on c.idCommande = a.idCommande
-            WHERE client=:e ";
+          $sql = "SELECT achat.idCommande,date,SUM(prix)
+            FROM achat JOIN commande
+            On achat.idCommande=commande.idCommande
+            WHERE client=:e
+            GROUP BY (achat.idCommande) ";
           $req_prep = Model::$pdo->prepare($sql);
           $values = array(
               "e" => $_SESSION['login'],
@@ -39,6 +56,9 @@ require_once File::build_path(array('model','ModelProduit.php'));
         $tab = $req_prep->fetchAll();
         return $tab;
     }
+
+
+
 
     public static function getNbOfCommande(){
       $rep = Model::$pdo->query("SELECT MAX(idCommande) FROM commande");
@@ -63,7 +83,6 @@ require_once File::build_path(array('model','ModelProduit.php'));
         foreach ($produit as $tab) {
           $sql = "INSERT INTO achat (idCommande, nomProduit, description, prix, photo, taille) VALUES (:idC, :n, :d, :prix, :p, :t)";
           $req_prep = Model::$pdo->prepare($sql);
-          var_dump(self::getNbOfCommande()-1);
           $values = array(
               ":idC" => self::getNbOfCommande()-1,
               ":n" => $tab->get('nomProduit'),

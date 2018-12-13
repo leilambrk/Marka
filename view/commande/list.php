@@ -4,15 +4,11 @@
 <article>
 <?php
 
-if (!empty($tab)){
-foreach ($tab as $prod) {
-  echo '<div><img class="vet" src= "'. $prod['photo'] . '"/><h2>'. $prod['nomProduit'] . '</h2><h5>' . $prod['prix'] . '€ </h5> Taille' . $prod['taille'] . '<p>' . $prod['description'] . '</p></div>';
-}
-}
-else {
+if ($tab != false){
+  foreach ($tab as $key) {
 
-  echo '<h3>Vous n\'avez pas encore passer de commande</h3>';
-
+    echo '<div><h5>Commande n°'. htmlspecialchars($key['0']) . '</h5><h5>Date de la commande : ' . htmlspecialchars($key['1']) . ' </h5> Prix total de la commande :' . htmlspecialchars($key['2']) . '€</div>';
+  }
 }
 
 
@@ -20,5 +16,5 @@ else {
 
 ?>
 
-<a href="?action=clear&controller=commande">Supprimer l'historique des commandes </a>
+<h5><a href="?action=clear&controller=commande">Supprimer l'historique des commandes </a></h5>
 </article>

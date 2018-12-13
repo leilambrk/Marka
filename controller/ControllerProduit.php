@@ -8,24 +8,24 @@ class ControllerProduit{
 protected static $object='produit';
 
 
-    public static function displayerH(){
-      $tab = ModelProduit::getProduitByCategorie('Hommes');
-      return $tab;
-    }
-
-    public static function displayerF(){
-      $tab = ModelProduit::getProduitByCategorie('Femmes');
-      return $tab;
-    }
-
-    public static function displayerE(){
-      $tab = ModelProduit::getProduitByCategorie('Enfants');
-      return $tab;
-    }
+    // public static function displayerH(){
+    //   $tab = ModelProduit::getProduitByCategorie('Hommes');
+    //   return $tab;
+    // }
+    //
+    // public static function displayerF(){
+    //   $tab = ModelProduit::getProduitByCategorie('Femmes');
+    //   return $tab;
+    // }
+    //
+    // public static function displayerE(){
+    //   $tab = ModelProduit::getProduitByCategorie('Enfants');
+    //   return $tab;
+    // }
 
     public static function display1st()
     {
-        $tab = self::displayerH();
+        $tab = ModelProduit::getProduitByCategorie('Hommes');
         $controller ='produit';
         $view = 'hommes';
         $pagetitle = 'Collection Homme';
@@ -34,7 +34,7 @@ protected static $object='produit';
 
     public static function display2nd()
     {
-        $tab = self::displayerF();
+        $tab = ModelProduit::getProduitByCategorie('Femmes');
         $controller ='produit';
         $view = 'femmes';
         $pagetitle = 'Collection Femme';
@@ -44,7 +44,7 @@ protected static $object='produit';
 
     public static function display3rd()
     {
-        $tab = self::displayerE();
+        $tab = ModelProduit::getProduitByCategorie('Enfants');
         $controller ='produit';
         $view = 'enfants';
         $pagetitle = 'Collection Enfant';
@@ -59,10 +59,15 @@ protected static $object='produit';
     }
 
     public static function add(){
-      $controller ='produit';
-      $view = 'add';
-      $pagetitle = 'Ajoutez un article';
-      require File::build_path(array('view','view.php'));
+      if (isset($_SESSION['login']) && ($_SESSION['admin'] == 1) ) {
+        $controller ='produit';
+        $view = 'add';
+        $pagetitle = 'Ajoutez un article';
+        require File::build_path(array('view','view.php'));
+      }
+      else {
+        self::error();
+      }
     }
 
     public static function adder(){
@@ -103,13 +108,19 @@ protected static $object='produit';
 
 
     public static function updateProduit(){
+      if ($_SESSION['admin'] == 1){
       $controller='produit';
       $view = 'updateProduit';
       $pagetitle = 'Modifier l\'article';
       require File::build_path(array('view','view.php'));
     }
+    else {
+      self::error();
+    }
+    }
 
     public static function updated(){
+      if ($_SESSION['admin'] == 1){
       $a=$_POST['newprice'];
       $b=$_POST['newsize'];
       $c=$_POST['newdesc'];
@@ -120,6 +131,10 @@ protected static $object='produit';
       Model::update($primary, $primary_value, $table_name, array("prix"=>$a, "taille"=>$b, "description"=>$c));
       //ModelUtilisateur::update($primary, $primary_value, $table_name, array("adresse"=>$a, "nomVille"=>$b));
       ControllerUtilisateur::profile();
+    }
+    else {
+      self::error();
+    }
     }
 
 
