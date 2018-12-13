@@ -1,4 +1,4 @@
-<h1>panier</h1>
+<h1>Panier</h1>
 
 
 <article>
@@ -12,10 +12,13 @@ if ($tab != false){
 
   echo '<h3><a href=?action=viderPanier&controller=panier> Vider le panier </a></h3>';
 }
-else {
+if ($tab == false){
+
   echo '<h3>Votre panier est vide</h3>';
 
 }
+echo '<h3><a href=?action=commander&controller=commande>Passer au paiement </a></h3>';
+
 
 }
 

@@ -9,12 +9,9 @@
 
 <a href="?action=display1st&controller=produit"><img src="images/homme.jpg" alt="homme" class="cat"></a>
 <a href="?action=display2nd&controller=produit"><img src="images/femme.jpg" alt="femme"class="cat"></a>
-<a href="?action=display3nd&controller=produit"><img src="images/enfants.jpg" alt="enfants" class="cat"></a>
-
+<a href="?action=display3rd&controller=produit"><img src="images/enfants.jpg" alt="enfants" class="cat"></a>
 
 <h2> Des nouveautés toutes les semaines pour un look branché ! </h2>
-
-
 
 <div align="center">
   <div class="contener_slideshow">
