@@ -72,12 +72,12 @@ public static function created()
           $sujet = "Activer votre compte" ;
           $entete = "From: inscription@marka.com" ;
  
-        $mail = '<p>Bienvenue sur VotreSite,
+        $mail = '<p>Bienvenue sur Marka,
  
       Pour activer votre compte, veuillez cliquer sur le lien ci dessous
       
  
-      http://webinfo.iutmontp.univ-montp2.fr/~senhajis/Marka/index.php?controller=utilisateur&action=validate&email=' . $p->getEmail() . '&nonce=' . $nonce . '</p>';
+      http://webinfo.iutmontp.univ-montp2.fr/~senhajis/Marka/index.php?controller=utilisateur&action=validate&email=' . $p->get('email') . '&nonce=' . $nonce . '</p>';
 
       mail($destinataire, $sujet, $mail, $entete);
         //redirige vers la vue monprofil
@@ -105,7 +105,7 @@ public static function created()
 	public static function validate(){
 		$user=ModelUtilisateur::select($_GET['email']);
 		if($user != false && $user->getNonce() == $_GET['nonce']){
-			ModelUtilisateur::update('idUser', $user->get('idUser'), 'utilisateur', array("nonce" => NULL));
+			ModelUtilisateur::update('email', $user->get('email'), 'utilisateur', array("nonce" => NULL));
 			self::connect();
 		}
 		else {

@@ -11,7 +11,6 @@ protected static $object='produit';
         $controller ='produit';
         $view = 'produits';
         $pagetitle = 'Nos produits';
-        //require File::build_path(array('Model','ModelProduit.php')); 
         $tab_p = ModelProduit::getAllProduit();
         require File::build_path(array('view','view.php')); 
     }
@@ -43,7 +42,7 @@ protected static $object='produit';
         $pagetitle = 'Error 404';
         require File::build_path(array('view','view.php'));
     }
-    
+
     public static function add(){
       $controller ='produit';
       $view = 'add';
