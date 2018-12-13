@@ -44,7 +44,6 @@ class ControllerCommande{
 
     public static function buy(){
       if (isset($_SESSION['login']) && isset($_COOKIE['panier'])){
-        var_dump(unserialize($_COOKIE['panier']));
         ModelCommande::savePanier(unserialize($_COOKIE['panier']));
         setcookie ("panier", "", time() - 1);
         ControllerAccueil::homepage();
