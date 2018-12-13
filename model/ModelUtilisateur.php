@@ -51,9 +51,9 @@ class ModelUtilisateur extends Model {
 								"addre" => $this->adresse,
 								"nomVille" => $this->nomVille,
 								"pays" => $this->pays,
-                "nonce" => $this->nonce,
+                                "nonce" => $this->nonce,
 						);
-						var_dump($values);
+	
 						// On donne les valeurs et on exécute la requête
 						$req_prep->execute($values);
 				}
@@ -118,6 +118,9 @@ class ModelUtilisateur extends Model {
         $this->password = $password;
     }
 
+
+   
+
     // public static function getPwByMail($email){
     // //error_reporting(E_ALL & ~E_NOTICE);
     //    $sql = "SELECT password FROM Utilisateur WHERE email=:email";
@@ -145,7 +148,7 @@ class ModelUtilisateur extends Model {
 
     public static function selectByEmail($email){
 	   error_reporting(E_ALL & ~E_NOTICE);
-	   $sql = "SELECT * FROM Utilisateur U WHERE email=:email";
+	   $sql = "SELECT * FROM utilisateur U WHERE email=:email";
 
 		        // Préparation de la requête
         $req_prep = Model::$pdo->prepare($sql);
@@ -207,7 +210,7 @@ class ModelUtilisateur extends Model {
     public function isValid (){
         if (strlen($this->nom)>2 && strlen($this->prenom)>2 && strlen($this->email) > 5
             && strlen($this->password)>7 && strlen($this->adresse)>2 && strlen($this->nomVille)>2
-            &&strlen($this->pays)>2){
+            && strlen($this->pays)>2){
             return true;
         }
         else {

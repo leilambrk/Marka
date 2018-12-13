@@ -13,28 +13,6 @@
 }
 
 
-
-}
-
-
-footer {
-  position: relative;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: grey;
-  color: black;
-  text-align: center;
-
-}
-
-.footdiv{
-	text-align: center;
-	margin-bottom: 50px:
-	  margin-top: 10px; 
-}
-
-
 #logoFB , #logoTT , #logoGP {
   padding-left: 1%;
   height: 25px;
@@ -303,7 +281,8 @@ a:visited{
   height:500px;
   overflow: hidden;
   position: relative;
-  margin-bottom: 50px;
+  margin-bottom: 70px;
+
 }
 
 .slid_1, .slid_2, .slid_3
@@ -363,6 +342,7 @@ a:visited{
   66% {left:-1220px;}
   90% {left:-1220px;}
 }
+
 @keyframes anim_slide 
 {
   0% {left:0px;}
@@ -373,3 +353,26 @@ a:visited{
   90% {left:-1220px;}
 
 
+}
+
+body, html {
+	height: 100%;
+	margin: 0;
+}
+
+main
+{
+	margin-bottom: 11%;
+}
+
+footer {
+	position: fixed;
+  left:0px;
+  bottom:0px;
+  height:10%;
+  width:100%;
+  background:#D3D3D3;
+  text-align: center;
+  color: black;
+  text-align: center;
+}
