@@ -8,24 +8,24 @@ class ControllerProduit{
 protected static $object='produit';
 
 
-    public static function displayerH(){
-      $tab = ModelProduit::getProduitByCategorie('Hommes');
-      return $tab;
-    }
-
-    public static function displayerF(){
-      $tab = ModelProduit::getProduitByCategorie('Femmes');
-      return $tab;
-    }
-
-    public static function displayerE(){
-      $tab = ModelProduit::getProduitByCategorie('Enfants');
-      return $tab;
-    }
+    // public static function displayerH(){
+    //   $tab = ModelProduit::getProduitByCategorie('Hommes');
+    //   return $tab;
+    // }
+    //
+    // public static function displayerF(){
+    //   $tab = ModelProduit::getProduitByCategorie('Femmes');
+    //   return $tab;
+    // }
+    //
+    // public static function displayerE(){
+    //   $tab = ModelProduit::getProduitByCategorie('Enfants');
+    //   return $tab;
+    // }
 
     public static function display1st()
     {
-        $tab = self::displayerH();
+        $tab = ModelProduit::getProduitByCategorie('Hommes');
         $controller ='produit';
         $view = 'hommes';
         $pagetitle = 'Collection Homme';
@@ -34,7 +34,7 @@ protected static $object='produit';
 
     public static function display2nd()
     {
-        $tab = self::displayerF();
+        $tab = ModelProduit::getProduitByCategorie('Femmes');
         $controller ='produit';
         $view = 'femmes';
         $pagetitle = 'Collection Femme';
@@ -44,7 +44,7 @@ protected static $object='produit';
 
     public static function display3rd()
     {
-        $tab = self::displayerE();
+        $tab = ModelProduit::getProduitByCategorie('Enfants');
         $controller ='produit';
         $view = 'enfants';
         $pagetitle = 'Collection Enfant';
@@ -59,7 +59,7 @@ protected static $object='produit';
     }
 
     public static function add(){
-      if ($_SESSION('login') == 1){
+      if (isset($_SESSION['login']) && ($_SESSION['admin'] == 1) ) {
         $controller ='produit';
         $view = 'add';
         $pagetitle = 'Ajoutez un article';
@@ -108,7 +108,7 @@ protected static $object='produit';
 
 
     public static function updateProduit(){
-      if ($_SESSION['login'] == 1){
+      if ($_SESSION['admin'] == 1){
       $controller='produit';
       $view = 'updateProduit';
       $pagetitle = 'Modifier l\'article';
@@ -120,7 +120,7 @@ protected static $object='produit';
     }
 
     public static function updated(){
-      if ($_SESSION['login'] == 1){
+      if ($_SESSION['admin'] == 1){
       $a=$_POST['newprice'];
       $b=$_POST['newsize'];
       $c=$_POST['newdesc'];

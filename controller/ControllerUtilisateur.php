@@ -58,37 +58,39 @@ class ControllerUtilisateur{
 
     public static function created()
         {
+        if (!isset($_SESSION['login'])){
         $date = date('Y-m-d H:i:s');
         $mdp=Security::chiffrer($_POST['password']);
         $id=null;
         $admin=null;
         $p = new ModelUtilisateur($_POST['nom'],$_POST['prenom'],$_POST['email'],$date,$mdp,$_POST['adresse'],$_POST['nomVille'],$_POST['pays'],$admin);
-        if ($p->isValid()){
-        $nonce =Security::generateRandomHex();
-        $p->setNonce($nonce);
+          if ($p->isValid()){
+          $nonce =Security::generateRandomHex();
+          $p->setNonce($nonce);
 
-        $destinataire = $p->get('email');
-        if ($_POST['password']==$_POST['password_valid'] && !$p->isUse()){ //on recupere les infos du formulaires
+          $destinataire = $p->get('email');
+            if ($_POST['password']==$_POST['password_valid'] && !$p->isUse()){ //on recupere les infos du formulaires
 
-            $p->save(); // on les sauve dans la base de donnees
-            //$_SESSION['login']=$_POST['email'];
-            //$_SESSION['admin']=$p->get('admin');
+                $p->save(); // on les sauve dans la base de donnees
+                //$_SESSION['login']=$_POST['email'];
+                //$_SESSION['admin']=$p->get('admin');
 
-              $sujet = "Activer votre compte" ;
-              $entete = "From: inscription@marka.com" ;
+                  $sujet = "Activer votre compte" ;
+                  $entete = "From: inscription@marka.com" ;
 
-            $mail = '<p>Bienvenue sur Marka,
+                $mail = '<p>Bienvenue sur Marka,
 
-          Pour activer votre compte, veuillez cliquer sur le lien ci dessous
+              Pour activer votre compte, veuillez cliquer sur le lien ci dessous
 
 
-          http://webinfo.iutmontp.univ-montp2.fr/~senhajis/Marka/index.php?controller=utilisateur&action=validate&email=' . $p->get('email') . '&nonce=' . $nonce . '</p>';
+              http://webinfo.iutmontp.univ-montp2.fr/~senhajis/Marka/index.php?controller=utilisateur&action=validate&email=' . $p->get('email') . '&nonce=' . $nonce . '</p>';
 
-          mail($destinataire, $sujet, $mail, $entete);
-            //redirige vers la vue monprofil
-          self::connect();
+              mail($destinataire, $sujet, $mail, $entete);
+                //redirige vers la vue monprofil
+              self::connect();
+            }
+          }
         }
-      }
         else {
             self::error();
         }
@@ -98,40 +100,47 @@ class ControllerUtilisateur{
 
 
     public static function connect(){
-		$view = 'connect';
-		$pagetitle = 'Se connecter';
-		require File::build_path(array('view','view.php'));
+    if (!isset($_SESSION['login'])){
+  		$view = 'connect';
+  		$pagetitle = 'Se connecter';
+  		require File::build_path(array('view','view.php'));
+    }
+    else {
+      self::error();
+    }
 	}
 
   public static function connected(){
-    if (isset($_POST['email'])&&isset($_POST['password'])){ // Si mail et password exst
-      $login = $_POST['email'];
-      $mdp = Security::chiffrer($_POST['password']);
-      $user = ModelUtilisateur::selectByEmail($login);
-      if (!empty($user)){ // Si l'utilisateur existe
-        if(is_null($user->get('nonce')) || $user->get('nonce') == ""){ // Si nonce est null
-          if ($user->get('password') == $mdp){ // Si le mot de pass correspond
-            $_SESSION['login'] = $login;
-            $_SESSION['admin'] = $user->get('admin');
-            self::profile(); // Affichage profile
+    if (!isset($_SESSION['login'])){
+      if (isset($_POST['email'])&&isset($_POST['password'])){ // Si mail et password exst
+        $login = $_POST['email'];
+        $mdp = Security::chiffrer($_POST['password']);
+        $user = ModelUtilisateur::selectByEmail($login);
+        if (!empty($user)){ // Si l'utilisateur existe
+          if(is_null($user->get('nonce')) || $user->get('nonce') == ""){ // Si nonce est null
+            if ($user->get('password') == $mdp){ // Si le mot de pass correspond
+              $_SESSION['login'] = $login;
+              $_SESSION['admin'] = $user->get('admin');
+              self::profile(); // Affichage profile
+            }
+          }
+          else{
+            $view = 'connect';
+            $pagetitle = 'Merci de comfirmer votre adresse mail';
+            require File::build_path(array('view','view.php'));
           }
         }
-        else{
+        else { // Si utilisateur exst pas
           $view = 'connect';
-          $pagetitle = 'Merci de comfirmer votre adresse mail';
+          $pagetitle = 'Erreur de connexion mdp';
           require File::build_path(array('view','view.php'));
         }
       }
-      else { // Si utilisateur exst pas
+      else { // Si il n'y a pas de mail et de mot de passe
         $view = 'connect';
-        $pagetitle = 'Erreur de connexion mdp';
+        $pagetitle = 'Erreur de connexion mail';
         require File::build_path(array('view','view.php'));
-      }
-    }
-    else { // Si il n'y a pas de mail et de mot de passe
-      $view = 'connect';
-      $pagetitle = 'Erreur de connexion mail';
-      require File::build_path(array('view','view.php'));
+        }
       }
     }
 
@@ -140,14 +149,17 @@ class ControllerUtilisateur{
     {
         if (isset($_SESSION['login'])) {
             $infos = ModelUtilisateur::selectByEmail($_SESSION['login']);
+            $controller ='utilisateur';
+            $view = 'voirmonprofil';
+            $pagetitle = 'Mon Profil';
+            require File::build_path(array('view','view.php'));
         }
-        $controller ='utilisateur';
-        $view = 'voirmonprofil';
-        $pagetitle = 'Mon Profil';
-        require File::build_path(array('view','view.php'));
+        else {
+          self::error();
+        }
     }
 
-  
+
 
     public static function validate(){
 		$user=ModelUtilisateur::select($_GET['email']);
@@ -173,29 +185,47 @@ class ControllerUtilisateur{
       public static function deconnect()
 		{
 			session_unset();
-
 			ControllerAccueil::homepage();
 		}
 
     public static function updateAdrL(){
-      $view = 'updateAdrL';
-      $pagetitle = 'Modifier l\'adresse de livraisaon';
-      require File::build_path(array('view','view.php'));
+      if (isset($_SESSION['login'])) {
+        $view = 'updateAdrL';
+        $pagetitle = 'Modifier l\'adresse de livraisaon';
+        require File::build_path(array('view','view.php'));
+      }
+      else {
+        self::error();
+      }
     }
 
     public static function updateAdrM(){
+      if (isset($_SESSION['login'])) {
+
       $view = 'updateAdrM';
       $pagetitle = 'Modifier l\'adresse mail';
       require File::build_path(array('view','view.php'));
     }
+    else {
+      self::error();
+    }
+    }
 
     public static function updatePW(){
+      if (isset($_SESSION['login'])) {
+
       $view = 'updatePW';
       $pagetitle = 'Modifier le mot de passe';
       require File::build_path(array('view','view.php'));
     }
+    else {
+      self::error();
+    }
+    }
 
     public static function updatedAdrL(){
+      if (isset($_SESSION['login'])) {
+
       $a=$_POST['newadrL'];
       $b=$_POST['newVille'];
       $primary='email';
@@ -204,8 +234,14 @@ class ControllerUtilisateur{
       ModelUtilisateur::update($primary, $primary_value, $table_name, array("adresse"=>$a, "nomVille"=>$b));
       self::profile();
     }
+    else {
+      self::error();
+    }
+    }
 
     public static function updatedAdrM(){
+      if (isset($_SESSION['login'])) {
+
       $a=$_POST['newadrM'];
       $primary='email';
       $table_name='utilisateur';
@@ -214,8 +250,14 @@ class ControllerUtilisateur{
       $_SESSION['login']=$a;
       self::profile();
     }
+    else {
+      self::error();
+    }
+    }
 
     public static function updatedPW(){
+      if (isset($_SESSION['login'])) {
+
       $a=$_POST['oldpw'];
       $achiffre=Security::chiffrer($a);
       $b=$_POST['newpw'];
@@ -248,5 +290,10 @@ class ControllerUtilisateur{
          require File::build_path(array('view','view.php'));
       }
     }
+    else {
+      self::error();
+    }
+  }
+
 }
 ?>
