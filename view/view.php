@@ -7,6 +7,8 @@
     </head>
     <body>
         <header>
+
+            <h1 class="marka"> MARKA </h1>
             <div class="burger">
                 <img src="images/burger.png" alt="burger" width="50px" height="50px">
                     <ul id="menu2" class="men">
@@ -71,21 +73,23 @@
                 </div>
             </nav>
         </header>
+
+        <main>
 <?php
 // Si $controleur='voiture' et $view='list',
 // alors $filepath="/chemin_du_site/view/voiture/list.php"
     $filepath = File::build_path(array("view", static::$object, "$view.php"));
     require $filepath;
 ?>
-    </body>
+        </main>
         <footer>
             <div class="footdiv">
                 <p> Suivez nous sur les réseaux sociaux ! </p>
                     <a href="https://www.facebook.com/" target="_blank"><img id="logoFB" src="images/facebook.png" alt="logo facebook"> </a>
                     <a href="https://twitter.com/" target="_blank"><img id="logoTT" src="images/twitter.png" alt="logo twitter"> </a>
-                    <a href="https://plus.google.com/" target="_blank"><img id="logoGP" src="images/googleplus.png" alt="logo google plus"> </a>
-                </div>
+                    <a href="https://plus.google.com/" target="_blank"><img id="logoGP" src="images/googleplus.png" alt="logo google plus"> </a>            </div>
         </footer>
+    </body>
 </html>
 
 

@@ -44,11 +44,16 @@ class ControllerUtilisateur{
 
     public static function create()
     {
-    $controller ='utilisateur';
-    $view = 'create';
-    $pagetitle = 'Inscription';
-    require File::build_path(array('view','view.php'));
-        //redirige vers la vue create.php (formulaire)
+      if (!isset($_SESSION['login'])){
+        $controller ='utilisateur';
+        $view = 'create';
+        $pagetitle = 'Inscription';
+        require File::build_path(array('view','view.php'));
+      }
+      else {
+        self::error();
+      }
+            //redirige vers la vue create.php (formulaire)
     }
 
     public static function created()
@@ -57,11 +62,10 @@ class ControllerUtilisateur{
         $mdp=Security::chiffrer($_POST['password']);
         $id=null;
         $admin=null;
-        var_dump($_POST['nom']);
         $p = new ModelUtilisateur($_POST['nom'],$_POST['prenom'],$_POST['email'],$date,$mdp,$_POST['adresse'],$_POST['nomVille'],$_POST['pays'],$admin);
+        if ($p->isValid()){
         $nonce =Security::generateRandomHex();
         $p->setNonce($nonce);
-        var_dump($p);
 
         $destinataire = $p->get('email');
         if ($_POST['password']==$_POST['password_valid'] && !$p->isUse()){ //on recupere les infos du formulaires
@@ -84,6 +88,7 @@ class ControllerUtilisateur{
             //redirige vers la vue monprofil
           self::connect();
         }
+      }
         else {
             self::error();
         }
@@ -142,9 +147,7 @@ class ControllerUtilisateur{
         require File::build_path(array('view','view.php'));
     }
 
-    public static function uesrExist($email){
-
-    }
+  
 
     public static function validate(){
 		$user=ModelUtilisateur::select($_GET['email']);
