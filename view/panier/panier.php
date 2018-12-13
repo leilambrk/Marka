@@ -5,8 +5,9 @@
 <?php
 
 if ($tab != false){
-foreach ($tab as $prod) {
-  echo '<div><img class="vet" src= "'. $prod->get('photo') . '" alt="' . $prod->get('idProduit'). '"/><h2>'. $prod->get('nomProduit') . '</h2><h5>' . $prod->get('prix') . '€ </h5> Taille' . $prod->get('taille') . '<p>' . $prod->get('description') . '</p></div>';
+foreach ($tab as $prod => $values) {
+  echo '<h3> '. $values[1] .' x </h3>';
+  echo '<div><img class="vet" src= "'. htmlspecialchars($values[0]->get('photo')) . '" alt="' . htmlspecialchars($values[0]->get('idProduit')). '"/><h2>'. htmlspecialchars($values[0]->get('nomProduit')) . '</h2><h5>' . htmlspecialchars($values[0]->get('prix')) . '€ </h5> Taille' . htmlspecialchars($values[0]->get('taille')) . '<p>' . htmlspecialchars($values[0]->get('description')) . '</p></div>';
 }
 if ($tab != false){
 

@@ -101,11 +101,11 @@
 		color:#223A49;
 		font-family: 'Glitch', sans-serif;
 	}
-	
+
 	#menu ul a{
 		padding:8px 0px;
 	}
-	
+
 	#menu li:hover li a{
 		color:white;
 		text-transform:inherit;
@@ -122,23 +122,23 @@
 	}
 
 	@media all and (max-width: 650px) {
-		
+
 		.burger{
 			display:block;
 		}
-			
+
 		.burger{
 			display:flex;
 		}
-			
+
 		nav ul li {
 			display:inherit;
 		}
-		
+
 		nav{
 			display:none;
 		}
-		
+
 		#menu2{
 			position:absolute;
 			left:0px;
@@ -153,22 +153,22 @@
 			border-color:#223A49;
 			background-color:white;
 		}
-			
+
 		li #rej {
 			text-align:center;
 			display: none;
-			
+
 		}
-			
+
 		li:hover #rej {
 			text-align:center;
 			display: block;
 		}
-				
+
 		.burger:hover #menu2{
 			display:block;
 		}
-			
+
 	}
 
 	img .burger:hover {
@@ -198,7 +198,7 @@
 
 /* css site */
 
-html { 
+html {
 	background-color: white;
 	}
 
@@ -228,7 +228,7 @@ h1,h2{
 	display: inline;
     margin-left: 4%;
     margin-right: 1% ;
- 	border: 2px #aaa solid; 
+ 	border: 2px #aaa solid;
   	text-align: center;
   	margin-bottom: 20px;
 }
@@ -315,7 +315,7 @@ a:visited{
   animation-iteration-count:infinite;
   animation-name: anim_slide;
 }
-@-webkit-keyframes anim_slide 
+@-webkit-keyframes anim_slide
 {
   0% {left:0px;}
   22% {left:0px;}
@@ -324,7 +324,7 @@ a:visited{
   66% {left:-1220px;}
   90% {left:-1220px;}
 }
-@-moz-keyframes anim_slide 
+@-moz-keyframes anim_slide
 {
   0% {left:0px;}
   22% {left:0px;}
@@ -333,7 +333,7 @@ a:visited{
   66% {left:-1220px;}
   90% {left:-1220px;}
 }
-@-ms-keyframes anim_slide 
+@-ms-keyframes anim_slide
 {
   0% {left:0px;}
   22% {left:0px;}
@@ -343,7 +343,7 @@ a:visited{
   90% {left:-1220px;}
 }
 
-@keyframes anim_slide 
+@keyframes anim_slide
 {
   0% {left:0px;}
   22% {left:0px;}

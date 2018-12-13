@@ -59,10 +59,15 @@ protected static $object='produit';
     }
 
     public static function add(){
-      $controller ='produit';
-      $view = 'add';
-      $pagetitle = 'Ajoutez un article';
-      require File::build_path(array('view','view.php'));
+      if ($_SESSION('login') == 1){
+        $controller ='produit';
+        $view = 'add';
+        $pagetitle = 'Ajoutez un article';
+        require File::build_path(array('view','view.php'));
+      }
+      else {
+        self::error();
+      }
     }
 
     public static function adder(){
@@ -103,13 +108,19 @@ protected static $object='produit';
 
 
     public static function updateProduit(){
+      if ($_SESSION['login'] == 1){
       $controller='produit';
       $view = 'updateProduit';
       $pagetitle = 'Modifier l\'article';
       require File::build_path(array('view','view.php'));
     }
+    else {
+      self::error();
+    }
+    }
 
     public static function updated(){
+      if ($_SESSION['login'] == 1){
       $a=$_POST['newprice'];
       $b=$_POST['newsize'];
       $c=$_POST['newdesc'];
@@ -120,6 +131,10 @@ protected static $object='produit';
       Model::update($primary, $primary_value, $table_name, array("prix"=>$a, "taille"=>$b, "description"=>$c));
       //ModelUtilisateur::update($primary, $primary_value, $table_name, array("adresse"=>$a, "nomVille"=>$b));
       ControllerUtilisateur::profile();
+    }
+    else {
+      self::error();
+    }
     }
 
 

@@ -25,8 +25,10 @@ require_once File::build_path(array('model','ModelProduit.php'));
     }
 
     public static function getAllPanier($tab){
+        $indice=0;
         $tab_prod = array();
-        foreach ($tab as $id){
+        $tab = array_count_values($tab);
+        foreach ($tab as $id => $value){
           $sql = "SELECT * from produit WHERE idProduit=:id";
           $req_prep = Model::$pdo->prepare($sql);
           $values = array(
@@ -35,7 +37,12 @@ require_once File::build_path(array('model','ModelProduit.php'));
           $req_prep->execute($values);
           $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelProduit');
           $tab_p = $req_prep->fetchAll();
-          array_push ($tab_prod, $tab_p[0]);
+          if (!empty($tab_p)){
+            $tab_prod[$indice][0]=$tab_p[0];
+            $tab_prod[$indice][1]=$value;
+
+          }
+          $indice=$indice+1;
         }
         return $tab_prod;
     }
