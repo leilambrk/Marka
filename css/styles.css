@@ -260,13 +260,16 @@ a:visited{
 
 
 .vet{
-	width: 400px;
+	width: 350px;
 	height: 500px;
 	margin-top: 50px;
 	margin-left: auto;
 	margin-right: auto;
 	display: block;
-	margin-bottom: 100px;
+	margin-bottom: 20px;
+	border-color: grey;
+	border-radius: 10px;
+
 }
 
 .h2{
@@ -375,4 +378,55 @@ footer {
   text-align: center;
   color: black;
   text-align: center;
+}
+
+
+.addpanier{
+     font-size: 1.6em;
+     width: 200px;
+     height: 50px;
+     border-radius: 5px;
+     text-align: center;
+     color: #000;
+     background: #A9A9A9;
+
+
+
+ }
+
+ .info{
+ 	text-align: center;
+ }
+
+ 
+ /** {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}*/
+
+.item {
+  /*position: relative;*/
+  
+  /*border: 1px solid #333;*/
+  /*margin: 2%;*/
+  overflow: hidden;
+  width: 540px;
+  text-align: center;
+  display: inline;
+}
+.item img {
+ /* max-width: 100%;*/
+  
+  -moz-transition: all 0.5s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  text-align: center;
+}
+.item:hover img {
+  -moz-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }

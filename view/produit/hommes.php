@@ -9,8 +9,8 @@ if (!$tab){
 }else{
 	foreach ($tab as $prod){
 		$idp=$prod->get('idProduit');
-		echo '<div><img class="vet" src= "'. $prod->get('photo') . '" alt="' . $prod->get('idProduit'). '"/><h2>'. $prod->get('nomProduit') . '</h2><h5>' . $prod->get('prix') . '€ </h5> Taille' . $prod->get('taille') . '<p>' . $prod->get('description') . '</p></div>';
-		echo '<a href=?action=ajouterPanier&controller=panier&idProduit=' . $idp . '> Ajouter au panier </a>';
+		echo '<div><div class="item" /><img class="vet" src= "'. $prod->get('photo') . '" alt="' . $prod->get('idProduit'). '"/> </div> <div class="info"> <h2>'. $prod->get('nomProduit') . '</h2><h3>Prix: ' . $prod->get('prix') . '€ </h3> Taille' . $prod->get('taille') . '<p class="descr">Description: ' . $prod->get('description') . '</p></div></div>';
+		echo '<div class="info"><a class="addpanier" href=?action=ajouterPanier&controller=panier&idProduit=' . $idp . '> Ajouter au panier </a></div>';
 
 		if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
 			//$idp=$prod->get('idProduit');
