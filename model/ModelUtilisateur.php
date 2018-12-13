@@ -5,7 +5,6 @@ require_once File::build_path(array("model","Model.php"));
 class ModelUtilisateur extends Model {
 
 	protected static $object="utilisateur";
-    protected static $primary="email";
     private $idUser;
     private $nom;
     private $prenom;
@@ -16,7 +15,8 @@ class ModelUtilisateur extends Model {
     private $nomVille;
     private $pays;
     private $admin;
-    private $nonce;
+		private $nonce;
+
 
 
 		public function __construct($nom = null, $prenom = null, $email = null, $dateInscription = null, $password=null,$adresse = null, $nomVille = null, $pays = null, $admin = 0)
@@ -34,27 +34,29 @@ class ModelUtilisateur extends Model {
 		        $this->admin=0;
 		        }
 		    }
-		public function save()
-		{
-				$sql = "INSERT INTO utilisateur (nom, prenom, email, password, dateInscription, adresse, nomVille, pays, nonce) VALUES (:nom, :prenom, :email, :pw, :da, :addre, :nomVille, :pays, :nonce)";
-			// Préparation de la requête
-				$req_prep = Model::$pdo->prepare($sql);
+				
+				public function save()
+				{
+						$sql = "INSERT INTO utilisateur (nom, prenom, email, password, dateInscription, adresse, nomVille, pays, nonce) VALUES (:nom, :prenom, :email, :pw, :da, :addre, :nomVille, :pays, :nonce)";
+					// Préparation de la requête
+						$req_prep = Model::$pdo->prepare($sql);
 
 
-				$values = array(
-						"nom" => $this->nom,
-						"prenom" => $this->prenom,
-						"email" => $this->email,
-						"pw" => $this->password,
-						"da" => $this->dateInscription,
-						"addre" => $this->adresse,
-						"nomVille" => $this->nomVille,
-						"pays" => $this->pays,
-                        "nonce" => $this->nonce,
-				);
-				// On donne les valeurs et on exécute la requête
-				$req_prep->execute($values);
-		}
+						$values = array(
+								"nom" => $this->nom,
+								"prenom" => $this->prenom,
+								"email" => $this->email,
+								"pw" => $this->password,
+								"da" => $this->dateInscription,
+								"addre" => $this->adresse,
+								"nomVille" => $this->nomVille,
+								"pays" => $this->pays,
+                "nonce" => $this->nonce,
+						);
+						var_dump($values);
+						// On donne les valeurs et on exécute la requête
+						$req_prep->execute($values);
+				}
 
 
 
@@ -68,11 +70,15 @@ class ModelUtilisateur extends Model {
         $this->idUser = $id;
     }
 
-    public function setNom($nom){
-        if (strlen($nom) < 30 && strlen($nom) > 0){
-            $this->nom = $nom;
-        }
+		public function setNonce($nonce){
+        $this->nonce=$nonce;
     }
+
+		public function setNom($nom){
+		if (strlen($nom) < 30 && strlen($nom) > 0){
+				$this->nom = $nom;
+		}
+}
 
     public function setPrenom($prenom){
         if (strlen($prenom) < 30 && strlen($prenom) > 0) {
@@ -112,21 +118,6 @@ class ModelUtilisateur extends Model {
         $this->password = $password;
     }
 
-    public function getNonce(){
-        return $this->nonce;
-    }
-
-    public function getEmail(){
-        return $this->email;
-    }
-
-    public function getIdUser(){
-        return $this->idUser;
-    }
-
-    public function setNonce($nonce){
-        $this->nonce=$nonce;
-    }
     // public static function getPwByMail($email){
     // //error_reporting(E_ALL & ~E_NOTICE);
     //    $sql = "SELECT password FROM Utilisateur WHERE email=:email";
@@ -154,7 +145,7 @@ class ModelUtilisateur extends Model {
 
     public static function selectByEmail($email){
 	   error_reporting(E_ALL & ~E_NOTICE);
-	   $sql = "SELECT * FROM utilisateur U WHERE email=:email";
+	   $sql = "SELECT * FROM Utilisateur U WHERE email=:email";
 
 		        // Préparation de la requête
         $req_prep = Model::$pdo->prepare($sql);
@@ -191,7 +182,7 @@ class ModelUtilisateur extends Model {
     public function checkPW($email, $mdpchiffre)
     {
 
-        $sql = "SELECT * FROM utilisateur WHERE email=:email";
+        $sql = "SELECT * FROM Utilisateur WHERE email=:email";
 
         // Préparation de la requête
         $req_prep = Model::$pdo->prepare($sql);
@@ -209,8 +200,6 @@ class ModelUtilisateur extends Model {
         return ($tab[0]->email==$email) && ($tab[0]->password==$mdpchiffre);
 
     }
-
-
 
 //------------------------------------------------------------------------
 

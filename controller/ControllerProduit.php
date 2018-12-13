@@ -1,39 +1,54 @@
-<?php 
+<?php
 //BON
+require_once File::build_path(array('controller','ControllerUtilisateur.php'));
 require_once File::build_path(array('model','ModelProduit.php'));
 class ControllerProduit{
 
 
 protected static $object='produit';
 
-    public static function display()
-    {
-        $controller ='produit';
-        $view = 'produits';
-        $pagetitle = 'Nos produits';
-        $tab_p = ModelProduit::getAllProduit();
-        require File::build_path(array('view','view.php')); 
+
+    public static function displayerH(){
+      $tab = ModelProduit::getProduitByCategorie('Hommes');
+      return $tab;
     }
+
+    public static function displayerF(){
+      $tab = ModelProduit::getProduitByCategorie('Femmes');
+      return $tab;
+    }
+
+    public static function displayerE(){
+      $tab = ModelProduit::getProduitByCategorie('Enfants');
+      return $tab;
+    }
+
     public static function display1st()
     {
+        $tab = self::displayerH();
         $controller ='produit';
         $view = 'hommes';
         $pagetitle = 'Collection Homme';
-        require File::build_path(array('view','view.php')); 
+        require File::build_path(array('view','view.php'));
     }
+
     public static function display2nd()
     {
+        $tab = self::displayerF();
         $controller ='produit';
         $view = 'femmes';
         $pagetitle = 'Collection Femme';
-        require File::build_path(array('view','view.php')); 
+        require File::build_path(array('view','view.php'));
     }
+
+
     public static function display3rd()
     {
+        $tab = self::displayerE();
         $controller ='produit';
         $view = 'enfants';
         $pagetitle = 'Collection Enfant';
-        require File::build_path(array('view','view.php')); 
+        require File::build_path(array('view','view.php'));
     }
 
     public static function error(){
@@ -106,5 +121,8 @@ protected static $object='produit';
       //ModelUtilisateur::update($primary, $primary_value, $table_name, array("adresse"=>$a, "nomVille"=>$b));
       ControllerUtilisateur::profile();
     }
-} 
+
+
+
+}
 ?>

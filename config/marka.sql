@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 10 déc. 2018 à 00:32
+-- Généré le :  jeu. 13 déc. 2018 à 14:29
 -- Version du serveur :  5.7.23
 -- Version de PHP :  7.2.10
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `achat` (
   `idAchat` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`idAchat`),
   KEY `id` (`idCommande`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `commande` (
   `date` date NOT NULL,
   `client` varchar(50) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`idCommande`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `commande`
@@ -96,7 +96,9 @@ INSERT INTO `commande` (`idCommande`, `date`, `client`) VALUES
 (13, '2018-12-09', 'mabrkl@icloud.com'),
 (14, '2018-12-09', 'mabrkl@icloud.com'),
 (15, '2018-12-09', 'mabrkl@icloud.com'),
-(16, '2018-12-10', 'mabrkl@icloud.com');
+(16, '2018-12-10', 'mabrkl@icloud.com'),
+(17, '2018-12-12', 'mabrkl@icloud.com'),
+(18, '2018-12-13', 'mabrkl@icloud.com');
 
 -- --------------------------------------------------------
 
@@ -149,22 +151,24 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `nomVille` varchar(30) NOT NULL,
   `pays` varchar(30) NOT NULL,
   `admin` int(11) NOT NULL DEFAULT '0',
+  `nonce` varchar(32) NOT NULL,
   PRIMARY KEY (`email`),
   UNIQUE KEY `id` (`idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `utilisateur`
 --
 
-INSERT INTO `utilisateur` (`idUser`, `nom`, `prenom`, `email`, `password`, `dateInscription`, `adresse`, `nomVille`, `pays`, `admin`) VALUES
-(4, 'coste', 'thibault', 'coste.thibault@hduish.com', '$2y$10$2gAkWYpTgqheTgcfdBFyM.YIJpLx3EGQ.qx8rSsn7au/qGKgBo3Pu', '2018-11-30', '45 sdfilj', 'Valence', 'France', 0),
-(41, 'Hamza', 'Bouzid', 'hamzatest@test.te', 'df6a45d9e6018fdbbde29a4dbcf4a00f3e38783a9d75f8ddda524ede8e0904b5', '2018-12-08', 'Test', 'Test', 'Test', 0),
-(1, 'Bouzid', 'Hamza', 'hamzayou3a@gmail.com', '$2y$10$DfjsTLEtWPWK8VjH/d6s1.Hl2.Rkvn4Kxc.ZxRffgt4jwIe3i0.5e', '2018-11-30', '9 rue du test', 'test', 'Testage', 0),
-(28, 'mabrkl@icloud.com', 'mabrkl@icloud.com', 'mabrkl@icloud.com', '839bb236c39e7d1c1bfc79c0df0a2457698ea9192b9f72161336b96540f80813', '2018-12-07', 'mabrkl@icloud.com', 'mabrkl@icloud.com', 'mabrkl@icloud.com', 1),
-(2, 'mabrouk', 'leila', 'mabroukl@icloud.com', '$2y$10$BQHmeOqUdqOahVnMmtTXSObZYxt6NyAo6Fd7c0mXOdBLGXPyCr1vq', '2018-11-30', '71 chemin des plantiers', 'Cavaillon', 'France', 0),
-(29, 'random@rand.non', 'random@rand.non', 'random@rand.non', 'ff4c4185ea00f22a4a2754b0b50e0eece27525d79efee936886343ee7dc6ee9e', '2018-12-07', 'random@rand.non', 'random@rand.non', 'random@rand.non', 0),
-(3, 'senhaji', 'salma', 'salmoush34@gmail.com', '$2y$10$K5z9s/uVB.PKxvUzDHi.6eLpi1BZVVYrAjY52vVTe0pSyrSTCwMaO', '2018-11-30', '4 rue de la rose', 'Poitiers', 'France', 0);
+INSERT INTO `utilisateur` (`idUser`, `nom`, `prenom`, `email`, `password`, `dateInscription`, `adresse`, `nomVille`, `pays`, `admin`, `nonce`) VALUES
+(42, 'test', 'test', 'bob@yopmail.com', '6ae9bba8e20d3e2300af279787b60fab70ffee8ab31c3a4de194406b4d6331a8', '2018-12-13', 'bob@yopmail.com', 'bob@yopmail.com', 'bob@yopmail.com', 0, 'e19f376f083d930ba73df6ddfe9d9100'),
+(4, 'coste', 'thibault', 'coste.thibault@hduish.com', '$2y$10$2gAkWYpTgqheTgcfdBFyM.YIJpLx3EGQ.qx8rSsn7au/qGKgBo3Pu', '2018-11-30', '45 sdfilj', 'Valence', 'France', 0, ''),
+(41, 'Hamza', 'Bouzid', 'hamzatest@test.te', 'df6a45d9e6018fdbbde29a4dbcf4a00f3e38783a9d75f8ddda524ede8e0904b5', '2018-12-08', 'Test', 'Test', 'Test', 0, ''),
+(1, 'Bouzid', 'Hamza', 'hamzayou3a@gmail.com', '$2y$10$DfjsTLEtWPWK8VjH/d6s1.Hl2.Rkvn4Kxc.ZxRffgt4jwIe3i0.5e', '2018-11-30', '9 rue du test', 'test', 'Testage', 0, ''),
+(28, 'mabrkl@icloud.com', 'mabrkl@icloud.com', 'mabrkl@icloud.com', '839bb236c39e7d1c1bfc79c0df0a2457698ea9192b9f72161336b96540f80813', '2018-12-07', 'mabrkl@icloud.com', 'mabrkl@icloud.com', 'mabrkl@icloud.com', 1, ''),
+(2, 'mabrouk', 'leila', 'mabroukl@icloud.com', '$2y$10$BQHmeOqUdqOahVnMmtTXSObZYxt6NyAo6Fd7c0mXOdBLGXPyCr1vq', '2018-11-30', '71 chemin des plantiers', 'Cavaillon', 'France', 0, ''),
+(29, 'random@rand.non', 'random@rand.non', 'random@rand.non', 'ff4c4185ea00f22a4a2754b0b50e0eece27525d79efee936886343ee7dc6ee9e', '2018-12-07', 'random@rand.non', 'random@rand.non', 'random@rand.non', 0, ''),
+(3, 'senhaji', 'salma', 'salmoush34@gmail.com', '$2y$10$K5z9s/uVB.PKxvUzDHi.6eLpi1BZVVYrAjY52vVTe0pSyrSTCwMaO', '2018-11-30', '4 rue de la rose', 'Poitiers', 'France', 0, '');
 
 --
 -- Contraintes pour les tables déchargées

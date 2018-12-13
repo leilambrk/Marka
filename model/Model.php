@@ -30,7 +30,6 @@ class Model{
         }
 
 
-        
         public static function update($primary_key, $primary_value, $table_name, $data)
         {
             try
@@ -40,6 +39,7 @@ class Model{
                 foreach ($data as $valeur => $key)
                 {
                     $sql = $sql . $valeur . " = '" . $key . "', ";
+
                 }
                 $sql = rtrim($sql, ', ') . " WHERE " . $primary_key . " = '" . $primary_value ."'";
                 //var_dump($sql);
@@ -57,7 +57,6 @@ class Model{
                 die();
             }
         }
-
 
 // public function save() {
 //         $table_name = static::$object;
@@ -85,7 +84,7 @@ class Model{
 //         }
 //     }
 
-    public static function selectAll() {
+static public function selectAll() {
 
         $table_name = static::$object;
         $class_name = 'Model' . ucfirst($table_name);
@@ -103,13 +102,13 @@ class Model{
         return $tab;
     }
 
-    public static function select($primary_value)
+    static public function select($primary_value)
     {
         $table_name = static::$object;
         $class_name = 'Model' . ucfirst($table_name);
         $primary_key = static::$primary;
 
-        $sql = "SELECT * from " . $table_name .  " WHERE " . $primary_key . " = '" . $primary_value. "'";
+        $sql = "SELECT * from " . ucfirst($table_name) .  " WHERE " . $primary_key . " = '" . $primary_value. "'";
         //var_dump($sql);
         $req_prep = Model::$pdo->prepare($sql);
 
@@ -126,7 +125,7 @@ class Model{
             return $tab[0];
     }
 
-     public static function delete($primary_value) {
+     static public function delete($primary_value) {
 
         $table_name = static::$object;
         $class_name = 'Model' . ucfirst($table_name);
@@ -138,7 +137,7 @@ class Model{
         $req_prep->execute();
     }
 
-    public static function countAll()
+    static public function countAll()
     {
         $table_name = static::$object;
         $class_name = 'Model' . ucfirst($table_name);
