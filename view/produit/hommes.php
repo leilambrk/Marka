@@ -9,8 +9,10 @@ if (!$tab){
 }else{
 	foreach ($tab as $prod){
 		$idp=$prod->get('idProduit');
-		echo '<div><img class="vet" src= "'. htmlspecialchars($prod->get('photo')) . '" alt="' . htmlspecialchars($prod->get('idProduit')). '"/><h2>'. htmlspecialchars($prod->get('nomProduit')) . '</h2><h5>' . htmlspecialchars($prod->get('prix')) . '€ </h5><h5> Taille :' . htmlspecialchars($prod->get('taille')) . '</h5><p>' . htmlspecialchars($prod->get('description')) . '</p></div>';
-		echo '<a href=?action=ajouterPanier&controller=panier&idProduit=' . rawurlencode($idp) . '> Ajouter au panier </a>';
+
+		echo '<div><div class="item" /><img class="vet" src= "'. htmlspecialchars($prod->get('photo')) . '" alt="' . htmlspecialchars($prod->get('idProduit')). '"/> </div> <div class="info"> <h2>'. htmlspecialchars($prod->get('nomProduit')) . '</h2><h3>Prix: ' . htmlspecialchars($prod->get('prix')) . '€  </h3> Taille :' . htmlspecialchars($prod->get('taille')) . '<p class="descr">Description: ' . htmlspecialchars($prod->get('description')) . '</p></div></div>';
+		echo '<div class="info"><a class="addpanier" href=?action=ajouterPanier&controller=panier&idProduit=' . rawurlencode($idp) . '> Ajouter au panier </a></div>';
+
 
 		if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
 			//$idp=$prod->get('idProduit');

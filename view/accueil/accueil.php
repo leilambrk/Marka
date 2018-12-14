@@ -5,7 +5,10 @@
 
 
 <h2></h2>
-<h2 class="slog"> Marka, laissez vous guider par la mode ! </h2>
+
+<h1 class="marka"> MARKA </h1>
+<h2 class="slog">Laissez vous guider par la mode ! </h2>
+
 
 <a href="?action=display1st&controller=produit"><img src="images/homme.jpg" alt="homme" class="cat"></a>
 <a href="?action=display2nd&controller=produit"><img src="images/femme.jpg" alt="femme"class="cat"></a>

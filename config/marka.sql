@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 13 déc. 2018 à 14:29
+-- Généré le :  ven. 14 déc. 2018 à 08:24
 -- Version du serveur :  5.7.23
 -- Version de PHP :  7.2.10
 
@@ -39,7 +39,25 @@ CREATE TABLE IF NOT EXISTS `achat` (
   `idAchat` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`idAchat`),
   KEY `id` (`idCommande`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Déchargement des données de la table `achat`
+--
+
+INSERT INTO `achat` (`idCommande`, `nomProduit`, `description`, `prix`, `photo`, `taille`, `idAchat`) VALUES
+(20, 'Chemise bleu ciel', 'Chemise de très bonne qualité', 69, 'http://image.noelshack.com/fichiers/2018/49/5/1544210183-chemise.jpg', 'M', 4),
+(20, 'Veste en velours', ' Veste en velours côtelé avec col imitation peau de mouton - Rouge baie', 60, 'https://images.asos-media.com/products/asos-design-veste-en-velours-cotele-avec-col-imitation-peau-de-mouton-rouge-baie/9519519-1-berry?$XXL$&wid=513&fit=constrain', '36', 5),
+(20, 'Veste en velours', ' Veste en velours côtelé avec col imitation peau de mouton - Rouge baie', 60, 'https://images.asos-media.com/products/asos-design-veste-en-velours-cotele-avec-col-imitation-peau-de-mouton-rouge-baie/9519519-1-berry?$XXL$&wid=513&fit=constrain', '36', 6),
+(21, 'Chemise bleu ciel', 'Chemise de très bonne qualité', 69, 'http://image.noelshack.com/fichiers/2018/49/5/1544210183-chemise.jpg', 'M', 7),
+(21, 'parka', 'Parka avec badges interchangeables', 30, 'https://cdn.laredoute.com/products/641by641/4/6/e/46e62e6b2d97164bfbe2d2f100dad76e.jpg', '10', 8),
+(21, 'parka', 'Parka avec badges interchangeables', 30, 'https://cdn.laredoute.com/products/641by641/4/6/e/46e62e6b2d97164bfbe2d2f100dad76e.jpg', '10', 9),
+(21, 'Veste en velours', ' Veste en velours côtelé avec col imitation peau de mouton - Rouge baie', 60, 'https://images.asos-media.com/products/asos-design-veste-en-velours-cotele-avec-col-imitation-peau-de-mouton-rouge-baie/9519519-1-berry?$XXL$&wid=513&fit=constrain', '36', 10),
+(21, 'Chemise bleu ciel', 'Chemise de très bonne qualité', 69, 'http://image.noelshack.com/fichiers/2018/49/5/1544210183-chemise.jpg', 'M', 11),
+(22, 'Chemise bleu ciel', 'Chemise de très bonne qualité', 69, 'http://image.noelshack.com/fichiers/2018/49/5/1544210183-chemise.jpg', 'M', 12),
+(23, 'Chemise bleu ciel', 'Chemise de très bonne qualité', 69, 'http://image.noelshack.com/fichiers/2018/49/5/1544210183-chemise.jpg', 'M', 13),
+(23, 'Chemise bleu ciel', 'Chemise de très bonne qualité', 69, 'http://image.noelshack.com/fichiers/2018/49/5/1544210183-chemise.jpg', 'M', 14),
+(23, 'Veste en velours', ' Veste en velours côtelé avec col imitation peau de mouton - Rouge baie', 60, 'https://images.asos-media.com/products/asos-design-veste-en-velours-cotele-avec-col-imitation-peau-de-mouton-rouge-baie/9519519-1-berry?$XXL$&wid=513&fit=constrain', '36', 15);
 
 -- --------------------------------------------------------
 
@@ -76,29 +94,18 @@ CREATE TABLE IF NOT EXISTS `commande` (
   `date` date NOT NULL,
   `client` varchar(50) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`idCommande`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `commande`
 --
 
 INSERT INTO `commande` (`idCommande`, `date`, `client`) VALUES
-(3, '2018-12-11', 'mabrkl@icloud.com'),
-(4, '2018-12-19', 'mabrkl@icloud.com'),
-(5, '2018-12-09', 'mabrkl@icloud.com'),
-(6, '2018-12-09', 'mabrkl@icloud.com'),
-(7, '2018-12-09', 'mabrkl@icloud.com'),
-(8, '2018-12-09', 'mabrkl@icloud.com'),
-(9, '2018-12-09', 'mabrkl@icloud.com'),
-(10, '2018-12-09', 'mabrkl@icloud.com'),
-(11, '2018-12-09', 'mabrkl@icloud.com'),
-(12, '2018-12-09', 'mabrkl@icloud.com'),
-(13, '2018-12-09', 'mabrkl@icloud.com'),
-(14, '2018-12-09', 'mabrkl@icloud.com'),
-(15, '2018-12-09', 'mabrkl@icloud.com'),
-(16, '2018-12-10', 'mabrkl@icloud.com'),
-(17, '2018-12-12', 'mabrkl@icloud.com'),
-(18, '2018-12-13', 'mabrkl@icloud.com');
+(19, '2018-12-13', 'mabrkl@icloud.com'),
+(20, '2018-12-13', 'mabrkl@icloud.com'),
+(21, '2018-12-13', 'mabrkl@icloud.com'),
+(22, '2018-12-13', 'mabrkl@icloud.com'),
+(23, '2018-12-14', 'mabrkl@icloud.com');
 
 -- --------------------------------------------------------
 
