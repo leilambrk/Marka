@@ -7,7 +7,7 @@
     </head>
     <body>
         <header>
-            <img src="images/marka.jpg" alt="ban" width="100%">
+            <img src="images/ban.png" alt="ban" width="100%">
             <!--<h1 class="marka"> MARKA </h1>-->
             <div class="burger">
                 <img src="images/burger.png" alt="burger" width="50px" height="50px">
