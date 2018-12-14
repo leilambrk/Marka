@@ -518,11 +518,13 @@ footer {
 
 
 .qte{
+
 	font-family: bienvenue;
 	margin-left: 50%;
 	margin-top: -280px;
 	margin-bottom: 20px;
-	
+	text-indent: 0;
+	text-align: center;
 }
 
 
@@ -531,6 +533,7 @@ footer {
 	height: 250px;
 	margin-left: 50px;
 	margin-top: 50px;
+	margin-bottom: 20px;
 }
 
 .viderPanier{
