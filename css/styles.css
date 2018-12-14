@@ -512,6 +512,7 @@ footer {
 	font-size: 150%;
 }
 
+
 .qte{
 	margin-left: 50%;
 	margin-top: -280px;
@@ -532,4 +533,14 @@ footer {
 	font-size: 1em;
 	background-color: black;
 	color: white;
+}
+
+.nouvco{
+	font-family: bienvenue;
+	font-size : 200%;
+}
+
+.bal{
+	font-family: bienvenue;
+	font-size : 100%;
 }
