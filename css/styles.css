@@ -6,6 +6,10 @@
 	padding:1%;
 }*/
 
+.ban{
+	width = 100%;
+}
+
 @font-face {
   font-family: bienvenue;
   src: url(CaviarDreams.ttf);
@@ -527,7 +531,6 @@ footer {
 	height: 250px;
 	margin-left: 50px;
 	margin-top: 50px;
-	margin-bottom: 
 }
 
 .viderPanier{
