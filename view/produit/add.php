@@ -7,7 +7,7 @@
 
         <p>
             <label for="nom">Nom de l'article :</label>
-            <input type="text" placeholder="Jean Disquared" name="nom" id="nom" required/>
+            <input type="text" placeholder="Levi's Jeans" name="nom" id="nom" required/>
 
         </p>
         <p>

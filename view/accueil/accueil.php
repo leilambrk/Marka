@@ -1,12 +1,8 @@
 
 <h1>La mode qui convient à tous.</h1>
 
-<img src="images/banniere.jpg" alt="La boutique en ligne" class="ban"/>
+<img src="images/banniere.jpg" alt="La boutique en ligne" width="100%"/>
 
-
-<h2></h2>
-
-<h1 class="marka"> MARKA </h1>
 <h2 class="slog">Laissez vous guider par la mode ! </h2>
 
 
