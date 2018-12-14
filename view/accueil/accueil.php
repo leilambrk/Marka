@@ -1,16 +1,16 @@
 
-<h1>La mode qui convient à tous.</h1>
+<h1 class="bienvenue">B I E N V E N U E</h1>
+<p class="textbienvenue">Marka est une jeune marque bercée par les influences de 4 jeunes français du sud de la France. </br> Leïla, Salma, Hamza et Thibault proposent leurs articles coup de coeur sur ce site.</p>
 
 <img src="images/banniere.jpg" alt="La boutique en ligne" width="100%"/>
 
-<h2 class="slog">Laissez vous guider par la mode ! </h2>
+<h2 class="textbienvenue">Laissez vous guider par nos collections inédites. </h2>
 
 
 <a href="?action=display1st&controller=produit"><img src="images/homme.jpg" alt="homme" class="cat"></a>
 <a href="?action=display2nd&controller=produit"><img src="images/femme.jpg" alt="femme"class="cat"></a>
 <a href="?action=display3rd&controller=produit"><img src="images/enfants.jpg" alt="enfants" class="cat"></a>
 
-<h2> Des nouveautés toutes les semaines pour un look branché ! </h2>
 
 <div align="center">
   <div class="contener_slideshow">

@@ -1,4 +1,4 @@
-<h1>Paiement</h1>
+<h1 class="titlet">Paiement</h1>
  <form <form id="paiement"> <!-- action = "?action=buy&controller=commande" > -->
 <li>
 <fieldset>

@@ -1,6 +1,6 @@
 <?php  if (isset($_SESSION['login'])) { ?>
 
-	<h1> Votre profil: </h1>
+	<h1  class="titlet"> Votre profil: </h1>
 	<div>
 		<ul>
 			<li>
