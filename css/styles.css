@@ -463,17 +463,18 @@ footer {
 
 .form{
 	margin-left: 220px;
-	background-color: black;
+	background-color: #282923;
 	width: 70%;
 	border-radius: 5px;
 	box-shadow: 8px 8px 0px  	#808080; 
 	height: 190px;
-
+	
 }
 
 .label{
 	background-color: #D3D3D3;
 	border-radius: 5px;
+	font-size:1em;
 	
 
 }
@@ -485,11 +486,12 @@ footer {
 
 .form2{
 	margin-left: 220px;
-	background-color: black;
+	background-color: #282923;
 	width: 70%;
 	border-radius: 5px;
 	box-shadow: 8px 8px 0px #808080; 
 	height: 400px;
+	
 
 
 }
@@ -523,6 +525,7 @@ footer {
 	height: 250px;
 	margin-left: 50px;
 	margin-top: 50px;
+	margin-bottom: 
 }
 
 .viderPanier{
