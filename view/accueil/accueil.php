@@ -1,7 +1,7 @@
 
 <h1>La mode qui convient à tous.</h1>
 
-<img src="images/banniere.jpg" alt="La boutique en ligne"  width="100%"/>
+<img src="images/banniere.jpg" alt="La boutique en ligne" width="100%"/>
 
 <h2 class="slog">Laissez vous guider par la mode ! </h2>
 
