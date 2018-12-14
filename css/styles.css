@@ -426,3 +426,61 @@ footer {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
+
+
+.connect {
+	text-align: center;
+	margin-top: 3%;
+	border: none;
+	color: white;
+
+}
+
+.connect2{
+	border: none;
+	color: white;
+	margin-top: 3%;
+	margin-left: 50px;
+
+}
+
+.seConnecter{
+	text-align: center; 
+	font-size: 1em;
+	width: 70%;
+
+
+}
+
+.form{
+	margin-left: 220px;
+	background-color: black;
+	width: 70%;
+	border-radius: 5px;
+	box-shadow: 8px 8px 0px  	#808080; 
+	height: 190px;
+
+}
+
+.label{
+	background-color: #D3D3D3;
+	border-radius: 5px;
+	
+
+}
+
+.inscrire{
+	text-align: center; 
+	margin-top: 5%;
+}
+
+.form2{
+	margin-left: 220px;
+	background-color: black;
+	width: 70%;
+	border-radius: 5px;
+	box-shadow: 8px 8px 0px #808080; 
+	height: 400px;
+
+
+}
