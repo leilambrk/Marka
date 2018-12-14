@@ -57,7 +57,7 @@
     }
 
      public static function getProduitByIdProduit($idP) {
-            $sql = " SELECT * FROM Produit WHERE idProduit=:nom_tag";
+            $sql = " SELECT * FROM produit WHERE idProduit=:nom_tag";
             $req_prep = Model::$pdo->prepare($sql);
             $values = array(
                 "nom_tag" => $idP,
@@ -70,7 +70,7 @@
 
 
         public static function deleteProduitByIdProduit($idP) {
-            $sql = " DELETE FROM Produit WHERE idProduit=:nom_tag";
+            $sql = " DELETE FROM produit WHERE idProduit=:nom_tag";
             $req_prep = Model::$pdo->prepare($sql);
             $values = array(
                 "nom_tag" => $idP,
