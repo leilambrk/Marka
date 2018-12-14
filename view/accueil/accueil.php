@@ -4,13 +4,14 @@
 
 <img src="images/banniere.jpg" alt="La boutique en ligne" width="100%"/>
 
-<h2 class="textbienvenue">Laissez vous guider par nos collections inédites. </h2>
+<p class="textbienvenue">Laissez vous guider par nos collections inédites. </p>
 
 
 <a href="?action=display1st&controller=produit"><img src="images/homme.jpg" alt="homme" class="cat"></a>
 <a href="?action=display2nd&controller=produit"><img src="images/femme.jpg" alt="femme"class="cat"></a>
 <a href="?action=display3rd&controller=produit"><img src="images/enfants.jpg" alt="enfants" class="cat"></a>
 
+<h2 class="nouvco">Nouvelle collection Hiver 18/19 disponible. </h2> 
 
 <div align="center">
   <div class="contener_slideshow">
