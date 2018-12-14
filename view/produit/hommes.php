@@ -26,5 +26,5 @@ if (!$tab){
 
 ?>
 </article>
-<a href="?action=display1st&controller=produit">Aller en haut de la page</a>
+<a href="?action=display1st&controller=produit"><img src="images/hdp.png" alt="hautdepade" class="hautdepage"></a>
 

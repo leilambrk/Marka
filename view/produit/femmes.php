@@ -29,4 +29,4 @@ if (!$tab){
 
 </article>
 
-<a href="?action=display2nd&controller=produit">Aller en haut de la page</a>
+<a href="?action=display2nd&controller=produit"><img src="images/hdp.png" alt="hautdepade" class="hautdepage"></a>
