@@ -37,6 +37,7 @@ require_once File::build_path(array('controller','ControllerPanier.php'));
 	}
 	else
 	{
+		echo'sa vyg';
 		$pagetitle='Erreur';
 	    $view='error';
 	    $controller = "accueil";
