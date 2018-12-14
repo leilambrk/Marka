@@ -56,12 +56,14 @@
                                                <?php }
                                                     else
                                                         { ?>
-                                                          <li><a href="?action=historique&controller=commande">Mes commandes</a></li>
+                                                          
                                                           <li>
                                                               <a href="?action=profile&controller=utilisateur">Mon profil</a>
                                                               <ul>
                                                                 <li><a href="?action=profile&controller=utilisateur">Voir mon profil</a></li>
+                                                                <li><a href="?action=historique&controller=commande">Mes commandes</a></li>
                                                                 <li><a href="?action=deconnect&controller=utilisateur">Se deconnecter</a></li>
+
                                                               </ul>
                                                             </li>
                                             <?php } ?>

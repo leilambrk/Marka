@@ -1,4 +1,4 @@
-<h1>panier</h1>
+<h1 class="titlet">panier</h1>
 
 
 <article>

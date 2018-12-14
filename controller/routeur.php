@@ -29,18 +29,11 @@ require_once File::build_path(array('controller','ControllerPanier.php'));
 			$controller_class::$action();
 
 		}else{
-			$pagetitle='Erreur';
-	        $view='error';
-	        $controller = "accueil";
-			require_once (File::build_path(array("view", "view.php")));
+			ControllerAccueil::error();
 		}
 	}
 	else
 	{
-		echo'sa vyg';
-		$pagetitle='Erreur';
-	    $view='error';
-	    $controller = "accueil";
-		require_once (File::build_path(array("view", "view.php")));
+		ControllerAccueil::error();
 	}
 ?>

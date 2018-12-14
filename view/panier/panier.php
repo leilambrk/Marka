@@ -1,4 +1,6 @@
-<h1>Votre panier</h1>
+
+<h1 class="titlet">Votre panier</h1>
+
 
 
 <article>
