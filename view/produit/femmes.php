@@ -28,3 +28,5 @@ if (!$tab){
 ?>
 
 </article>
+
+<a href="?action=display2nd&controller=produit">Aller en haut de la page</a>
