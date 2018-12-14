@@ -1,10 +1,4 @@
-/* menu */
 
-/*nav {
-	border: 1px solid black;
-	text-align:center;
-	padding:1%;
-}*/
 
 @font-face {
   font-family: bienvenue;
@@ -262,9 +256,6 @@ a:visited{
 	text-align: left;
 }
 
-.aside{
-	position: fixed;
-}
 
 
 .vet{
@@ -273,9 +264,9 @@ a:visited{
 	margin-top: 50px;
 	margin-left: auto;
 	margin-right: auto;
-	display: inline-block;
+	/*text-align: center;*/
+	display: block;
 	margin-bottom: 20px;
-	border-color: grey;
 	border-radius: 10px;
 }
 
@@ -405,14 +396,6 @@ footer {
  	text-align: center;
  }
 
-
- /** {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}*/
 
 .item {
 
