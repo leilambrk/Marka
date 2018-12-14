@@ -1,27 +1,23 @@
-<?php  if (!isset($_SESSION['login'])) { ?>
+<h2> Bienvenue sur le site Marka, veuillez vous connecter. </h2>
 
-<form method="post" action="?action=connected&controller=utilisateur">
+<form class="form" method="post" action="?action=connected&controller=utilisateur">
 
 
-  <fieldset>
-    <legend>Se connecter :</legend>
+  <fieldset class="connect" >
     <p>
       <label for="login_id">Adresse Mail</label> :
-      <input type="text" placeholder="Ex : mabroukl@icloud.com" name="email" id="email" required/>
+      <input class="label" type="text" placeholder="Ex : mabroukl@icloud.com" name="email" id="email" required/>
     </p>
     <p>
       <label for="pw_id">Mot de passe</label> :
-      <input type="password" placeholder="Ex : motdepasse " name="password" id="password" required/>
+      <input class="label" type="password" placeholder="Ex : motdepasse " name="password" id="password" required/>
     </p>
     <p>
-      <input type="submit" value="Envoyer" />
+      <input type="submit" value="Se connecter" />
     </p>
 
   </fieldset>
-    <a href="?action=create&controller=utilisateur">S'inscrire</a>
+    
 </form>
-<?php }
-else {?>
-<li><a href="?action=profile&controller=utilisateur">Vous vous êtes déjà connecté, cliquez ici pour voir votre profil.</a></li>
-<?php
-}?>
+<h4 class="inscrire" > <a href="?action=create&controller=utilisateur" > Si vous n'êtes pas encore inscrit, inscrivez vous gratuitement sur notre site en cliquant ici. </a></h4>
+
