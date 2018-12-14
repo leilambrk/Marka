@@ -9,7 +9,7 @@
 if ($tab != false){
 foreach ($tab as $prod => $values) {
   
-  echo '<div><img class="pan" src= "'. htmlspecialchars($values[0]->get('photo')) . '" alt="' . htmlspecialchars($values[0]->get('idProduit')). '"/> <h3 class="qte">Quantité: '. $values[1] .' x </h3> <div class="info"><h2>'. htmlspecialchars($values[0]->get('nomProduit')) . '</h2><h5>' . htmlspecialchars($values[0]->get('prix')) . '€ </h5> Taille' . htmlspecialchars($values[0]->get('taille')) . '<p>' . htmlspecialchars($values[0]->get('description')) . '</p></div></div>';
+  echo '<div><img class="pan" src= "'. htmlspecialchars($values[0]->get('photo')) . '" alt="' . htmlspecialchars($values[0]->get('idProduit')). '"/> <h3 class="qte">Quantité: '. $values[1] .' x </h3> <div class="info"><h2 class="titlea">'. htmlspecialchars($values[0]->get('nomProduit')) . '</h2><h5 class="textbienvenue">' . htmlspecialchars($values[0]->get('prix')) . '€ </h5> <h5 class="textbienvenue">Taille' . htmlspecialchars($values[0]->get('taille')) . '</h5><p class="textbienvenue">' . htmlspecialchars($values[0]->get('description')) . '</p></div></div>';
 }
 if ($tab != false){
 
