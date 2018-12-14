@@ -49,7 +49,7 @@ class ControllerUtilisateur{
         $view = 'create';
         $pagetitle = 'Inscription';
         require File::build_path(array('view','view.php'));
-      }
+      } 
       else {
         self::error();
       }
@@ -162,7 +162,7 @@ class ControllerUtilisateur{
 
 
     public static function validate(){
-		$user=ModelUtilisateur::select($_GET['email']);
+		$user=ModelUtilisateur::selectByEmail($_GET['email']);
 		if($user != false && $user->get('nonce') == $_GET['nonce']){
 			ModelUtilisateur::update('email', $user->get('email'), 'utilisateur', array("nonce" => NULL));
 			self::connect();

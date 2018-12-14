@@ -509,3 +509,24 @@ footer {
 	font-family: bienvenue;
 	font-size: 150%;
 }
+
+.qte{
+	margin-left: 50%;
+	margin-top: -280px;
+	margin-bottom: 20px;
+	
+}
+
+
+.pan{
+	width: 200px;
+	height: 250px;
+	margin-left: 50px;
+	margin-top: 50px;
+}
+
+.viderPanier{
+	font-size: 1em;
+	background-color: black;
+	color: white;
+}
