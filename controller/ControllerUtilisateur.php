@@ -83,7 +83,7 @@ class ControllerUtilisateur{
               Pour activer votre compte, veuillez cliquer sur le lien ci dessous
 
 
-              http://webinfo.iutmontp.univ-montp2.fr/~senhajis/Marka/index.php?controller=utilisateur&action=validate&email=' . $p->get('email') . '&nonce=' . $nonce . '</p>';
+              http://webinfo.iutmontp.univ-montp2.fr/~senhajis/Marka/index.php?controller=utilisateur&action=validate&email=' . rawurlencode($p->get('email')) . '&nonce=' . $nonce . '</p>';
 
               mail($destinataire, $sujet, $mail, $entete);
                 //redirige vers la vue monprofil

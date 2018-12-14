@@ -1,6 +1,6 @@
 <h2 class="titlet"> Bienvenue sur le site Marka, veuillez vous connecter. </h2>
 
-<form method="post" action="?action=connected&controller=utilisateur">
+<form class="form" method="post" action="?action=connected&controller=utilisateur">
 
 
   <fieldset class="connect" >
